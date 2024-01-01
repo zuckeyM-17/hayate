@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password
+  pool: 5
+
+development:
+  <<: *default
+  database: hayate_development
+
+test:
+  <<: *default
+  database: hayate_test
+
+production:
+  <<: *default
+  database: hayate_production
