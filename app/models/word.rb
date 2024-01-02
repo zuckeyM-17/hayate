@@ -10,7 +10,6 @@
 #  pronunciation_symbol :string           not null
 #  meaning              :string           not null
 #  misc                 :json             not null
-#  count                :integer          default(0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,19 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_101_180_326) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_01_180326) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'words', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.string 'en', null: false
-    t.string 'ja', null: false
-    t.string 'pronunciation_symbol', null: false
-    t.string 'meaning', null: false
-    t.json 'misc', default: {}, null: false
-    t.integer 'count', default: 0, null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['en'], name: 'index_words_on_en', unique: true
+  create_table "word_searches", force: :cascade do |t|
+    t.uuid "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word_id"], name: "index_word_searches_on_word_id"
   end
+
+  create_table "words", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "en", null: false
+    t.string "ja", null: false
+    t.string "pronunciation_symbol", null: false
+    t.string "meaning", null: false
+    t.json "misc", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["en"], name: "index_words_on_en", unique: true
+  end
+
+  add_foreign_key "word_searches", "words"
 end

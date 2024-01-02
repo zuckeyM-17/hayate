@@ -9,7 +9,11 @@ class CreateWords < ActiveRecord::Migration[7.1]
       t.string :meaning, null: false
       t.json :misc, null: false, default: {}
 
-      t.integer :count, null: false, default: 0
+      t.timestamps
+    end
+
+    create_table :word_searches do |t|
+      t.references :word, null: false, foreign_key: true, type: :uuid
 
       t.timestamps
     end
