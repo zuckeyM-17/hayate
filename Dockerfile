@@ -5,6 +5,7 @@ WORKDIR /hayate
 COPY Gemfile /hayate/Gemfile
 COPY Gemfile.lock /hayate/Gemfile.lock
 RUN bundle install
+RUN bin/rails tailwindcss:install
 
 # コンテナー起動時に毎回実行されるスクリプトを追加
 COPY entrypoint.sh /usr/bin/
