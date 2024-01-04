@@ -18,4 +18,5 @@
 #  fk_rails_...  (word_id => words.id)
 #
 class WordSearch < ApplicationRecord
+  belongs_to :word
 end

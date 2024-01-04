@@ -15,6 +15,7 @@ AllCops:
     - 'Rakefile'
     - 'config.ru'
     - 'Gemfile'
+    - 'db/schema.rb'
 
 Style/FrozenStringLiteralComment:
   Enabled: true

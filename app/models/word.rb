@@ -18,4 +18,11 @@
 #  index_words_on_en  (en) UNIQUE
 #
 class Word < ApplicationRecord
+  has_many :word_searches, dependent: :destroy
+
+  validates :en, presence: true, uniqueness: true
+  validates :ja, presence: true
+  validates :pronunciation_symbol, presence: true
+  validates :meaning, presence: true
+  validates :misc, presence: true
 end
