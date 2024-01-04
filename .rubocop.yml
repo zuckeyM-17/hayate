@@ -31,3 +31,9 @@ Metrics/BlockLength:
   Exclude:
     - 'lib/tasks/**/*'
     - 'spec/**/*'
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
