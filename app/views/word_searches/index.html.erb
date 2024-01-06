@@ -1,0 +1,25 @@
+<main class="container">
+  <div class="header">
+    <h1>Word Searches</h1>
+    <%= link_to "New",
+                new_word_search_path,
+                class: "btn btn--primary" %>
+  </div>
+
+  <div>
+    <table>
+      <tr>
+        <th>Word</th>
+        <th>Japanese</th>
+        <th>Pronunciation</th>
+      </tr>
+      <% @word_searches.each do |ws| %>
+        <tr>
+          <td><%= link_to ws.word.en, word_search_path(ws.word.word_searches.last) %></td>
+          <td><%= ws.word.ja %></td>
+          <td><%= ws.word.pronunciation_symbol %></td>
+        </tr>
+      <% end%>
+    </table>
+  </div>
+</main>

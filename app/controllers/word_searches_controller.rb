@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class WordSearchesController < ApplicationController
+  def index
+    @word_searches = WordSearch.select(:word_id).distinct
+  end
+
   def show
     @word_search = WordSearch.find(params[:id])
   end
