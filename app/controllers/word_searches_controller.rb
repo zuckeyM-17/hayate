@@ -14,14 +14,10 @@ class WordSearchesController < ApplicationController
   end
 
   def create
-    word = Word.find_or_initialize_by(en: word_search_params[:word])
-    if word.new_record?
-      word.assign_attributes({
-                               ja: 'ほげ',
-                               pronunciation_symbol: 'hoge',
-                               meaning: 'hoge',
-                               misc: { thesaurus: %w[hoge fuga piyo], examples: ['this is example.'] }
-                             })
+    word = Word.find_by(en: word_search_params[:word])
+
+    if word.nil?
+      word = Word::Explain.new(word_search_params[:word]).call
       word.save!
     end
     @word_search = word.word_searches.create!
