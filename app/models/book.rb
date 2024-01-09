@@ -20,6 +20,6 @@ class Book < ApplicationRecord
   enum category: { engineering: 10, management: 20, english: 30, other: 0 }
 
   def start!
-    Reading.create!(chapter: chapters.sort_by(&:number).first)
+    Reading.create!(chapter: chapters.min_by(&:number))
   end
 end
