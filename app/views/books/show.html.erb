@@ -5,6 +5,7 @@
     </h1>
     <div>
       <p><%= @book.category %></p>
+      <p><%= @book.chapters.map(&:title) %></p>
     </div>
   </div>
 </main>

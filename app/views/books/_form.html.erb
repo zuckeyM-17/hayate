@@ -7,5 +7,7 @@
 
   <%= f.text_field :title %>
   <%= f.select :category, Book.categories.keys %>
+
+  <%= f.text_area :chapters, value: "" %>
   <%= f.submit %>
 <% end %>

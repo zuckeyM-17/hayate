@@ -14,7 +14,11 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.build(book_params)
+    book = Book.build(book_params.slice(:title, :category))
+    book_params[:chapters].split(/\R/).each.with_index do |title, i|
+      next if title.blank?
+      book.chapters.build(title:, number: i).save!
+    end
     if book.save
       redirect_to book_path(book.id), notice: 'Book was successfully created.'
     else
@@ -25,6 +29,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :category)
+    params.require(:book).permit(:title, :category, :chapters)
   end
 end
