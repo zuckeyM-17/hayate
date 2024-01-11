@@ -4,6 +4,13 @@
       <%= @book.title %>
     </h1>
     <div>
+      <% if @book.readings.blank? %>
+        <%= form_with url: start_book_path(@book) do |f| %>
+          <%= f.submit 'start' %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
       <p><%= @book.category %></p>
       <p><%= @book.chapters.map(&:title) %></p>
     </div>

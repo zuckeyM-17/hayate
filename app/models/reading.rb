@@ -20,4 +20,10 @@
 #
 class Reading < ApplicationRecord
   belongs_to :chapter
+
+  scope :in_progress, -> { where(done_at: nil) }
+
+  def done!
+    update!(done_at: Time.zone.now)
+  end
 end

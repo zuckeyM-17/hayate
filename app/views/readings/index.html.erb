@@ -1,0 +1,22 @@
+<main class="container">
+  <div class="header">
+    <h1>Readings</h1>
+  </div>
+
+  <div>
+    <table>
+      <tr>
+        <th>Book</th>
+        <th>Chapter</th>
+        <th>Note</th>
+      </tr>
+      <% @readings.each do |r| %>
+        <tr>
+          <td><%= r.chapter.book.title %></td>
+          <td><%= r.chapter.title %></td>
+          <td><%= link_to 'note', reading_path(r) %></td>
+        </tr>
+      <% end%>
+    </table>
+  </div>
+</main>

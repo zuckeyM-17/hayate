@@ -1,0 +1,22 @@
+<main class="container">
+  <div class="header">
+    <h1>
+      <%= "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
+    </h1>
+    <div>
+      <p>メモ</p>
+    </div>
+
+    <div>
+      <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
+        <%= form_with url: next_book_path(@reading.chapter.book) do |f| %>
+          <%= f.submit 'next' %>
+        <% end %>
+      <% else %>
+        <%= form_with url: finish_book_path(@reading.chapter.book) do |f| %>
+          <%= f.submit 'finish' %>
+        <% end %>
+      <% end%>
+    </div>
+  </div>
+</main>

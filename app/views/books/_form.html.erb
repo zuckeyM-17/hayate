@@ -5,9 +5,18 @@
     </div>
   <% end %>
 
-  <%= f.text_field :title %>
-  <%= f.select :category, Book.categories.keys %>
+  <div>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.select :category, Book.categories.keys %>
+  </div>
 
-  <%= f.text_area :chapters, value: "" %>
-  <%= f.submit %>
+  <div>
+    <%= f.text_area :chapters, value: "" %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
 <% end %>

@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_08_140601) do
   create_table "books", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
     t.integer "category", default: 0, null: false
+    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_books_on_title", unique: true

@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration[7.1]
     create_table :books, id: :uuid do |t|
       t.string :title, null: false, index: { unique: true }
       t.integer :category, null: false, default: 0
+      t.datetime :finished_at, null: true
 
       t.timestamps
     end
