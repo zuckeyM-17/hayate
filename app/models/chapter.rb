@@ -22,4 +22,7 @@
 class Chapter < ApplicationRecord
   belongs_to :book
   has_one :reading, dependent: :destroy
+
+  has_many :chapter_notes, dependent: :destroy
+  has_many :notes, through: :chapter_notes
 end

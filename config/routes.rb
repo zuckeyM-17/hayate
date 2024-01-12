@@ -10,6 +10,6 @@ Rails.application.routes.draw do
       post :finish
     end
   end
-
   resources :readings, only: %i[index show]
+  resources :chapter_notes, only: %i[create]
 end
