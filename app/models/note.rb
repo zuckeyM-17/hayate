@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notes
@@ -8,6 +10,6 @@
 #  updated_at :datetime         not null
 #
 class Note < ApplicationRecord
-  has_one :chapter_note, dependent: :destroy
-  has_one :chapter, through: :chapter_note
+  has_one :reading_note, dependent: :destroy
+  has_one :reading, through: :reading_note
 end

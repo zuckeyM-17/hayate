@@ -23,15 +23,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
     t.index ["title"], name: "index_books_on_title", unique: true
   end
 
-  create_table "chapter_notes", force: :cascade do |t|
-    t.uuid "chapter_id", null: false
-    t.bigint "note_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chapter_id"], name: "index_chapter_notes_on_chapter_id"
-    t.index ["note_id"], name: "index_chapter_notes_on_note_id"
-  end
-
   create_table "chapters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "book_id", null: false
     t.string "title", null: false
@@ -45,6 +36,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reading_notes", force: :cascade do |t|
+    t.bigint "reading_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_reading_notes_on_note_id"
+    t.index ["reading_id"], name: "index_reading_notes_on_reading_id"
   end
 
   create_table "readings", force: :cascade do |t|
@@ -73,9 +73,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
     t.index ["en"], name: "index_words_on_en", unique: true
   end
 
-  add_foreign_key "chapter_notes", "chapters"
-  add_foreign_key "chapter_notes", "notes"
   add_foreign_key "chapters", "books"
+  add_foreign_key "reading_notes", "notes"
+  add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"
   add_foreign_key "word_searches", "words"
 end

@@ -11,5 +11,5 @@ Rails.application.routes.draw do
     end
   end
   resources :readings, only: %i[index show]
-  resources :chapter_notes, only: %i[create]
+  resources :reading_notes, only: %i[create]
 end

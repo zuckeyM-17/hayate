@@ -8,8 +8,8 @@ class CreateNotes < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    create_table :chapter_notes do |t|
-      t.references :chapter, null: false, foreign_key: true, type: :uuid
+    create_table :reading_notes do |t|
+      t.references :reading, null: false, foreign_key: true
       t.references :note, null: false, foreign_key: true
 
       t.timestamps

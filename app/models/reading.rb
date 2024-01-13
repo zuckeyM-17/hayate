@@ -21,6 +21,9 @@
 class Reading < ApplicationRecord
   belongs_to :chapter
 
+  has_many :reading_notes, dependent: :destroy
+  has_many :notes, through: :reading_notes
+
   scope :in_progress, -> { where(done_at: nil) }
 
   def done!

@@ -5,13 +5,13 @@
     </h1>
     <div>
       <p>
-        <%= form_with url: chapter_notes_path do |f| %>
-          <%= f.hidden_field :chapter_id, value: @reading.chapter.id %>
+        <%= form_with url: reading_notes_path do |f| %>
+          <%= f.hidden_field :reading_id, value: @reading.id %>
           <%= f.text_area :body, value: '' %>
           <%= f.submit 'add note' %>
         <% end %>
       </p>
-      <% @reading.chapter.notes.order(created_at: :desc).each do |n| %>
+      <% @reading.notes.order(created_at: :desc).each do |n| %>
         <p><%= n.body %></p>
       <% end %>
     </div>
