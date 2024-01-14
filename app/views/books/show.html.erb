@@ -5,9 +5,7 @@
     </h1>
     <div>
       <% if @book.readings.blank? %>
-        <%= form_with url: start_book_path(@book) do |f| %>
-          <%= f.submit 'start' %>
-        <% end %>
+        <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post } %>
       <% end %>
     </div>
     <div>

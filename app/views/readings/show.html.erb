@@ -18,13 +18,9 @@
 
     <div>
       <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
-        <%= form_with url: next_book_path(@reading.chapter.book) do |f| %>
-          <%= f.submit 'next' %>
-        <% end %>
+        <%= link_to 'Next', next_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
       <% else %>
-        <%= form_with url: finish_book_path(@reading.chapter.book) do |f| %>
-          <%= f.submit 'finish' %>
-        <% end %>
+        <%= link_to 'Finish', finish_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
       <% end%>
     </div>
   </div>
