@@ -1,12 +1,10 @@
 <main class="container">
-  <div class="header">
-    <h1>Books</h1>
-    <%= link_to "New",
-                new_book_path,
-                class: "btn btn--primary" %>
-  </div>
+  <%= render 'shared/header', title: 'Books' %>
 
   <div>
+    <%= link_to "New",
+            new_book_path,
+            class: "btn btn--primary" %>
     <table>
       <tr>
         <th>Title</th>

@@ -1,13 +1,10 @@
 <main class="container">
-  <div class="header">
-    <h1>
-      <%= @word_search.word.en %>
-    </h1>
-    <div>
-      <p><%= @word_search.word.ja %></p>
-      <p><%= @word_search.word.pronunciation_symbol %></p>
-      <p><%= @word_search.word.meaning %></p>
-      <p><%= @word_search.word.misc %></p>
-    </div>
+  <%= render 'shared/header', title: @word_search.word.en %>
+
+  <div>
+    <p><%= @word_search.word.ja %></p>
+    <p><%= @word_search.word.pronunciation_symbol %></p>
+    <p><%= @word_search.word.meaning %></p>
+    <p><%= @word_search.word.misc %></p>
   </div>
 </main>

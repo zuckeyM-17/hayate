@@ -1,12 +1,10 @@
 <main class="container">
-  <div class="header">
-    <h1>Word Searches</h1>
-    <%= link_to "New",
-                new_word_search_path,
-                class: "btn btn--primary" %>
-  </div>
+  <%= render 'shared/header', title: 'Word Searches' %>
 
   <div>
+    <%= link_to "New",
+            new_word_search_path,
+            class: "btn btn--primary" %>
     <table>
       <tr>
         <th>Word</th>

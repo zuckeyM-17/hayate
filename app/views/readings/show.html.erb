@@ -1,27 +1,24 @@
 <main class="container">
-  <div class="header">
-    <h1>
-      <%= "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
-    </h1>
-    <div>
-      <p>
-        <%= form_with url: reading_notes_path do |f| %>
-          <%= f.hidden_field :reading_id, value: @reading.id %>
-          <%= f.text_area :body, value: '' %>
-          <%= f.submit 'add note' %>
-        <% end %>
-      </p>
-      <% @reading.notes.order(created_at: :desc).each do |n| %>
-        <p><%= n.body %></p>
-      <% end %>
-    </div>
+  <%= render 'shared/header', title: "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
 
-    <div>
-      <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
-        <%= link_to 'Next', next_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
-      <% else %>
-        <%= link_to 'Finish', finish_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
-      <% end%>
-    </div>
+  <div>
+    <p>
+      <%= form_with url: reading_notes_path do |f| %>
+        <%= f.hidden_field :reading_id, value: @reading.id %>
+        <%= f.text_area :body, value: '' %>
+        <%= f.submit 'add note' %>
+      <% end %>
+    </p>
+    <% @reading.notes.order(created_at: :desc).each do |n| %>
+      <p><%= n.body %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
+      <%= link_to 'Next', next_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
+    <% else %>
+      <%= link_to 'Finish', finish_book_path(@reading.chapter.book), data: { "turbo-method": :post } %>
+    <% end%>
   </div>
 </main>

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  root 'top#index'
+
   resources :word_searches, only: %i[index create show new]
   resources :books, only: %i[index create show new] do
     member do

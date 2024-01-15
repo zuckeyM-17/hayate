@@ -1,16 +1,13 @@
 <main class="container">
-  <div class="header">
-    <h1>
-      <%= @book.title %>
-    </h1>
-    <div>
-      <% if @book.readings.blank? %>
-        <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post } %>
-      <% end %>
-    </div>
-    <div>
-      <p><%= @book.category %></p>
-      <p><%= @book.chapters.map(&:title) %></p>
-    </div>
+  <%= render 'shared/header', title: @book.title %>
+
+  <div>
+    <% if @book.readings.blank? %>
+      <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post } %>
+    <% end %>
+  </div>
+  <div>
+    <p><%= @book.category %></p>
+    <p><%= @book.chapters.map(&:title) %></p>
   </div>
 </main>

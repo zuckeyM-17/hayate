@@ -1,7 +1,5 @@
 <main class="container">
-  <div class="header">
-    <h1>Book</h1>
-  </div>
+  <%= render 'shared/header', title: 'New Book' %>
 
   <%= render "form", book: @book %>
 </main>
