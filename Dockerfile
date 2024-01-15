@@ -5,7 +5,6 @@ WORKDIR /hayate
 COPY Gemfile /hayate/Gemfile
 COPY Gemfile.lock /hayate/Gemfile.lock
 RUN bundle install
-RUN rails tailwindcss:install
 
 RUN export EDITOR=vim
 

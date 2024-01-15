@@ -2,19 +2,23 @@
   <%= render 'shared/header', title: 'Readings' %>
 
   <div>
-    <table>
-      <tr>
-        <th>Book</th>
-        <th>Chapter</th>
-        <th>Note</th>
-      </tr>
-      <% @readings.each do |r| %>
+    <table class="border border-slate-500 table-auto">
+      <thead>
         <tr>
-          <td><%= r.chapter.book.title %></td>
-          <td><%= r.chapter.title %></td>
-          <td><%= link_to 'note', reading_path(r) %></td>
+          <th class="border border-slate-600 px-2 py-1">Book</th>
+          <th class="border border-slate-600 px-2 py-1">Chapter</th>
+          <th class="border border-slate-600 px-2 py-1">Note</th>
         </tr>
-      <% end%>
+      </thead>
+      <tbody>
+        <% @readings.each do |r| %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1"><%= r.chapter.book.title %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= r.chapter.title %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= link_to 'note', reading_path(r) %></td>
+          </tr>
+        <% end%>
+      </tbody>
     </table>
   </div>
 </main>
