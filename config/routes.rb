@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
-  resources :word_searches, only: %i[index create show new]
+  resources :word_searches, only: %i[create new]
+  resources :words, only: %i[index show]
   resources :books, only: %i[index create show new] do
     member do
       post :start

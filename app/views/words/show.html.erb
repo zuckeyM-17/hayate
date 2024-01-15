@@ -1,0 +1,10 @@
+<main class="container">
+  <%= render 'shared/header', title: @word.en %>
+
+  <div>
+    <p><%= @word.ja %></p>
+    <p><%= @word.pronunciation_symbol %></p>
+    <p><%= @word.meaning %></p>
+    <p><%= @word.misc %></p>
+  </div>
+</main>

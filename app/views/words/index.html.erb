@@ -1,5 +1,5 @@
 <main class="container">
-  <%= render 'shared/header', title: 'Word Searches' %>
+  <%= render 'shared/header', title: 'Words' %>
 
   <div>
     <div class="pt-4">
@@ -17,11 +17,11 @@
           </tr>
         </thead>
         <tbody>
-        <% @word_searches.each do |ws| %>
+        <% @words.each do |w| %>
           <tr>
-            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to ws.word.en, word_search_path(ws.word.word_searches.last) %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= ws.word.ja %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= ws.word.pronunciation_symbol %></td>
+            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= w.pronunciation_symbol %></td>
           </tr>
         <% end%>
         </tbody>

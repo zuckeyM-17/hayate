@@ -53,7 +53,7 @@ class Word < ApplicationRecord
       @word = Word.new(en: word)
     end
 
-    def call
+    def call!
       messages = [
         { role: 'system', content: SYSTEM_MESSAGE },
         { role: 'user', content: @word.en },

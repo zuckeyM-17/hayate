@@ -1,8 +1,6 @@
 <%= form_for word_search do |f| %>
-  <% if word_search.errors.any? %>
-    <div>
-      <%= word_search.errors.full_messages.to_sentence.capitalize %>
-    </div>
+  <% if flash[:alert] %>
+    <p class="alert alert-danger"><%= alert %></p>
   <% end %>
 
   <div class="pt-4"><%= f.search_field :word %></div>
