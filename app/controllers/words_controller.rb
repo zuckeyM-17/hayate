@@ -2,7 +2,7 @@
 
 class WordsController < ApplicationController
   def index
-    @words = Word.all
+    @words = Word.includes(:word_searches).all
   end
 
   def show
