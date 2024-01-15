@@ -2,6 +2,7 @@
   <%= render 'shared/header', title: @word.en %>
 
   <div>
+    <p><%= @word.word_searches.count %></p>
     <p><%= @word.ja %></p>
     <p><%= @word.pronunciation_symbol %></p>
     <p><%= @word.meaning %></p>

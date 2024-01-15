@@ -2,7 +2,7 @@
 
 class WordsController < ApplicationController
   def index
-    @words = Word.includes(:word_searches).all
+    @words = Word.includes(:word_searches).order(created_at: :desc).page(params[:page])
   end
 
   def show

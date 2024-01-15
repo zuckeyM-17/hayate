@@ -21,6 +21,8 @@ gem "importmap-rails", "~> 2.0"
 gem "stimulus-rails"
 gem "turbo-rails"
 
+gem 'kaminari'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
