@@ -1,5 +1,5 @@
 <main class="container">
-  <%= render 'shared/header', title: @book.title %>
+  <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
 
   <div>
     <% if @book.readings.blank? %>

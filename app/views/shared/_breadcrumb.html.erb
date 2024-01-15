@@ -1,0 +1,21 @@
+<% parents ||= [] %>
+<% root ||= false %>
+<nav aria-label="breadcrumb" class="w-full p-4 bg-gray-100 text-gray-800">
+	<ol class="flex h-8 space-x-2 text-gray-800">
+		<li class="flex items-center">
+			<a rel="noopener noreferrer" href="/" title="Back to homepage" class="flex items-center hover:underline">Home</a>
+		</li>
+    <% parents.each do |parent| %>
+      <li class="flex items-center space-x-1">
+        <span class="text-gray-600">/</span>
+        <a rel="noopener noreferrer" href="<%= parent[:url] %>" class="flex items-center px-1 capitalize hover:underline"><%= parent[:title] %></a>
+      </li>
+    <% end %>
+		<% unless root %>
+			<li class="flex items-center space-x-1">
+				<span class="text-gray-600">/</span>
+				<a rel="noopener noreferrer" href="#" class="flex items-center px-1 capitalize hover:underline hover:no-underline cursor-default">Current</a>
+			</li>
+		<% end%>
+	</ol>
+</nav>
