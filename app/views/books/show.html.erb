@@ -1,13 +1,15 @@
 <main class="container">
   <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
 
-  <div>
-    <% if @book.readings.blank? %>
-      <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post } %>
-    <% end %>
-  </div>
-  <div>
-    <p><%= @book.category %></p>
-    <p><%= @book.chapters.map(&:title) %></p>
+  <div class="p-4">
+    <div>
+      <% if @book.readings.blank? %>
+        <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post } %>
+      <% end %>
+    </div>
+    <div>
+      <p><%= @book.category %></p>
+      <p><%= @book.chapters.map(&:title) %></p>
+    </div>
   </div>
 </main>

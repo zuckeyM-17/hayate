@@ -3,43 +3,46 @@
     { url: books_path, title: 'Books'},
     {url: book_path(@readings.first.chapter.book.id), title: @readings.first.chapter.book.title}
   ] %>
-  <%= render 'shared/header', title: "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
 
-  <div class="mt-4">
-    <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
-      <%= link_to 'Next', next_book_path(@reading.chapter.book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-    <% else %>
-      <%= link_to 'Finish', finish_book_path(@reading.chapter.book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-    <% end%>
-  </div>
+  <div class="p-4">
+    <%= render 'shared/header', title: "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
 
-  <div class="mt-4">
-    <h2 class="text-2xl md:text-4xl">Notes</h2>
-    <div class="px-4 lg:px-8 pt-4 lg:pt-8 mt-4 bg-gray-100">
-      <%= form_with url: reading_notes_path do |f| %>
-        <%= f.hidden_field :reading_id, value: @reading.id %>
-        <div>
-          <%= f.text_area :body, value: '', class: "w-full rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" %>
-        </div>
-        <%= f.submit 'Add note', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-      <% end %>
+    <div class="mt-4">
+      <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
+        <%= link_to 'Next', next_book_path(@reading.chapter.book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      <% else %>
+        <%= link_to 'Finish', finish_book_path(@reading.chapter.book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      <% end%>
     </div>
 
-    <ul class="p-4 lg:p-8 bg-gray-100 text-gray-800">
-      <% @reading.notes.order(created_at: :desc).each do |n| %>
-        <li>
-          <article>
-            <div class="grid p-2 overflow-hidden md:grid-cols-5 rounded-xl lg:p-4 xl:grid-cols-12">
-              <time datetime="" class="row-start-1 mb-1 md:col-start-1 xl:col-span-2 text-gray-600">
-                <%= l n.created_at, format: :long %>
-              </time>
-              <p class="ml-8 md:col-start-2 md:col-span-4 xl:col-start-3 xl:col-span-9 md:ml-0 text-gray-700">
-                <%= n.body %>
-              </p>
-            </div>
-          </article>
-        </li>
-      <% end %>
-    </ul>
+    <div class="mt-4">
+      <h2 class="text-2xl md:text-4xl">Notes</h2>
+      <div class="px-4 lg:px-8 pt-4 lg:pt-8 mt-4 bg-gray-100">
+        <%= form_with url: reading_notes_path do |f| %>
+          <%= f.hidden_field :reading_id, value: @reading.id %>
+          <div>
+            <%= f.text_area :body, value: '', class: "w-full rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" %>
+          </div>
+          <%= f.submit 'Add note', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <% end %>
+      </div>
+
+      <ul class="p-4 lg:p-8 bg-gray-100 text-gray-800">
+        <% @reading.notes.order(created_at: :desc).each do |n| %>
+          <li>
+            <article>
+              <div class="grid p-2 overflow-hidden md:grid-cols-5 rounded-xl lg:p-4 xl:grid-cols-12">
+                <time datetime="" class="row-start-1 mb-1 md:col-start-1 xl:col-span-2 text-gray-600">
+                  <%= l n.created_at, format: :long %>
+                </time>
+                <p class="ml-8 md:col-start-2 md:col-span-4 xl:col-start-3 xl:col-span-9 md:ml-0 text-gray-700">
+                  <%= n.body %>
+                </p>
+              </div>
+            </article>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </main>

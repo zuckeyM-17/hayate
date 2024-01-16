@@ -1,6 +1,8 @@
 <main class="container">
   <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
-  <%= render 'shared/header', title: 'New Book' %>
+  <div class="p-4">
+    <%= render 'shared/header', title: 'New Book' %>
 
-  <%= render "form", book: @book %>
+    <%= render "form", book: @book %>
+  </div>
 </main>

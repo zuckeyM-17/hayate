@@ -1,35 +1,37 @@
 <main class="container">
   <%= render 'shared/breadcrumb' %>
-  <%= render 'shared/header', title: 'Words' %>
+  <div class="p-4">
+    <%= render 'shared/header', title: 'Words' %>
 
-  <div>
-    <div class="pt-4">
-      <%= link_to "New",
-            new_word_search_path,
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-    </div>
-    <div class="pt-4">
-      <%= paginate @words %>
-      <table  class="border border-slate-500 table-auto">
-        <thead>
-          <tr>
-            <th class="border border-slate-600 px-2 py-1">Word</th>
-            <th class="border border-slate-600 px-2 py-1">Japanese</th>
-            <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
-            <th class="border border-slate-600 px-2 py-1">Count</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @words.each do |w| %>
-          <tr>
-            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= w.pronunciation_symbol %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
-          </tr>
-        <% end%>
-        </tbody>
-      </table>
+    <div>
+      <div class="pt-4">
+        <%= link_to "New",
+              new_word_search_path,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      </div>
+      <div class="pt-4">
+        <%= paginate @words %>
+        <table  class="border border-slate-500 table-auto">
+          <thead>
+            <tr>
+              <th class="border border-slate-600 px-2 py-1">Word</th>
+              <th class="border border-slate-600 px-2 py-1">Japanese</th>
+              <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
+              <th class="border border-slate-600 px-2 py-1">Count</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @words.each do |w| %>
+            <tr>
+              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= w.pronunciation_symbol %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
+            </tr>
+          <% end%>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </main>

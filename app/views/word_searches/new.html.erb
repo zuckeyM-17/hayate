@@ -1,5 +1,7 @@
 <main class="container">
   <%= render 'shared/breadcrumb', parents: [{url: words_path, title: 'Words'}] %>
-  <%= render 'shared/header', title: 'Search English Word' %>
-  <%= render "form", word_search: @word_search %>
+  <div class="p-4">
+    <%= render 'shared/header', title: 'Search English Word' %>
+    <%= render "form", word_search: @word_search %>
+  </div>
 </main>
