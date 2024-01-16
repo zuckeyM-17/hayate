@@ -1,11 +1,10 @@
 <main class="container">
   <%= render 'shared/breadcrumb', parents: [
-    { url: books_path, title: 'Books'},
-    {url: book_path(@readings.first.chapter.book.id), title: @readings.first.chapter.book.title}
+    { url: readings_path, title: 'Readings'}
   ] %>
 
   <div class="p-4">
-    <%= render 'shared/header', title: "#{@reading.chapter.book.title} ##{@reading.chapter.number} #{@reading.chapter.title}" %>
+    <%= render 'shared/header', title: "#{@reading.chapter.book.title} #{@reading.chapter.title}" %>
 
     <div class="mt-4">
       <% if @reading.chapter.book.chapters.count > @reading.chapter.number %>
