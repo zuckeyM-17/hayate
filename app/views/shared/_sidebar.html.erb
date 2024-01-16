@@ -4,31 +4,11 @@
 	</div>
 	<div class="divide-y dark:divide-gray-700">
 		<ul class="pt-2 pb-4 space-y-1 text-sm">
-			<li class="dark:bg-gray-800 dark:text-gray-50">
-				<a rel="noopener noreferrer" href="<%= root_path %>" class="flex items-center p-2 space-x-3 rounded-md">
-					<span>🖥️ Dashboard</span>
-				</a>
-			</li>
-			<li>
-				<a rel="noopener noreferrer" href="<%= new_word_search_path %>" class="flex items-center p-2 space-x-3 rounded-md">
-					<span>🔍 Search word</span>
-				</a>
-			</li>
-			<li>
-				<a rel="noopener noreferrer" href="<%= words_path %>" class="flex items-center p-2 space-x-3 rounded-md">
-					<span>🔤 Words</span>
-				</a>
-			</li>
-			<li>
-				<a rel="noopener noreferrer" href="<%= books_path %>" class="flex items-center p-2 space-x-3 rounded-md">
-					<span>📚 Books</span>
-				</a>
-			</li>
-			<li>
-				<a rel="noopener noreferrer" href="<%= readings_path %>" class="flex items-center p-2 space-x-3 rounded-md">
-					<span>📖 Readings</span>
-				</a>
-			</li>
+			<%= sidebar_link_to root_path, "🖥️ Dashboard" %>
+			<%= sidebar_link_to new_word_search_path, "🔍 Search word" %>
+			<%= sidebar_link_to words_path, "🔤 Words" %>
+			<%= sidebar_link_to books_path, "📚 Books" %>
+			<%= sidebar_link_to readings_path, "📖 Readings" %>
 		</ul>
 	</div>
 </div>
