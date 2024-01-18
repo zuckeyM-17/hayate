@@ -21,7 +21,7 @@
             <% @books.each do |b| %>
               <tr>
                 <td class="border border-slate-600 px-2 py-1"><%= link_to b.title, book_path(b.id) %></td>
-                <td class="border border-slate-600 px-2 py-1"><%= b.category %></td>
+                <td class="border border-slate-600 px-2 py-1"><%= book_category(b.category) %></td>
               </tr>
             <% end%>
           </tbody>
