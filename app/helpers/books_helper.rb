@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BooksHelper
   def book_category(category)
     color_map = {
