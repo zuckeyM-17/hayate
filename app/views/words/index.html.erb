@@ -18,6 +18,7 @@
               <th class="border border-slate-600 px-2 py-1">Japanese</th>
               <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
               <th class="border border-slate-600 px-2 py-1">Count</th>
+              <th class="border border-slate-600 px-2 py-1"></th>
             </tr>
           </thead>
           <tbody>
@@ -27,6 +28,7 @@
               <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
               <td class="border border-slate-600 px-2 py-1"><%= w.pronunciation_symbol %></td>
               <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></td>
             </tr>
           <% end%>
           </tbody>
