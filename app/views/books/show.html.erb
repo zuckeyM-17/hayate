@@ -1,3 +1,5 @@
+<% content_for(:page_title) { @book.title } %>
+
 <main class="container">
   <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
 
