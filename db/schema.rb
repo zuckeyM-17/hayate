@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_chapters_on_book_id"
+  end
+
+  create_table "daily_task_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "num", null: false
+    t.datetime "disabled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "daily_tasks", force: :cascade do |t|
+    t.bigint "daily_task_items_id", null: false
+    t.date "date", null: false
+    t.boolean "done", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["daily_task_items_id"], name: "index_daily_tasks_on_daily_task_items_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -74,6 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_062435) do
   end
 
   add_foreign_key "chapters", "books"
+  add_foreign_key "daily_tasks", "daily_task_items", column: "daily_task_items_id"
   add_foreign_key "reading_notes", "notes"
   add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"
