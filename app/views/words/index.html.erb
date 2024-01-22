@@ -5,9 +5,7 @@
 
     <div>
       <div class="pt-4">
-        <%= link_to "New",
-              new_word_search_path,
-              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= render 'word_searches/form', word_search: @word_search %>
       </div>
       <div class="pt-4">
         <%= paginate @words %>
