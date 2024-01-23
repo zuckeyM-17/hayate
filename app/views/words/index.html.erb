@@ -26,7 +26,7 @@
             <tr>
               <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
               <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= w.pronunciation_symbol %></td>
+              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.pronunciation_symbol, "https://youglish.com/pronounce/#{w.en}/english/us", target: '_blank'  %></td>
               <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
               <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></td>
             </tr>
