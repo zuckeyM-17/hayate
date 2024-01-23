@@ -1,0 +1,34 @@
+<% content_for(:page_title) { 'Daily Task Items' } %>
+
+<main class="container">
+  <%= render 'shared/breadcrumb' %>
+  <div class="p-4">
+    <%= render 'shared/header', title: 'Daily Task Items' %>
+
+    <div>
+      <div class="pt-4">
+        <%= form_for @daily_task_item do |f| %>
+          <div class="pt-4"><%= f.text_field :name, autofocus: true %><%= f.submit 'Add',  class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %></div>
+        <% end %>
+      </div>
+      <div class="pt-4">
+        <table  class="border border-slate-500 table-auto">
+          <thead>
+            <tr>
+              <th class="border border-slate-600 px-2 py-1">Name</th>
+              <th class="border border-slate-600 px-2 py-1">Del</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @daily_task_items.each do |i| %>
+            <tr>
+              <td class="border border-slate-600 px-2 py-1"><%= i.name %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', daily_task_item_path(i), data: { "turbo-method": :delete } %></td>
+            </tr>
+          <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

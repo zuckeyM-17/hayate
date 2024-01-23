@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
   resources :readings, only: %i[index show]
   resources :reading_notes, only: %i[create]
+  resources :daily_task_items, only: %i[index create destroy]
 end
