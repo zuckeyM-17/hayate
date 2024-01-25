@@ -14,4 +14,8 @@ class DailyTaskItem < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
 
   scope :enabled, -> { where(disabled_at: nil) }
+
+  def disable!
+    update!(disabled_at: Time.zone.now)
+  end
 end

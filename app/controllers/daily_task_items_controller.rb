@@ -14,7 +14,7 @@ class DailyTaskItemsController < ApplicationController
 
   def destroy
     daily_task_item = DailyTaskItem.find(params[:id])
-    daily_task_item.destroy!
+    daily_task_item.disable!
 
     redirect_to daily_task_items_path
   end
