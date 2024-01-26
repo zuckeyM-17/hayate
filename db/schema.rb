@@ -39,13 +39,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "daily_tasks", force: :cascade do |t|
-    t.bigint "daily_task_item_id", null: false
+  create_table "daily_task_sets", force: :cascade do |t|
     t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "daily_tasks", force: :cascade do |t|
+    t.bigint "daily_task_set_id", null: false
+    t.bigint "daily_task_item_id", null: false
     t.boolean "done", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["daily_task_item_id"], name: "index_daily_tasks_on_daily_task_item_id"
+    t.index ["daily_task_set_id"], name: "index_daily_tasks_on_daily_task_set_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -91,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
 
   add_foreign_key "chapters", "books"
   add_foreign_key "daily_tasks", "daily_task_items"
+  add_foreign_key "daily_tasks", "daily_task_sets"
   add_foreign_key "reading_notes", "notes"
   add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"

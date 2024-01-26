@@ -9,9 +9,15 @@ class CreateDailyTasks < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    create_table :daily_tasks do |t|
-      t.references :daily_task_item, null: false, foreign_key: true
+    create_table :daily_task_sets do |t|
       t.date :date, null: false
+
+      t.timestamps
+    end
+
+    create_table :daily_tasks do |t|
+      t.references :daily_task_set, null: false, foreign_key: true
+      t.references :daily_task_item, null: false, foreign_key: true
       t.boolean :done, null: false, default: false
 
       t.timestamps
