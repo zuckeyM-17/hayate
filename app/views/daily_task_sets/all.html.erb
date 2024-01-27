@@ -1,7 +1,9 @@
 <% content_for(:page_title) { 'Past Daily Tasks' } %>
 
 <main class="container">
-  <%= render 'shared/breadcrumb' %>
+  <%= render 'shared/breadcrumb', parents: [
+    { url: daily_task_sets_path, title: 'Daily Tasks'}
+  ] %>
   <div class="p-4">
     <%= render 'shared/header', title: 'Past Daily Tasks' %>
 
