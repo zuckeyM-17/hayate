@@ -13,7 +13,7 @@
 #
 class Link < ApplicationRecord
   def self.get_title(url)
-    html = URI.open(url).read
+    html = OpenURI.open_uri(url).read
     doc = Nokogiri::HTML(html)
     doc.css('title').text
   rescue StandardError => _e
