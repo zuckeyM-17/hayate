@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_162720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
     t.datetime "updated_at", null: false
     t.index ["daily_task_item_id"], name: "index_daily_tasks_on_daily_task_item_id"
     t.index ["daily_task_set_id"], name: "index_daily_tasks_on_daily_task_set_id"
+  end
+
+  create_table "favorite_links", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.datetime "archived_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_favorite_links_on_link_id"
+  end
+
+  create_table "link_notes", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_link_notes_on_link_id"
+    t.index ["note_id"], name: "index_link_notes_on_note_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -99,6 +124,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_142801) do
   add_foreign_key "chapters", "books"
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
+  add_foreign_key "favorite_links", "links"
+  add_foreign_key "link_notes", "links"
+  add_foreign_key "link_notes", "notes"
   add_foreign_key "reading_notes", "notes"
   add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"
