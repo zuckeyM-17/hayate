@@ -21,4 +21,5 @@ Rails.application.routes.draw do
       get :all
     end
   end
+  resources :daily_tasks, only: %i[update]
 end
