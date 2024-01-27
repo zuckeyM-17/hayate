@@ -19,6 +19,7 @@
           <tbody>
           <% if @daily_task_sets.empty? || !@daily_task_sets.first.date.today? %>
             <tr>
+              <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
               <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size %>">
                 <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
               </td>
@@ -36,7 +37,7 @@
                   </td>
                 <% else %>
                   <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '🔲', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
+                    <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
                   </td>
                 <% end %>
               <% end %>
