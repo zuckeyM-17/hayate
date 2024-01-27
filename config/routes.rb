@@ -22,4 +22,5 @@ Rails.application.routes.draw do
     end
   end
   resources :daily_tasks, only: %i[update]
+  resources :links, only: %i[index create destroy]
 end
