@@ -9,7 +9,7 @@ module BooksHelper
       'other' => 'bg-gray-100'
     }
 
-    content_tag(:span, class: "rounded text-gray-900 #{color_map[category]} py-1 px-2") do
+    content_tag(:span, class: "rounded-md text-xs text-gray-900 #{color_map[category]} py-0.5 px-1") do
       category
     end
   end
