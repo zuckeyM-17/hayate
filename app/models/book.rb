@@ -21,6 +21,10 @@ class Book < ApplicationRecord
 
   enum category: { engineering: 10, management: 20, english: 30, other: 0 }
 
+  def in_progress?
+    readings.in_progress.present?
+  end
+
   def start!
     Reading.create!(chapter: chapters.min_by(&:number))
   end

@@ -2,6 +2,7 @@
 
 class BooksController < ApplicationController
   def index
+    @readings = Reading.in_progress
     @books = Book.all.page(params[:page])
   end
 

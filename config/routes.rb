@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       post :finish
     end
   end
-  resources :readings, only: %i[index show]
+  resources :readings, only: %i[show]
   resources :reading_notes, only: %i[create]
   resources :daily_task_items, only: %i[index create destroy]
   resources :daily_task_sets, only: %i[index create] do
