@@ -36,7 +36,9 @@ daily_tasks = [
   ['2024/01/23', true, true, true, true, true, true, false, true],
   ['2024/01/24', true, false, true, true, false, true, false, false],
   ['2024/01/25', true, false, true, true, true, true, true, true],
-  ['2024/01/26', true, true, true, true, true, true, true, true]
+  ['2024/01/26', true, true, true, true, true, true, true, true],
+  ['2024/01/27', true, true, true, true, true, true, false, true],
+  ['2024/01/28', true, true, true, true, true, true, false, true]
 ]
 
 daily_tasks.each do |date|
