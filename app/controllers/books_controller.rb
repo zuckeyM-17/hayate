@@ -16,9 +16,7 @@ class BooksController < ApplicationController
 
   def create
     book = Book.build(book_params.slice(:title, :category))
-    book_params[:chapters].split(/\R/).each.with_index(1) do |title, i|
-      next if title.blank?
-
+    book_params[:chapters].split(/\R/).delete_if(&:empty?).each.with_index(1) do |title, i|
       book.chapters.build(title:, number: i)
     end
     if book.save
