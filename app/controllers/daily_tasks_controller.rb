@@ -5,7 +5,7 @@ class DailyTasksController < ApplicationController
     task = DailyTask.find(params[:id])
     task.update!(update_params)
 
-    redirect_to daily_task_sets_path
+    redirect_to root_path
   end
 
   private

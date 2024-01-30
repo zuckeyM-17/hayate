@@ -1,14 +1,55 @@
 <main class="container">
   <%= render 'shared/breadcrumb', root: true %>
   <div class="p-4">
-    <%= render 'shared/header', title: 'Hayate' %>
 
+    <!-- Daily Tasks -->
+    <%= render 'shared/header', title: 'Daily Tasks' %>
     <div>
-      <ul>
-        <li><%= link_to 'Words', words_path %></li>
-        <li><%= link_to 'Books', books_path %></li>
-        <li><%= link_to 'Daily Task', daily_task_sets_path %>
-      </ul>
+      <div class="pt-4">
+        <span class="underline"><%= link_to 'Past...', daily_task_sets_path %></span>
+        <span> | </span>
+        <span><%= link_to '⚙️', daily_task_items_path %></span>
+      </div>
+      <div class="pt-4">
+        <table  class="border border-slate-500 table-auto">
+          <thead>
+            <tr>
+              <th class="border border-slate-600 px-2 py-1">Date</th>
+              <% @daily_task_items.each do |i| %>
+                <th class="border border-slate-600 px-2 py-1"><%= i.name %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+          <% if @daily_task_sets.empty? || !@daily_task_sets.first.date.today? %>
+            <tr>
+              <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
+              <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size %>">
+                <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
+              </td>
+            </tr>
+          <% end %>
+          <% @daily_task_sets.each do |task_set| %>
+            <% tasks = task_set.daily_tasks.index_by(&:daily_task_item_id) %>
+            <tr>
+              <td class="border border-slate-600 px-2 py-1"><%= task_set.date %></td>
+              <% @daily_task_items.each do |i| %>
+                <% task = tasks[i.id] %>
+                <% if task.done %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch } %>
+                  </td>
+                <% else %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
+                  </td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end%>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </main>
