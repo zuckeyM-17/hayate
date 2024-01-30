@@ -2,8 +2,8 @@
 
 class BooksController < ApplicationController
   def index
-    @readings = Reading.in_progress
-    @books = Book.all.page(params[:page])
+    @unread_books = Book.unread.page(params[:page])
+    @finished_books = Book.finished.page(params[:page])
   end
 
   def show

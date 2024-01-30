@@ -19,6 +19,9 @@ class Book < ApplicationRecord
   has_many :chapters, dependent: :destroy
   has_many :readings, through: :chapters
 
+  scope :unread, -> { where(finished_at: nil) }
+  scope :finished, -> { where.not(finished_at: nil) }
+
   enum category: { engineering: 10, management: 20, english: 30, other: 0 }
 
   def in_progress?

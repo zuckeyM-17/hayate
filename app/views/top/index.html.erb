@@ -51,5 +51,36 @@
         </table>
       </div>
     </div>
+
+    <!-- Readings -->
+    <div class="pt-4">
+
+      <%= render 'shared/header', title: 'Readings' %>
+
+      <div class="pt-4">
+        <table class="border border-slate-500 table-auto">
+          <thead>
+            <tr>
+              <th class="border border-slate-600 px-2 py-1">Book</th>
+              <th class="border border-slate-600 px-2 py-1">Category</th>
+              <th class="border border-slate-600 px-2 py-1">Chapter</th>
+              <th class="border border-slate-600 px-2 py-1">Progress</th>
+              <th class="border border-slate-600 px-2 py-1">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @readings.each do |r| %>
+              <tr>
+                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.book.title %></td>
+                <td class="border border-slate-600 px-2 py-1"><%= book_category(r.chapter.book.category) %></td>
+                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.title %></td>
+                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.number %>/<%= r.chapter.book.chapters.size %></td>
+                <td class="border border-slate-600 px-2 py-1 underline"><%= link_to 'note', reading_path(r) %></td>
+              </tr>
+            <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </main>
