@@ -2,7 +2,8 @@
 
 module Sizume
   class Posts
-    Post = Struct.new(:slug, :title, :bodyCharacterCount, :visibility, :createdAt, :updatedAt, :tags, keyword_init: true)
+    Post = Struct.new(:slug, :title, :bodyCharacterCount, :visibility, :createdAt, :updatedAt, :tags,
+                      keyword_init: true)
 
     def initialize
       @api_key = Rails.application.credentials[:sizume][:api_key]
