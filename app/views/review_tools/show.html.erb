@@ -1,0 +1,15 @@
+<% content_for(:page_title) { 'Review Tool' } %>
+
+<main class="container">
+  <%= render 'shared/breadcrumb' %>
+
+  <div class="p-4">
+    <%= render 'shared/header', title: 'Review Tool' %>
+
+    <div class="mt-4 p-4 border rounded-lg">
+      <% @posts.each do |p| %>
+        <p><%= "- [https://sizu.me/zuckey/posts/#{p.slug}:title]"%></p>
+      <% end %>
+    </div>
+  </div>
+</main>
