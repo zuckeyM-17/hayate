@@ -2,6 +2,8 @@
 
 module Sizume
   class Posts
+    Post = Struct.new(:slug, :title, :bodyCharacterCount, :visibility, :createdAt, :updatedAt, :tags, keyword_init: true)
+
     def initialize
       @api_key = Rails.application.credentials[:sizume][:api_key]
       @uri = URI.parse('https://sizu.me/api/v1/posts')
@@ -13,7 +15,9 @@ module Sizume
       request = Net::HTTP::Get.new(@uri)
       request['Authorization'] = "Bearer #{@api_key}"
       res = Net::HTTP.start(@uri.host, @uri.port, @req_options) { |http| http.request request }
-      JSON.parse(res.body)["posts"]
+      JSON.parse(res.body).symbolize_keys[:posts].map do |post|
+        Post.new(post)
+      end
     end
   end
 end
