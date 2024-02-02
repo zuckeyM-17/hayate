@@ -8,7 +8,7 @@
 
     <div class="mt-4 p-4 border rounded-lg">
       <% @posts.each do |p| %>
-        <p><%= "- [https://sizu.me/zuckey/posts/#{p.slug}:title]"%></p>
+        <p><%= "- [#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></p>
       <% end %>
     </div>
   </div>
