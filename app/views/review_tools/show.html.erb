@@ -12,15 +12,17 @@
       <p>### daily task</p>
       <p>### 読書</p>
 
+      <span>タイトル|進捗🏃‍♂️|一言</span><br />
+      <span>-|-|-</span><br />
       <% @readings.each do |r| %>
-        <span>* <%= r.chapter.book.title %></span><br />
+        <span><%= r.chapter.book.title %>|XX%=>YY%|ほげほげ</span><br />
       <% end %>
       <br />
 
       <p>### しずかなインターネット</p>
 
       <% @posts.each do |p| %>
-        <span>* <%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
+        <span><%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
       <% end %>
       <br />
 
