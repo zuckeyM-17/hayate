@@ -13,9 +13,10 @@ class DailyTaskSet < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
 
   scope :this_week, -> { where(date: Time.zone.today.all_week) }
+  scope :last_week, -> { where(date: Time.zone.today.last_week.all_week) }
 
-  def self.init!
-    daily_task_set = create!(date: Time.zone.today)
+  def self.init!(date: Time.zone.today)
+    daily_task_set = create!(date:)
     DailyTaskItem.enabled.each do |item|
       DailyTask.create!(daily_task_set:, daily_task_item: item)
     end

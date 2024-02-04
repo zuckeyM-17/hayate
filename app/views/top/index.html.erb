@@ -8,6 +8,12 @@
       <div class="pt-4">
         <span class="underline"><%= link_to 'Past...', daily_task_sets_path %></span>
         <span> | </span>
+        <% if params[:last_week]%>
+          <span class="underline"><%= link_to 'This Week', root_path %></span>
+        <% else %>
+          <span class="underline"><%= link_to 'Last Week', root_path(last_week: true) %></span>
+        <% end %>
+        <span> | </span>
         <span><%= link_to '⚙️', daily_task_items_path %></span>
       </div>
       <div class="pt-4">
@@ -21,7 +27,7 @@
             </tr>
           </thead>
           <tbody>
-          <% if @daily_task_sets.empty? || !@daily_task_sets.first.date.today? %>
+          <% if !params[:last_week] && !@daily_task_sets.first&.date&.today? %>
             <tr>
               <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
               <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size %>">
