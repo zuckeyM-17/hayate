@@ -5,11 +5,30 @@
 
   <div class="p-4">
     <%= render 'shared/header', title: 'Review Tool' %>
-
     <div class="mt-4 p-4 border rounded-lg">
-      <% @posts.each do |p| %>
-        <p><%= "- [#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></p>
+
+      <p>## まとめ</p>
+      <p>## やったこと</p>
+      <p>### daily task</p>
+      <p>### 読書</p>
+
+      <% @readings.each do |r| %>
+        <span>* <%= r.chapter.book.title %></span><br />
       <% end %>
+      <br />
+
+      <p>### しずかなインターネット</p>
+
+      <% @posts.each do |p| %>
+        <span>* <%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
+      <% end %>
+      <br />
+
+      <p>### その他</p>
+      <p>## やれなかったこと</p>
+      <p>## 来週のトピック</p>
+      <p>---</p>
+      <p>終わり</p>
     </div>
   </div>
 </main>
