@@ -43,11 +43,11 @@
                 <% task = tasks[i.id] %>
                 <% if task.done %>
                   <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch } %>
+                    <%= link_to '✅', daily_task_path(task, done: false, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
                   </td>
                 <% else %>
                   <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
+                    <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
                   </td>
                 <% end %>
               <% end %>
