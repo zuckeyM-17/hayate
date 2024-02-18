@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_27_162720) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_144433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_162720) do
     t.datetime "updated_at", null: false
     t.index ["daily_task_item_id"], name: "index_daily_tasks_on_daily_task_item_id"
     t.index ["daily_task_set_id"], name: "index_daily_tasks_on_daily_task_set_id"
+  end
+
+  create_table "daily_waking_hours", force: :cascade do |t|
+    t.bigint "daily_task_set_id", null: false
+    t.datetime "upped_at"
+    t.datetime "turned_in_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["daily_task_set_id"], name: "index_daily_waking_hours_on_daily_task_set_id"
   end
 
   create_table "favorite_links", force: :cascade do |t|
@@ -124,6 +133,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_27_162720) do
   add_foreign_key "chapters", "books"
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
+  add_foreign_key "daily_waking_hours", "daily_task_sets"
   add_foreign_key "favorite_links", "links"
   add_foreign_key "link_notes", "links"
   add_foreign_key "link_notes", "notes"
