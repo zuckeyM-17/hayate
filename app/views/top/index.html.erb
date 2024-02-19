@@ -24,13 +24,15 @@
               <% @daily_task_items.each do |i| %>
                 <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
               <% end %>
+              <th class="border border-slate-600 px-2 py-1 w-30">起床</th>
+              <th class="border border-slate-600 px-2 py-1 w-30">就寝</th>
             </tr>
           </thead>
           <tbody>
           <% if !params[:last_week] && !@daily_task_sets.first&.date&.today? %>
             <tr>
               <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
-              <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size %>">
+              <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
                 <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
               </td>
             </tr>
@@ -50,6 +52,28 @@
                     <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
                   </td>
                 <% end %>
+              <% end %>
+
+              <% if waking_hour = task_set.daily_waking_hour %>
+                <% if waking_hour.upped_at %>
+                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
+                <% else %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= link_to '🌅', daily_waking_hour_path(waking_hour, upped_at: Time.zone.now, turned_in_at: waking_hour.turned_in_at, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                  </td>
+                <% end %>
+
+                <% if waking_hour.turned_in_at %>
+                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
+                <% else %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= link_to '🛌', daily_waking_hour_path(waking_hour, upped_at: waking_hour.upped_at, turned_in_at: Time.zone.now, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                  </td>
+                <% end %>
+
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1"></td>
+                <td class="border border-slate-600 px-2 py-1"></td>
               <% end %>
             </tr>
           <% end%>

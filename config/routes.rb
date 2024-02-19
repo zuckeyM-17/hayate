@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :daily_task_items, only: %i[index create destroy]
   resources :daily_task_sets, only: %i[index create]
   resources :daily_tasks, only: %i[update]
+  resources :daily_waking_hours, only: %i[update]
   resources :links, only: %i[index create destroy]
 
   resource :review_tool, only: %i[show]
