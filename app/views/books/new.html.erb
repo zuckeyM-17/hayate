@@ -1,10 +1,9 @@
 x<% content_for(:page_title) { 'New Book' } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
-  <div class="p-4">
-    <%= render 'shared/header', title: 'New Book' %>
 
-    <%= render "form", book: @book %>
-  </div>
-</main>
+<%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'New Book' %>
+
+  <%= render "form", book: @book %>
+</div>

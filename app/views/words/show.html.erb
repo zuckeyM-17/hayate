@@ -1,16 +1,14 @@
 <% content_for(:page_title) { @word.en } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb', parents: [{url: words_path, title: 'Words'}] %>
-  <div class="p-4">
-    <%= render 'shared/header', title: @word.en %>
+<%= render 'shared/breadcrumb', parents: [{url: words_path, title: 'Words'}] %>
+<div class="p-4">
+  <%= render 'shared/header', title: @word.en %>
 
-    <div>
-      <p><%= @word.word_searches.count %></p>
-      <p><%= @word.ja %></p>
-      <p class="underline"><%= link_to @word.pronunciation_symbol, "https://youglish.com/pronounce/#{@word.en}/english/us", target: '_blank' %></p>
-      <p><%= @word.meaning %></p>
-      <p><%= @word.misc %></p>
-    </div>
+  <div>
+    <p><%= @word.word_searches.count %></p>
+    <p><%= @word.ja %></p>
+    <p class="underline"><%= link_to @word.pronunciation_symbol, "https://youglish.com/pronounce/#{@word.en}/english/us", target: '_blank' %></p>
+    <p><%= @word.meaning %></p>
+    <p><%= @word.misc %></p>
   </div>
-</main>
+</div>

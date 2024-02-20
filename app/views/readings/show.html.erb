@@ -1,6 +1,6 @@
 <% content_for(:page_title) { @reading.chapter.book.title } %>
 
-<main class="container">
+<main class="container w-full">
   <%= render 'shared/breadcrumb', parents: [
     { url: books_path, title: 'Books'}
   ] %>

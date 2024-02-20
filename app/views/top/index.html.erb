@@ -1,116 +1,114 @@
-<main class="container">
-  <%= render 'shared/breadcrumb', root: true %>
-  <div class="p-4">
+<%= render 'shared/breadcrumb', root: true %>
+<div class="p-4">
 
-    <!-- Daily Tasks -->
-    <%= render 'shared/header', title: 'Daily Tasks' %>
-    <div>
-      <div class="pt-4">
-        <span class="underline"><%= link_to 'Past...', daily_task_sets_path %></span>
-        <span> | </span>
-        <% if params[:last_week]%>
-          <span class="underline"><%= link_to 'This Week', root_path %></span>
-        <% else %>
-          <span class="underline"><%= link_to 'Last Week', root_path(last_week: true) %></span>
-        <% end %>
-        <span> | </span>
-        <span><%= link_to '⚙️', daily_task_items_path %></span>
-      </div>
-      <div class="pt-4">
-        <table  class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <th class="border border-slate-600 px-2 py-1">Date</th>
-              <% @daily_task_items.each do |i| %>
-                <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
-              <% end %>
-              <th class="border border-slate-600 px-2 py-1 w-30">起床</th>
-              <th class="border border-slate-600 px-2 py-1 w-30">就寝</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% if !params[:last_week] && !@daily_task_sets.first&.date&.today? %>
-            <tr>
-              <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
-              <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
-                <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
-              </td>
-            </tr>
-          <% end %>
-          <% @daily_task_sets.each do |task_set| %>
-            <% tasks = task_set.daily_tasks.index_by(&:daily_task_item_id) %>
-            <tr>
-              <td class="border border-slate-600 px-2 py-1"><%= task_set.date %></td>
-              <% @daily_task_items.each do |i| %>
-                <% task = tasks[i.id] %>
-                <% if task.done %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '✅', daily_task_path(task, done: false, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                  </td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                  </td>
-                <% end %>
-              <% end %>
-
-              <% if waking_hour = task_set.daily_waking_hour %>
-                <% if waking_hour.upped_at %>
-                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '🌅', daily_waking_hour_path(waking_hour, upped_at: Time.zone.now, turned_in_at: waking_hour.turned_in_at, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                  </td>
-                <% end %>
-
-                <% if waking_hour.turned_in_at %>
-                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '🛌', daily_waking_hour_path(waking_hour, upped_at: waking_hour.upped_at, turned_in_at: Time.zone.now, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                  </td>
-                <% end %>
-
-              <% else %>
-                <td class="border border-slate-600 px-2 py-1"></td>
-                <td class="border border-slate-600 px-2 py-1"></td>
-              <% end %>
-            </tr>
-          <% end%>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Readings -->
+  <!-- Daily Tasks -->
+  <%= render 'shared/header', title: 'Daily Tasks' %>
+  <div>
     <div class="pt-4">
+      <span class="underline"><%= link_to 'Past...', daily_task_sets_path %></span>
+      <span> | </span>
+      <% if params[:last_week]%>
+        <span class="underline"><%= link_to 'This Week', root_path %></span>
+      <% else %>
+        <span class="underline"><%= link_to 'Last Week', root_path(last_week: true) %></span>
+      <% end %>
+      <span> | </span>
+      <span><%= link_to '⚙️', daily_task_items_path %></span>
+    </div>
+    <div class="pt-4">
+      <table  class="border border-slate-500 table-auto">
+        <thead>
+          <tr>
+            <th class="border border-slate-600 px-2 py-1">Date</th>
+            <% @daily_task_items.each do |i| %>
+              <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
+            <% end %>
+            <th class="border border-slate-600 px-2 py-1 w-30">起床</th>
+            <th class="border border-slate-600 px-2 py-1 w-30">就寝</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if !params[:last_week] && !@daily_task_sets.first&.date&.today? %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
+            <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
+              <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
+            </td>
+          </tr>
+        <% end %>
+        <% @daily_task_sets.each do |task_set| %>
+          <% tasks = task_set.daily_tasks.index_by(&:daily_task_item_id) %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1"><%= task_set.date %></td>
+            <% @daily_task_items.each do |i| %>
+              <% task = tasks[i.id] %>
+              <% if task.done %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '✅', daily_task_path(task, done: false, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                </td>
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                </td>
+              <% end %>
+            <% end %>
 
-      <%= render 'shared/header', title: 'Readings' %>
+            <% if waking_hour = task_set.daily_waking_hour %>
+              <% if waking_hour.upped_at %>
+                <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '🌅', daily_waking_hour_path(waking_hour, upped_at: Time.zone.now, turned_in_at: waking_hour.turned_in_at, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                </td>
+              <% end %>
 
-      <div class="pt-4">
-        <table class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <th class="border border-slate-600 px-2 py-1">Book</th>
-              <th class="border border-slate-600 px-2 py-1">Category</th>
-              <th class="border border-slate-600 px-2 py-1">Chapter</th>
-              <th class="border border-slate-600 px-2 py-1">Progress</th>
-              <th class="border border-slate-600 px-2 py-1">Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @readings.each do |r| %>
-              <tr>
-                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.book.title %></td>
-                <td class="border border-slate-600 px-2 py-1"><%= book_category(r.chapter.book.category) %></td>
-                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.title %></td>
-                <td class="border border-slate-600 px-2 py-1"><%= r.chapter.number %>/<%= r.chapter.book.chapters.size %></td>
-                <td class="border border-slate-600 px-2 py-1 underline"><%= link_to 'note', reading_path(r) %></td>
-              </tr>
-            <% end%>
-          </tbody>
-        </table>
-      </div>
+              <% if waking_hour.turned_in_at %>
+                <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '🛌', daily_waking_hour_path(waking_hour, upped_at: waking_hour.upped_at, turned_in_at: Time.zone.now, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                </td>
+              <% end %>
+
+            <% else %>
+              <td class="border border-slate-600 px-2 py-1"></td>
+              <td class="border border-slate-600 px-2 py-1"></td>
+            <% end %>
+          </tr>
+        <% end%>
+        </tbody>
+      </table>
     </div>
   </div>
-</main>
+
+  <!-- Readings -->
+  <div class="pt-4">
+
+    <%= render 'shared/header', title: 'Readings' %>
+
+    <div class="pt-4">
+      <table class="border border-slate-500 table-auto">
+        <thead>
+          <tr>
+            <th class="border border-slate-600 px-2 py-1">Book</th>
+            <th class="border border-slate-600 px-2 py-1">Category</th>
+            <th class="border border-slate-600 px-2 py-1">Chapter</th>
+            <th class="border border-slate-600 px-2 py-1">Progress</th>
+            <th class="border border-slate-600 px-2 py-1">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @readings.each do |r| %>
+            <tr>
+              <td class="border border-slate-600 px-2 py-1"><%= r.chapter.book.title %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= book_category(r.chapter.book.category) %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= r.chapter.title %></td>
+              <td class="border border-slate-600 px-2 py-1"><%= r.chapter.number %>/<%= r.chapter.book.chapters.size %></td>
+              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to 'note', reading_path(r) %></td>
+            </tr>
+          <% end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

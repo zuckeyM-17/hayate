@@ -1,24 +1,22 @@
 <% content_for(:page_title) { @book.title } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
+<%= render 'shared/breadcrumb', parents: [{url: '/books', title: 'Books'}] %>
 
-  <div class="p-4">
-    <%= render 'shared/header', title: @book.title %>
-    <% if @book.readings.blank? %>
-      <div class="pt-4">
-        <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-      </div>
-    <% end %>
+<div class="p-4">
+  <%= render 'shared/header', title: @book.title %>
+  <% if @book.readings.blank? %>
     <div class="pt-4">
-      <p><%= book_category @book.category %></p>
+      <%= link_to 'Start', start_book_path(@book), data: { "turbo-method": :post }, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>
-    <div class="pt-4">
-      <ul>
-        <% @book.chapters.each do |c| %>
-          <li><%= c.title %></li>
-        <% end %>
-      </ul>
-    </div>
+  <% end %>
+  <div class="pt-4">
+    <p><%= book_category @book.category %></p>
   </div>
-</main>
+  <div class="pt-4">
+    <ul>
+      <% @book.chapters.each do |c| %>
+        <li><%= c.title %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
