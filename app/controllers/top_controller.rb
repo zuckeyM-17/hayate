@@ -11,5 +11,6 @@ class TopController < ApplicationController
     @daily_task_items = DailyTaskItem.enabled.order(:created_at)
 
     @readings = Reading.in_progress
+    @notes = Note.today.order(created_at: :desc)
   end
 end
