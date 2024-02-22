@@ -2,7 +2,7 @@
 
 class NotesController < ApplicationController
   def create
-    note = Note.create!(note_params)
+    Note.create!(note_params)
 
     redirect_to root_path
   end
