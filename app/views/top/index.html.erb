@@ -86,20 +86,30 @@
             <% end %>
 
             <% if waking_hour = task_set.daily_waking_hour %>
-              <% if waking_hour.upped_at %>
-                <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
-              <% else %>
-                <td class="border border-slate-600 px-2 py-1">
-                  <%= link_to '🌅', daily_waking_hour_path(waking_hour, upped_at: Time.zone.now, turned_in_at: waking_hour.turned_in_at, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                </td>
-              <% end %>
 
-              <% if waking_hour.turned_in_at %>
-                <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
-              <% else %>
-                <td class="border border-slate-600 px-2 py-1">
-                  <%= link_to '🛌', daily_waking_hour_path(waking_hour, upped_at: waking_hour.upped_at, turned_in_at: Time.zone.now, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
-                </td>
+              <%= form_with model: waking_hour do |f| %>
+                <% if params[:last_week]%>
+                  <%= f.hidden_field :last_week, value: params[:last_week] %>
+                <% end %>
+                <% if waking_hour.upped_at %>
+                  <%= f.hidden_field :upped_at, value: waking_hour.upped_at.strftime('%m/%d %H:%M') %>
+                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
+                <% else %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= f.time_field :upped_at, class: "border-0 text-sm p-0" %>
+                    <%= f.submit '🌅' %>
+                  </td>
+                <% end %>
+
+                <% if waking_hour.turned_in_at %>
+                  <%= f.hidden_field :turned_in_at, value: waking_hour.turned_in_at.strftime('%m/%d %H:%M') %>
+                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
+                <% else %>
+                  <td class="border border-slate-600 px-2 py-1">
+                    <%= f.time_field :turned_in_at, class: "border-0 text-sm p-0" %>
+                    <%= f.submit '🛌' %>
+                  </td>
+                <% end %>
               <% end %>
 
             <% else %>
