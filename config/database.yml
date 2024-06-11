@@ -17,3 +17,5 @@ test:
 production:
   <<: *default
   database: hayate_production
+  username: hayate
+  password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
