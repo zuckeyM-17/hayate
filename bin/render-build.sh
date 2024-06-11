@@ -3,4 +3,4 @@
 set -o errexit
 
 bundle install
-bin/rails tailwindcss:build
+bundle exec rake assets:precompile
