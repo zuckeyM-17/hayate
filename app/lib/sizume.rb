@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'net/http'
+
 module Sizume
   class Posts
     Post = Struct.new(:slug, :title, :bodyCharacterCount, :visibility, :createdAt, :updatedAt, :tags,
