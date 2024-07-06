@@ -12,6 +12,14 @@
         <% end %>
       </div>
       <div class="pt-4">
+        <% if params[:all] %>
+          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', links_path %></td>
+        <% else %>
+          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', links_path(all: true) %></td>
+        <% end %>
+        all
+      </div>
+      <div class="pt-4">
         <%= paginate @links %>
         <table  class="border border-slate-500 table-auto">
           <thead>

@@ -3,6 +3,7 @@
 class LinksController < ApplicationController
   def index
     @links = Link.order(created_at: :desc).page(params[:page])
+    @links = @links.unread if params[:all].blank?
     @link = Link.new
   end
 
