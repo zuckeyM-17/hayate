@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   resources :links, only: %i[index create destroy]
 
   resource :review_tool, only: %i[show]
+
+  namespace :api do
+    resources :links, only: %i[create]
+  end
 end
