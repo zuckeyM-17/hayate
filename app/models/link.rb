@@ -19,4 +19,12 @@ class Link < ApplicationRecord
   rescue StandardError => _e
     nil
   end
+
+  def read!
+    update!(read_at: Time.zone.now)
+  end
+
+  def read?
+    read_at.present?
+  end
 end

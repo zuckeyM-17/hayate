@@ -16,6 +16,7 @@
         <table  class="border border-slate-500 table-auto">
           <thead>
             <tr>
+              <th class="border border-slate-600 px-2 py-1"></th>
               <th class="border border-slate-600 px-2 py-1">Title</th>
               <th class="border border-slate-600 px-2 py-1">Created</th>
               <th class="border border-slate-600 px-2 py-1"></th>
@@ -24,6 +25,13 @@
           <tbody>
           <% @links.each do |l| %>
             <tr>
+              <% if l.read? %>
+                <td class="border border-slate-600 px-2 py-1">✅</td>
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '⬜️', read_link_path(l), data: { "turbo-method": :patch } %>
+                </td>
+              <% end %>
               <td class="border border-slate-600 px-2 py-1 underline"><%= link_to l.title, l.url, target: '_blank' %></td>
               <td class="border border-slate-600 px-2 py-1"><%= l(l.created_at, format: :long) %></td>
               <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', link_path(l), data: { "turbo-method": :delete } %></td>

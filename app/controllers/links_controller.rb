@@ -24,6 +24,12 @@ class LinksController < ApplicationController
     redirect_to links_path
   end
 
+  def read
+    link = Link.find(params[:id])
+    link.read!
+    redirect_to links_path
+  end
+
   private
 
   def link_params
