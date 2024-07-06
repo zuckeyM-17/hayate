@@ -1,0 +1,19 @@
+{
+  "name": "hayate_helper",
+  "description": "hayate サービスを便利に使えるchrome拡張機能",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
