@@ -22,6 +22,7 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 gem 'kaminari'
+gem 'active_flag'
 
 gem 'rack-cors'
 
