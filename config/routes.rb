@@ -13,6 +13,11 @@ Rails.application.routes.draw do
       post :finish
     end
   end
+  resources :tasks, only: %i[index create destroy] do
+    member do
+      patch :done
+    end
+  end
   resources :notes, only: %i[create]
   resources :readings, only: %i[show]
   resources :reading_notes, only: %i[create]
