@@ -26,9 +26,9 @@
         <% end %>
         all
         <% if today %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', tasks_path(all:, today: true) %></td>
+          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', tasks_path(all:) %></td>
         <% else %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', tasks_path(all:) %></td>
+          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', tasks_path(all:, today: true) %></td>
         <% end %>
         today
       </div>
