@@ -5,6 +5,9 @@
   <div class="p-4">
     <%= render 'shared/header', title: 'Tasks' %>
 
+    <% all = params[:all] %>
+    <% today = params[:today] %>
+
     <div>
       <div class="pt-4">
         <%= form_for @task do |f| %>
@@ -17,8 +20,6 @@
         <% end %>
       </div>
       <div class="pt-4">
-        <% all = params[:all] %>
-        <% today = params[:today] %>
         <% if all %>
           <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', tasks_path(today:) %></td>
         <% else %>
