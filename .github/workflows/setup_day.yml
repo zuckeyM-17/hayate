@@ -1,0 +1,17 @@
+on:
+  schedule:
+    - cron: "0 15 * * *"
+
+# on:
+#   push:
+#     branches: main
+
+jobs:
+  setup_daily_jobs:
+    name: Setup Day
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Request
+        run: |
+          curl -X POST -H "Content-Type: application/json" ${{ secrets.CREATE_DAILY_TASK_SETS_URL }}
