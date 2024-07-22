@@ -25,7 +25,9 @@
             <td class="border border-slate-600 px-2 py-1"><%= task_set.date %></td>
             <% @daily_task_items.each do |i| %>
               <% task = tasks[i.id] %>
-              <% if task.done %>
+              <% if task.nil? %>
+                <td class="border border-slate-600 px-2 py-1"></td>
+              <% elsif task.done %>
                 <td class="border border-slate-600 px-2 py-1">✅</td>
               <% else %>
                 <td class="border border-slate-600 px-2 py-1">⬜️</td>
