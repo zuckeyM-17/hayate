@@ -17,7 +17,10 @@ class DailyTaskSet < ApplicationRecord
   scope :last_week, -> { where(date: Time.zone.today.last_week.all_week) }
 
   def self.init!(date: Time.zone.today)
-    daily_task_set = create!(date:)
+    daily_task_set = find_or_initialize_by(date:)
+    return nil if daily_task_set.persisted?
+
+    daily_task_set.save!
     DailyTaskItem.enabled.each do |item|
       DailyTask.create!(daily_task_set:, daily_task_item: item)
     end

@@ -35,5 +35,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :links, only: %i[create]
+    resources :daily_task_sets, only: %i[create]
   end
 end
