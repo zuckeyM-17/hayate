@@ -11,7 +11,6 @@
 #
 class DailyTaskSet < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
-  has_one :daily_waking_hour, dependent: :destroy
 
   scope :this_week, -> { where(date: Time.zone.today.all_week) }
   scope :last_week, -> { where(date: Time.zone.today.last_week.all_week) }
@@ -24,7 +23,6 @@ class DailyTaskSet < ApplicationRecord
     DailyTaskItem.enabled.each do |item|
       DailyTask.create!(daily_task_set:, daily_task_item: item)
     end
-    DailyWakingHour.create!(daily_task_set:)
     daily_task_set
   end
 end

@@ -55,8 +55,6 @@
             <% @daily_task_items.each do |i| %>
               <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
             <% end %>
-            <th class="border border-slate-600 px-2 py-1 w-30">起床</th>
-            <th class="border border-slate-600 px-2 py-1 w-30">就寝</th>
           </tr>
         </thead>
         <tbody>
@@ -83,38 +81,6 @@
                   <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
                 </td>
               <% end %>
-            <% end %>
-
-            <% if waking_hour = task_set.daily_waking_hour %>
-
-              <%= form_with model: waking_hour do |f| %>
-                <% if params[:last_week]%>
-                  <%= f.hidden_field :last_week, value: params[:last_week] %>
-                <% end %>
-                <% if waking_hour.upped_at %>
-                  <%= f.hidden_field :upped_at, value: waking_hour.upped_at.strftime('%m/%d %H:%M') %>
-                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.upped_at.strftime('%m/%d %H:%M') %></td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= f.time_field :upped_at, class: "border-0 text-sm p-0" %>
-                    <%= f.submit '🌅' %>
-                  </td>
-                <% end %>
-
-                <% if waking_hour.turned_in_at %>
-                  <%= f.hidden_field :turned_in_at, value: waking_hour.turned_in_at.strftime('%m/%d %H:%M') %>
-                  <td class="border border-slate-600 px-2 py-1"><%= waking_hour.turned_in_at.strftime('%m/%d %H:%M') %></td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= f.time_field :turned_in_at, class: "border-0 text-sm p-0" %>
-                    <%= f.submit '🛌' %>
-                  </td>
-                <% end %>
-              <% end %>
-
-            <% else %>
-              <td class="border border-slate-600 px-2 py-1"></td>
-              <td class="border border-slate-600 px-2 py-1"></td>
             <% end %>
           </tr>
         <% end%>
