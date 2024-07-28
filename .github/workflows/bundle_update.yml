@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '0 0 * * 0'
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
@@ -35,7 +39,6 @@ jobs:
           body: |
             This PR updates gems.
           branch: bundle-update-${{ steps.date.outputs.date }}
+          delete-branch: true
           base: main
           labels: dependencies
-          reviewers: octocat
-          assignees: octocat
