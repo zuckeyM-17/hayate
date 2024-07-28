@@ -6,6 +6,10 @@ name: Bundle update every week
 
 on: push
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
