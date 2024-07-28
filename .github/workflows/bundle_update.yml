@@ -1,8 +1,10 @@
 name: Bundle update every week
 
-on:
-  schedule:
-    - cron: '0 0 * * 0'
+# on:
+#   schedule:
+#     - cron: '0 0 * * 0'
+
+on: push
 
 jobs:
   createPullRequest:
@@ -35,7 +37,6 @@ jobs:
           body: |
             This PR updates gems.
           branch: bundle-update-${{ steps.date.outputs.date }}
+          delete-branch: true
           base: main
           labels: dependencies
-          reviewers: octocat
-          assignees: octocat
