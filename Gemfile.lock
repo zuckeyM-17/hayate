@@ -162,7 +162,7 @@ GEM
     parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.7)
+    pg (1.5.9)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -307,7 +307,7 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails (~> 2.0)
   kaminari
-  pg (~> 1.1)
+  pg (~> 1.5)
   propshaft
   pry-byebug
   pry-rails
