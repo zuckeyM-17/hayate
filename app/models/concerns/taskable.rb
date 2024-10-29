@@ -4,8 +4,8 @@ module Taskable
   extend ActiveSupport::Concern
 
   included do
-    enum priority: { new_added: 0, today: 10, later: 20 }
-    enum category: { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
+    enum :priority, { new_added: 0, today: 10, later: 20 }
+    enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
 
     validates :title, presence: true
 

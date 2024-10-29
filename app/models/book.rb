@@ -23,7 +23,7 @@ class Book < ApplicationRecord
   scope :unread, -> { where(finished_at: nil) }
   scope :finished, -> { where.not(finished_at: nil) }
 
-  enum category: { engineering: 10, management: 20, english: 30, other: 0 }
+  enum :category, { engineering: 10, management: 20, english: 30, other: 0 }
 
   def in_progress?
     readings.in_progress.present?
