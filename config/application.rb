@@ -13,7 +13,6 @@ require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
 # require "rails/test_unit/railtie"
-require 'open-uri'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,14 +23,10 @@ module Hayate
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
-    config.time_zone ='Asia/Tokyo'
-    config.i18n.default_locale = :ja
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -43,7 +38,5 @@ module Hayate
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    config.autoload_paths += Dir.glob("#{config.root}/app/lib")
   end
 end
