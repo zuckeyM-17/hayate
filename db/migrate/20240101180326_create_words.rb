@@ -2,9 +2,7 @@
 
 class CreateWords < ActiveRecord::Migration[7.1]
   def change
-    create_table :users do |t|
-      t.timestamps
-    end
+    create_table :users, &:timestamps
 
     create_table :user_profiles do |t|
       t.string :display_name, null: false
