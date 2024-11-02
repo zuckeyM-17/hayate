@@ -21,6 +21,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Link < ApplicationRecord
+  belongs_to :user
+
   def self.get_title(url)
     html = OpenURI.open_uri(url).read
     doc = Nokogiri::HTML(html)

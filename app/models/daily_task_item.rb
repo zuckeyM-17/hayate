@@ -21,6 +21,7 @@
 #
 class DailyTaskItem < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
+  belongs_to :user
 
   scope :enabled, -> { where(disabled_at: nil) }
 

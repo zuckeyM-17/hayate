@@ -22,4 +22,5 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class FavoriteLink < ApplicationRecord
+  belongs_to :user
 end

@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    @book = Book.new(user: current_user)
   end
 
   def create

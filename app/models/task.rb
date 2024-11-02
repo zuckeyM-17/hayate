@@ -25,6 +25,7 @@
 #
 class Task < ApplicationRecord
   include Taskable
+  belongs_to :user
 
   scope :todo, -> { where(done_at: nil) }
   scope :done, -> { where.not(done_at: nil) }
