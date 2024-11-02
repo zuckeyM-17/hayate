@@ -5,7 +5,7 @@ module Api
     protect_from_forgery
 
     def create
-      daily_task_set = DailyTaskSet.init!
+      daily_task_set = DailyTaskSet.init!(user: current_user)
       if daily_task_set.nil?
         head :conflict
         return

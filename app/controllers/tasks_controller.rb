@@ -2,7 +2,7 @@
 
 class TasksController < ApplicationController
   def index
-    @tasks = Task.order(due_at: :desc).page(params[:page])
+    @tasks = current_user.tasks.order(due_at: :desc).page(params[:page])
     @tasks = @tasks.todo if params[:all].blank?
     @tasks = @tasks.today if params[:today].present?
     @task = Task.new
@@ -17,13 +17,13 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.destroy!
     redirect_to tasks_path
   end
 
   def done
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.done!
     redirect_to tasks_path
   end

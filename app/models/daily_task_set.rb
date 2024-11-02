@@ -24,13 +24,13 @@ class DailyTaskSet < ApplicationRecord
   scope :this_week, -> { where(date: Time.zone.today.all_week) }
   scope :last_week, -> { where(date: Time.zone.today.last_week.all_week) }
 
-  def self.init!(date: Time.zone.today)
+  def self.init!(user:, date: Time.zone.today)
     daily_task_set = find_or_initialize_by(date:)
     return nil if daily_task_set.persisted?
 
-    daily_task_set.user = current_user
+    daily_task_set.user = user
     daily_task_set.save!
-    DailyTaskItem.enabled.each do |item|
+    user.daily_task_items.enabled.each do |item|
       DailyTask.create!(daily_task_set:, daily_task_item: item)
     end
     daily_task_set

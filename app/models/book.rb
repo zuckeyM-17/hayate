@@ -31,6 +31,16 @@ class Book < ApplicationRecord
 
   enum :category, { engineering: 10, management: 20, english: 30, other: 0 }
 
+  def self.register!(user:, title:, category:, chapters:)
+    book = user.books.build(title:, category:)
+    chapters.split(/\R/).delete_if(&:empty?).each.with_index(1) do |t, i|
+      book.chapters.build(title: t, number: i)
+    end
+
+    book.save!
+    book
+  end
+
   def in_progress?
     readings.in_progress.present?
   end

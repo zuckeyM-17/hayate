@@ -2,12 +2,13 @@
 
 class BooksController < ApplicationController
   def index
-    @unread_books = Book.unread.page(params[:page])
-    @finished_books = Book.finished.page(params[:page])
+    books = current_user.books
+    @unread_books = books.unread.page(params[:page])
+    @finished_books = books.finished.page(params[:page])
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = current_user.books.find(params[:id])
   end
 
   def new
@@ -15,31 +16,25 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.build(book_params.slice(:title, :category))
-    book_params[:chapters].split(/\R/).delete_if(&:empty?).each.with_index(1) do |title, i|
-      book.chapters.build(title:, number: i)
-    end
-    if book.save
-      redirect_to book_path(book.id), notice: 'Book was successfully created.'
-    else
-      render :new
-    end
+    book = Book.register!(user: current_user, title: book_params[:title], category: book_params[:category],
+                          chapters: book_params[:chapters])
+    redirect_to book_path(book.id), notice: 'Book was successfully created.'
   end
 
   def start
-    book = Book.find(params[:id])
+    book = current_user.books.find(params[:id])
     book.start!
     redirect_to reading_path(book.readings.first), notice: 'Reading was successfully created.'
   end
 
   def next
-    book = Book.find(params[:id])
+    book = current_user.books.find(params[:id])
     book.next!
     redirect_to reading_path(book.readings.in_progress.first), notice: 'Next reading was successfully created.'
   end
 
   def finish
-    book = Book.find(params[:id])
+    book = current_user.books.find(params[:id])
     book.finish!
     redirect_to book_path(book), notice: 'Reading was successfully finished.'
   end

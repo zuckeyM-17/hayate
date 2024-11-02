@@ -2,7 +2,7 @@
 
 class DailyTaskItemsController < ApplicationController
   def index
-    @daily_task_items = DailyTaskItem.enabled
+    @daily_task_items = current_user.daily_task_items.enabled
     @daily_task_item = DailyTaskItem.new
   end
 
@@ -13,7 +13,7 @@ class DailyTaskItemsController < ApplicationController
   end
 
   def destroy
-    daily_task_item = DailyTaskItem.find(params[:id])
+    daily_task_item = current_user.daily_task_items.find(params[:id])
     daily_task_item.disable!
 
     redirect_to daily_task_items_path

@@ -2,6 +2,6 @@
 
 class ReadingsController < ApplicationController
   def show
-    @reading = Reading.find(params[:id])
+    @reading = current_user.readings.find(params[:id])
   end
 end
