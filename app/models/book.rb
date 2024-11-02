@@ -5,6 +5,7 @@
 # Table name: books
 #
 #  id          :bigint           not null, primary key
+#  user_id     :bigint           not null
 #  title       :string           not null
 #  category    :integer          default("other"), not null
 #  finished_at :datetime
@@ -13,7 +14,12 @@
 #
 # Indexes
 #
-#  index_books_on_title  (title) UNIQUE
+#  index_books_on_title    (title) UNIQUE
+#  index_books_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class Book < ApplicationRecord
   has_many :chapters, dependent: :destroy

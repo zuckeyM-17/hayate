@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_07_155500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "title", null: false
     t.integer "category", default: 0, null: false
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_books_on_title", unique: true
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "chapters", force: :cascade do |t|
@@ -33,16 +35,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "daily_task_items", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "name", null: false
     t.datetime "disabled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_daily_task_items_on_user_id"
   end
 
   create_table "daily_task_sets", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_daily_task_sets_on_user_id"
   end
 
   create_table "daily_tasks", force: :cascade do |t|
@@ -56,11 +62,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "favorite_links", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "link_id", null: false
     t.datetime "archived_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_favorite_links_on_link_id"
+    t.index ["user_id"], name: "index_favorite_links_on_user_id"
   end
 
   create_table "link_notes", force: :cascade do |t|
@@ -73,17 +81,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "links", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "title"
     t.string "url"
     t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "reading_notes", force: :cascade do |t|
@@ -103,17 +115,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
     t.index ["chapter_id"], name: "index_readings_on_chapter_id"
   end
 
-  create_table "recurring_tasks", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "description"
-    t.integer "priority", default: 0, null: false
-    t.integer "category", default: 0, null: false
-    t.integer "weekday", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "title", null: false
     t.text "description"
     t.integer "priority", default: 0, null: false
@@ -122,12 +125,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
     t.datetime "done_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "user_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "display_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -136,9 +142,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "word_searches", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_word_searches_on_user_id"
     t.index ["word_id"], name: "index_word_searches_on_word_id"
   end
 
@@ -153,14 +161,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
     t.index ["en"], name: "index_words_on_en", unique: true
   end
 
+  add_foreign_key "books", "users"
   add_foreign_key "chapters", "books"
+  add_foreign_key "daily_task_items", "users"
+  add_foreign_key "daily_task_sets", "users"
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
   add_foreign_key "favorite_links", "links"
+  add_foreign_key "favorite_links", "users"
   add_foreign_key "link_notes", "links"
   add_foreign_key "link_notes", "notes"
+  add_foreign_key "links", "users"
+  add_foreign_key "notes", "users"
   add_foreign_key "reading_notes", "notes"
   add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"
+  add_foreign_key "tasks", "users"
+  add_foreign_key "user_profiles", "users"
+  add_foreign_key "word_searches", "users"
   add_foreign_key "word_searches", "words"
 end

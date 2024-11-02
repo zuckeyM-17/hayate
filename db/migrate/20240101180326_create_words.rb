@@ -5,6 +5,7 @@ class CreateWords < ActiveRecord::Migration[7.1]
     create_table :users, &:timestamps
 
     create_table :user_profiles do |t|
+      t.references :user, null: false, foreign_key: true
       t.string :display_name, null: false
 
       t.timestamps

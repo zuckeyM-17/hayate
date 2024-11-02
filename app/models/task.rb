@@ -5,6 +5,7 @@
 # Table name: tasks
 #
 #  id          :bigint           not null, primary key
+#  user_id     :bigint           not null
 #  title       :string           not null
 #  description :text
 #  priority    :integer          default("new_added"), not null
@@ -13,6 +14,14 @@
 #  done_at     :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_tasks_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
   include Taskable
