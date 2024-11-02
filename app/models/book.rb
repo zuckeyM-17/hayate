@@ -24,6 +24,7 @@
 class Book < ApplicationRecord
   has_many :chapters, dependent: :destroy
   has_many :readings, through: :chapters
+  belongs_to :user
 
   scope :unread, -> { where(finished_at: nil) }
   scope :finished, -> { where.not(finished_at: nil) }

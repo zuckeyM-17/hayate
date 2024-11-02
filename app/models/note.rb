@@ -21,6 +21,7 @@
 class Note < ApplicationRecord
   has_one :reading_note, dependent: :destroy
   has_one :reading, through: :reading_note
+  belongs_to :user
 
   scope :today, -> { where(created_at: Time.zone.today.all_day) }
 end

@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new
+    task = Task.new(user: current_user)
     task.assign_attributes(task_params)
     task.save!
 

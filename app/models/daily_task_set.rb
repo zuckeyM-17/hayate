@@ -28,6 +28,7 @@ class DailyTaskSet < ApplicationRecord
     daily_task_set = find_or_initialize_by(date:)
     return nil if daily_task_set.persisted?
 
+    daily_task_set.user = current_user
     daily_task_set.save!
     DailyTaskItem.enabled.each do |item|
       DailyTask.create!(daily_task_set:, daily_task_item: item)

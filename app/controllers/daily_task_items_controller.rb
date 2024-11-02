@@ -7,7 +7,7 @@ class DailyTaskItemsController < ApplicationController
   end
 
   def create
-    DailyTaskItem.create!(daily_task_item_params)
+    DailyTaskItem.create!(daily_task_item_params, user: current_user)
 
     redirect_to daily_task_items_path
   end

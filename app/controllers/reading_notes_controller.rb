@@ -2,7 +2,7 @@
 
 class ReadingNotesController < ApplicationController
   def create
-    note = Note.create!(body: chapter_note_params[:body])
+    note = Note.create!(body: chapter_note_params[:body], user: current_user)
     reading_note = ReadingNote.create!(
       note_id: note.id,
       reading_id: chapter_note_params[:reading_id]
