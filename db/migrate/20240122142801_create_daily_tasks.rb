@@ -3,6 +3,7 @@
 class CreateDailyTasks < ActiveRecord::Migration[7.1]
   def change
     create_table :daily_task_items do |t|
+      t.references :user, null: false, foreign_key: true
       t.string :name, null: false
       t.datetime :disabled_at, null: true
 
@@ -10,6 +11,7 @@ class CreateDailyTasks < ActiveRecord::Migration[7.1]
     end
 
     create_table :daily_task_sets do |t|
+      t.references :user, null: false, foreign_key: true
       t.date :date, null: false
 
       t.timestamps

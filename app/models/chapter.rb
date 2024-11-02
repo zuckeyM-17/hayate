@@ -4,8 +4,8 @@
 #
 # Table name: chapters
 #
-#  id         :uuid             not null, primary key
-#  book_id    :uuid             not null
+#  id         :bigint           not null, primary key
+#  book_id    :bigint           not null
 #  title      :string           not null
 #  number     :integer          not null
 #  created_at :datetime         not null

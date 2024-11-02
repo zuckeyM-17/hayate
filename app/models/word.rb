@@ -4,7 +4,7 @@
 #
 # Table name: words
 #
-#  id                   :uuid             not null, primary key
+#  id                   :bigint           not null, primary key
 #  en                   :string           not null
 #  ja                   :string           not null
 #  pronunciation_symbol :string           not null

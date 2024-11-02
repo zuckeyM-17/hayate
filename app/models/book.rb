@@ -4,7 +4,7 @@
 #
 # Table name: books
 #
-#  id          :uuid             not null, primary key
+#  id          :bigint           not null, primary key
 #  title       :string           not null
 #  category    :integer          default("other"), not null
 #  finished_at :datetime

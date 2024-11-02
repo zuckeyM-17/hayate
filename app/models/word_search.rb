@@ -5,7 +5,7 @@
 # Table name: word_searches
 #
 #  id         :bigint           not null, primary key
-#  word_id    :uuid             not null
+#  word_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

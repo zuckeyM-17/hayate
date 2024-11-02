@@ -5,7 +5,7 @@
 # Table name: readings
 #
 #  id         :bigint           not null, primary key
-#  chapter_id :uuid             not null
+#  chapter_id :bigint           not null
 #  done_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

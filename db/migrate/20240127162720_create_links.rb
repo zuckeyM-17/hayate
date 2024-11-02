@@ -3,6 +3,7 @@
 class CreateLinks < ActiveRecord::Migration[7.1]
   def change
     create_table :links do |t|
+      t.references :user, null: false, foreign_key: true
       t.string :title
       t.string :url
       t.datetime :read_at
@@ -18,6 +19,7 @@ class CreateLinks < ActiveRecord::Migration[7.1]
     end
 
     create_table :favorite_links do |t|
+      t.references :user, null: false, foreign_key: true
       t.references :link, null: false, foreign_key: true
       t.datetime :archived_at, null: true
 

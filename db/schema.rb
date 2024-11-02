@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "books", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.integer "category", default: 0, null: false
     t.datetime "finished_at"
@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
     t.index ["title"], name: "index_books_on_title", unique: true
   end
 
-  create_table "chapters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "book_id", null: false
+  create_table "chapters", force: :cascade do |t|
+    t.bigint "book_id", null: false
     t.string "title", null: false
     t.integer "number", null: false
     t.datetime "created_at", null: false
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "readings", force: :cascade do |t|
-    t.uuid "chapter_id", null: false
+    t.bigint "chapter_id", null: false
     t.datetime "done_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -136,13 +136,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_144532) do
   end
 
   create_table "word_searches", force: :cascade do |t|
-    t.uuid "word_id", null: false
+    t.bigint "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["word_id"], name: "index_word_searches_on_word_id"
   end
 
-  create_table "words", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "words", force: :cascade do |t|
     t.string "en", null: false
     t.string "ja", null: false
     t.string "pronunciation_symbol", null: false
