@@ -7,6 +7,7 @@ class TopController < ApplicationController
 
     @readings = current_user.readings.in_progress
     @notes = current_user.notes.today.order(created_at: :desc)
+    ExampleJob.perform_later
   end
 
   private
