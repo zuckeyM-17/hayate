@@ -7,7 +7,7 @@ class DailyTaskSetsController < ApplicationController
   end
 
   def create
-    DailyTaskSet.init!
+    DailyTaskSet.init!(user: current_user)
 
     redirect_to root_path
   end
