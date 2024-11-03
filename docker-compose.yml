@@ -19,3 +19,12 @@ services:
       - "3000:3000"
     depends_on:
       - db
+  worker:
+    build: .
+    tty: true
+    stdin_open: true
+    command: sh -c "bundle install && ./bin/jobs"
+    volumes:
+      - .:/hayate
+    depends_on:
+      - db
