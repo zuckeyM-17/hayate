@@ -58,7 +58,7 @@
           </tr>
         </thead>
         <tbody>
-        <% if !params[:last_week] && !@daily_task_sets.first&.date&.today? %>
+        <% if !params[:last_week] && !@daily_task_sets[0]&.date&.today? %>
           <tr>
             <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
             <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
