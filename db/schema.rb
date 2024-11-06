@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_03_171149) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_06_221905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,6 +61,18 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_03_171149) do
     t.index ["daily_task_set_id"], name: "index_daily_tasks_on_daily_task_set_id"
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.bigint "feed_id", null: false
+    t.string "title", null: false
+    t.string "url", null: false
+    t.text "description"
+    t.datetime "published_at", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_entries_on_feed_id"
+  end
+
   create_table "favorite_links", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "link_id", null: false
@@ -69,6 +81,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_03_171149) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_favorite_links_on_link_id"
     t.index ["user_id"], name: "index_favorite_links_on_user_id"
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
   create_table "link_notes", force: :cascade do |t|
@@ -288,8 +309,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_03_171149) do
   add_foreign_key "daily_task_sets", "users"
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
+  add_foreign_key "entries", "feeds"
   add_foreign_key "favorite_links", "links"
   add_foreign_key "favorite_links", "users"
+  add_foreign_key "feeds", "users"
   add_foreign_key "link_notes", "links"
   add_foreign_key "link_notes", "notes"
   add_foreign_key "links", "users"
