@@ -20,13 +20,13 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    link = current_user.links..find(params[:id])
+    link = current_user.links.find(params[:id])
     link.destroy!
     redirect_to links_path
   end
 
   def read
-    link = current_user.links..find(params[:id])
+    link = current_user.links.find(params[:id])
     link.read!
     redirect_to links_path
   end
