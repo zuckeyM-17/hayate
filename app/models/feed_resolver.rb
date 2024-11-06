@@ -19,15 +19,18 @@ class FeedResolver
     link_h
   end
 
+  # rubocop:disable Metrics/AbcSize
   def feed_url_and_title(uri)
     doc = ::Nokogiri::HTML(OpenURI.open_uri(uri).read)
     link = doc.css('link[type*="application/rss+xml"]').first
+    title = doc.css('title').first.text
     return nil if link.blank?
 
     href = URI.parse(link[:href])
     {
       url: href.scheme.present? ? href.to_s : URI.join(uri, href.to_s).to_s,
-      title: link[:title]
+      title: title || link[:title]
     }
   end
+  # rubocop:enable Metrics/AbcSize
 end
