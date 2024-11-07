@@ -1,0 +1,17 @@
+<% content_for(:page_title) { @feed.title } %>
+
+<%= render 'shared/breadcrumb', parents: [{url: feeds_path, title: 'Feeds'}] %>
+<div class="p-4">
+  <%= render 'shared/header', title: @feed.title %>
+
+  <div>
+
+    <%= form_for @feed do |f| %>
+      <div class="pt-4">
+        <%= f.text_field :title, autofocus: true, class: 'w-96' %>
+        <%= f.submit 'Edit', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
+      </div>
+    <% end %>
+    <p class="underline"><%= link_to @feed.url, @feed.url, target: '_blank' %></p>
+  </div>
+</div>
