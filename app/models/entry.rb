@@ -4,15 +4,16 @@
 #
 # Table name: entries
 #
-#  id           :bigint           not null, primary key
-#  feed_id      :bigint           not null
-#  title        :string           not null
-#  url          :string           not null
-#  description  :text
-#  published_at :datetime         not null
-#  read_at      :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :bigint           not null, primary key
+#  feed_id       :bigint           not null
+#  title         :string           not null
+#  url           :string           not null
+#  description   :text
+#  thumbnail_url :string
+#  published_at  :datetime         not null
+#  read_at       :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 # Indexes
 #

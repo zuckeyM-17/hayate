@@ -66,6 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_06_221905) do
     t.string "title", null: false
     t.string "url", null: false
     t.text "description"
+    t.string "thumbnail_url"
     t.datetime "published_at", null: false
     t.datetime "read_at"
     t.datetime "created_at", null: false
