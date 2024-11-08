@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FetchEntriesJob < ApplicationJob
-  queue_as :default
+  queue_as :background
 
   def perform(feed_id)
     feed = Feed.find(feed_id)

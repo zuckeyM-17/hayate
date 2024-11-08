@@ -3,10 +3,10 @@
 class FeedEntryFetcher
   def initialize(feed)
     @feed = feed
+    @rss = RSS::Parser.parse(OpenURI.open_uri(@feed.url).read)
   end
 
   def fetch!(from: nil)
-    @rss ||= RSS::Parser.parse(OpenURI.open_uri(@feed.url).read)
     entries = case @rss
               in RSS::Atom::Feed
                 atom_to_entries
@@ -16,6 +16,17 @@ class FeedEntryFetcher
                 raise 'Unsupported feed type'
               end
     from.nil? ? entries.first(5) : entries.select { |e| e.published_at > from }
+  end
+
+  def last_updated_at
+    case @rss
+    in RSS::Atom::Feed
+      @rss.updated.content
+    in RSS::Rss
+      @rss.channel.lastBuildDate
+    else
+      raise 'Unsupported feed type'
+    end
   end
 
   private
