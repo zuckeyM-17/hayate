@@ -10,19 +10,19 @@ class FeedsController < ApplicationController
     @feed = current_user.feeds.find(params[:id])
   end
 
-  def update
-    @feed = current_user.feeds.find(params[:id])
-    @feed.title = edit_params[:title]
-    @feed.save!
-    redirect_to feed_path(@feed)
-  end
-
   def create
     feed = FeedResolver.new(create_params[:url]).resolve
     feed.user = current_user
     feed.save!
     FetchEntriesJob.perform_later(feed.id)
     redirect_to feeds_path
+  end
+
+  def update
+    @feed = current_user.feeds.find(params[:id])
+    @feed.title = edit_params[:title]
+    @feed.save!
+    redirect_to feed_path(@feed)
   end
 
   def destroy
