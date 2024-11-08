@@ -1,16 +1,7 @@
-# production:
-#   periodic_cleanup:
-#     class: CleanSoftDeletedRecordsJob
-#     queue: background
-#     args: [ 1000, { batch_size: 500 } ]
-#     schedule: every hour
-#   periodic_command:
-#     command: "SoftDeletedRecord.due.delete_all"
-#     priority: 2
-#     schedule: at 5am every day
-
 production:
-  fetch_feeds:
+  periodic_cleanup:
     class: FetchFeedsJob
-    queue: default
-    schedule: "*/10 * * * *"
+    queue: background
+    schedule: "*/10 * * * *" # every 10 minutes
+
+
