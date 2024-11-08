@@ -235,6 +235,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.10)
       io-console (~> 0.5)
+    rexml (3.3.9)
     rspec-core (3.13.2)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -252,6 +253,8 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
+    rss (0.3.1)
+      rexml
     rubocop (1.68.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -328,6 +331,7 @@ DEPENDENCIES
   rack-cors
   rails (= 8.0.0.rc2)
   rspec-rails (~> 7.0.1)
+  rss
   rubocop
   rubocop-rails
   solid_queue (~> 1.0)

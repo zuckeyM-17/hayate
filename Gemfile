@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'ostruct'
+gem 'rss'
 gem "solid_queue", "~> 1.0"
 
 group :development, :test do
