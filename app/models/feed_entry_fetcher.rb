@@ -25,7 +25,7 @@ class FeedEntryFetcher
     in RSS::Atom::Feed
       @rss.updated.content
     in RSS::Rss
-      @rss.channel.lastBuildDate
+      @rss.channel.lastBuildDate || @rss.updated.content
     else
       raise 'Unsupported feed type'
     end
