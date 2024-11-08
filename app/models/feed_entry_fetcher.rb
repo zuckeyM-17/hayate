@@ -22,25 +22,25 @@ class FeedEntryFetcher
 
   def atom_to_entries
     @rss.entries.map do |entry|
-      Entry.new({
-                  title: entry.title.content,
-                  url: entry.link.href,
-                  published_at: entry.published.content,
-                  description: html_to_description(entry.content.content),
-                  thumbnail_url: get_thumbnail_url(entry.link.href)
-                })
+      @feed.entries.build({
+                            title: entry.title.content,
+                            url: entry.link.href,
+                            published_at: entry.published.content,
+                            description: html_to_description(entry.content.content),
+                            thumbnail_url: get_thumbnail_url(entry.link.href)
+                          })
     end
   end
 
   def rss_to_entries
     @rss.items.map do |item|
-      Entry.new({
-                  title: item.title,
-                  url: item.link,
-                  published_at: item.pubDate,
-                  description: html_to_description(item.description),
-                  thumbnail_url: get_thumbnail_url(item.link)
-                })
+      @feed.entries.build({
+                            title: item.title,
+                            url: item.link,
+                            published_at: item.pubDate,
+                            description: html_to_description(item.description),
+                            thumbnail_url: get_thumbnail_url(item.link)
+                          })
     end
   end
 
