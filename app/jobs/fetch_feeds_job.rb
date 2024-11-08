@@ -3,6 +3,7 @@
 # 10分に一度前ユーザーのフィードを元に新しいEntryを取得するジョブ
 class FetchFeedsJob < ApplicationJob
   queue_as :background
+  retry_on StandardError, wait: 5.minutes, attempts: 3
 
   def perform
     users = User.all

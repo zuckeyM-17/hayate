@@ -10,10 +10,11 @@ class FeedsController < ApplicationController
     @feed = current_user.feeds.find(params[:id])
   end
 
-  def edit
+  def update
     @feed = current_user.feeds.find(params[:id])
     @feed.title = edit_params[:title]
-    redirect_to feeds_path
+    @feed.save!
+    redirect_to feed_path(@feed)
   end
 
   def create
