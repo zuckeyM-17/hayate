@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 gem 'ostruct'
 gem 'rss'
 gem "solid_queue", "~> 1.0"
+gem "mission_control-jobs"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
