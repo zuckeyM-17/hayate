@@ -22,7 +22,7 @@ class FeedResolver
   # rubocop:disable Metrics/AbcSize
   def feed_url_and_title(uri)
     doc = ::Nokogiri::HTML(OpenURI.open_uri(uri).read)
-    link = doc.css('link[type*="application/rss+xml"]').first
+    link = doc.css('link[type*="application/rss+xml"]').first || doc.css('link[type*="application/atom+xml"]').first
     title = doc.css('title').first.text
     return nil if link.blank?
 
