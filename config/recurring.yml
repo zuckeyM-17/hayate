@@ -1,5 +1,5 @@
 production:
-  periodic_cleanup:
+  fetch_feeds:
     class: FetchFeedsJob
     queue: background
     schedule: "*/10 * * * *" # every 10 minutes
