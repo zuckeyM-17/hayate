@@ -20,17 +20,6 @@ class FeedEntryFetcher
     from.nil? ? entries.first(5) : entries.select { |e| e.published_at > from }
   end
 
-  def last_updated_at
-    case @rss
-    in RSS::Atom::Feed
-      @rss.updated.content
-    in RSS::Rss
-      @rss.channel.lastBuildDate || @rss.updated.content
-    else
-      raise 'Unsupported feed type'
-    end
-  end
-
   private
 
   # rubocop:disable Metrics/AbcSize

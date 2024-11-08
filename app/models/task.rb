@@ -4,8 +4,8 @@
 #
 # Table name: tasks
 #
-#  id          :bigint           not null, primary key
-#  user_id     :bigint           not null
+#  id          :integer           not null, primary key
+#  user_id     :integer           not null
 #  title       :string           not null
 #  description :text
 #  priority    :integer          default("new_added"), not null

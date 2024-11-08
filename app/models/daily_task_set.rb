@@ -4,8 +4,8 @@
 #
 # Table name: daily_task_sets
 #
-#  id         :bigint           not null, primary key
-#  user_id    :bigint           not null
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
 #  date       :date             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -14,10 +14,7 @@
 #
 #  index_daily_task_sets_on_user_id  (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
-#
+
 class DailyTaskSet < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
   belongs_to :user

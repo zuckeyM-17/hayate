@@ -4,8 +4,8 @@
 #
 # Table name: entries
 #
-#  id            :bigint           not null, primary key
-#  feed_id       :bigint           not null
+#  id            :integer          not null, primary key
+#  feed_id       :integer          not null
 #  title         :string           not null
 #  url           :string           not null
 #  description   :text
@@ -19,10 +19,7 @@
 #
 #  index_entries_on_feed_id  (feed_id)
 #
-# Foreign Keys
-#
-#  fk_rails_...  (feed_id => feeds.id)
-#
+
 class Entry < ApplicationRecord
   belongs_to :feed
 
