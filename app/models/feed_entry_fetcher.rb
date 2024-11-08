@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FeedEntryFetcher
+  attr_reader :rss
+
   def initialize(feed)
     @feed = feed
     @rss = RSS::Parser.parse(OpenURI.open_uri(@feed.url).read)
@@ -31,17 +33,19 @@ class FeedEntryFetcher
 
   private
 
+  # rubocop:disable Metrics/AbcSize
   def atom_to_entries
     @rss.entries.map do |entry|
       @feed.entries.build({
                             title: entry.title.content,
                             url: entry.link.href,
                             published_at: entry.published.content,
-                            description: html_to_description(entry.content.content),
+                            description: html_to_description(entry.content&.content || entry.summary.content),
                             thumbnail_url: get_thumbnail_url(entry.link.href)
                           })
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def rss_to_entries
     @rss.items.map do |item|
