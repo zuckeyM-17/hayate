@@ -15,7 +15,7 @@ class FeedEntryFetcher
               else
                 raise 'Unsupported feed type'
               end
-    from.nil? ? entries.first(5) : entries.select { |_e| entry.published_at > from }
+    from.nil? ? entries.first(5) : entries.select { |e| e.published_at > from }
   end
 
   private
