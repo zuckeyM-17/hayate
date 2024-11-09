@@ -2,7 +2,7 @@
 
 class EntriesController < ApplicationController
   def index
-    @entries = current_user.entries.unread.includes(:feed).order(created_at: :desc).page(params[:page])
+    @entries = current_user.entries.unread.includes(:feed).order(published_at: :desc).page(params[:page])
   end
 
   def mark_as_read
