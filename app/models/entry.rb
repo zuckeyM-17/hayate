@@ -27,4 +27,10 @@ class Entry < ApplicationRecord
   validates :url, presence: true
   validates :published_at, presence: true
   validates :description, length: { maximum: 200 }
+
+  scope :unread, -> { where(read_at: nil) }
+
+  def read!
+    update!(read_at: Time.zone.now)
+  end
 end
