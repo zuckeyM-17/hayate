@@ -1,7 +1,7 @@
 <% content_for(:page_title) { 'Feeds' } %>
 
 <main class="container w-full">
-  <%= render 'shared/breadcrumb' %>
+  <%= render 'shared/breadcrumb', parents: [{ url: entries_path, title: 'Entries' }] %>
   <div class="p-4">
     <%= render 'shared/header', title: 'Feeds' %>
 

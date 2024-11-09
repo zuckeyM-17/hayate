@@ -3,7 +3,7 @@
 <main class="container w-full">
   <%= render 'shared/breadcrumb' %>
   <div class="p-4">
-    <%= render 'shared/header', title: 'Entries' %>
+    <%= render 'shared/header', title: "Entries<a class='text-lg pl-4' href='#{feeds_path}'>⚙️</a>".html_safe %>
 
     <div class="pt-4">
       <div class="flex flex-wrap">

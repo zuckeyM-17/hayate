@@ -1,6 +1,6 @@
 <% content_for(:page_title) { @feed.title } %>
 
-<%= render 'shared/breadcrumb', parents: [{url: feeds_path, title: 'Feeds'}] %>
+<%= render 'shared/breadcrumb', parents: [{ url: entries_path, title: 'Entries' }, {url: feeds_path, title: 'Feeds'}] %>
 <div class="p-4">
   <%= render 'shared/header', title: @feed.title %>
 
