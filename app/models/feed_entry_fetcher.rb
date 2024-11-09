@@ -42,7 +42,7 @@ class FeedEntryFetcher
                             title: item.title,
                             url: item.link,
                             published_at: item.pubDate,
-                            description: html_to_description(item.description),
+                            description: html_to_description(item.description || item.content_encoded),
                             thumbnail_url: get_thumbnail_url(item.link)
                           })
     end
