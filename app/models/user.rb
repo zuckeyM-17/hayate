@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :word_searches, dependent: :destroy
   has_many :words, through: :word_searches, dependent: :destroy
   has_many :feeds, dependent: :destroy
+  has_many :entries, through: :feeds, dependent: :destroy
   has_many :links, dependent: :destroy
   has_many :favorite_links, dependent: :destroy
 end
