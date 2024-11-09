@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
   end
 
   def mark_as_read
-    current_user.entries.unread.where(id: mark_as_read_params[:entry_ids]).find_each(&:read!)
+    current_user.entries.unread.where(id: mark_as_read_params[:entry_ids]).update_all(read_at: Time.zone.now) # rubocop:disable Rails/SkipsModelValidations
     redirect_to entries_path
   end
 
