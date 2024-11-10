@@ -1,0 +1,7 @@
+<a href="<%= entry.url %>" target="_blank">
+  <img src="<%= entry.thumbnail_url %>" class="w-64 h-40 object-contain rounded-lg shadow-lg" alt="<%= entry.title %>">
+  <p class="line-clamp-2 font-bold pt-1"><%= entry.title %></p>
+  <p class="line-clamp-1 text-gray-800"><%= entry.feed.title %></p>
+  <p class="line-clamp-3 text-gray-500 text-sm"><%= entry.published_at.strftime('%Y-%m-%d %H:%M') %></p>
+  <p class="line-clamp-3 text-gray-500 text-sm"><%= entry.description %></p>
+</a>

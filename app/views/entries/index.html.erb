@@ -14,13 +14,7 @@
         <div class="flex flex-wrap">
           <% @entries.each do |e| %>
             <div class="w-64 mt-12 ml-8 relative group">
-              <a href="<%= e.url %>" target="_blank">
-                <img src="<%= e.thumbnail_url %>" class="w-64 h-40 object-contain rounded-lg shadow-lg" alt="<%= e.title %>">
-                <p class="line-clamp-2 font-bold pt-1"><%= e.title %></p>
-                <p class="line-clamp-1 text-gray-800"><%= e.feed.title %></p>
-                <p class="line-clamp-3 text-gray-500 text-sm"><%= e.published_at.strftime('%Y-%m-%d %H:%M') %></p>
-                <p class="line-clamp-3 text-gray-500 text-sm"><%= e.description %></p>
-              </a>
+              <%= render 'card', entry: e %>
               <div class="absolute top-0 right-0 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-x-1">
                 <button class="text-gray-400 hover:text-gray-200 text-3xl">
                   <%= link_to '☆', fav_entry_path(e), data: { "turbo-method": :patch } %>

@@ -8,6 +8,7 @@ class FeedsController < ApplicationController
 
   def show
     @feed = current_user.feeds.find(params[:id])
+    @entries = @feed.entries.order(published_at: :desc).page(params[:page])
   end
 
   def create
