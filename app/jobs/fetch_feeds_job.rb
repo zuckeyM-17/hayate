@@ -10,7 +10,6 @@ class FetchFeedsJob < ApplicationJob
     users.each do |user|
       user.feeds.each do |feed|
         FetchEntriesJob.perform_later(feed.id)
-        feed.update!(fetched_at: Time.zone.now)
       end
     end
   end
