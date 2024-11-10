@@ -2,6 +2,7 @@
 
 class FetchEntriesJob < ApplicationJob
   queue_as :background
+  retry_on StandardError, wait: 5.minutes, attempts: 3
 
   def perform(feed_id)
     feed = Feed.find(feed_id)
