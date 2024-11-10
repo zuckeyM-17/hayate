@@ -47,7 +47,7 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   config.active_job.queue_adapter = :solid_queue
-  
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

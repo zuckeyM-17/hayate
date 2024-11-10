@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_08_172405) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_10_132106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_08_172405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_entries_on_feed_id"
+    t.index ["url"], name: "index_entries_on_url", unique: true
   end
 
   create_table "favorite_links", force: :cascade do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_08_172405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "fetched_at"
+    t.index ["url"], name: "index_feeds_on_url", unique: true
     t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 

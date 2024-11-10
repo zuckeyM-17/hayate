@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: entries
@@ -18,6 +17,7 @@
 # Indexes
 #
 #  index_entries_on_feed_id  (feed_id)
+#  index_entries_on_url      (url) UNIQUE
 #
 
 class Entry < ApplicationRecord

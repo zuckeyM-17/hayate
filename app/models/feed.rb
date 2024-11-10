@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: feeds
@@ -14,6 +13,7 @@
 #
 # Indexes
 #
+#  index_feeds_on_url      (url) UNIQUE
 #  index_feeds_on_user_id  (user_id)
 #
 
