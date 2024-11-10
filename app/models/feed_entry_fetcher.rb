@@ -17,7 +17,7 @@ class FeedEntryFetcher
               else
                 raise 'Unsupported feed type'
               end
-    from.present? ? entries.select { |e| e.published_at > from } :  entries.first(5)
+    from.present? ? entries.select { |e| e.published_at > from } : entries.first(5)
   end
 
   private
@@ -25,28 +25,30 @@ class FeedEntryFetcher
   # rubocop:disable Metrics/AbcSize
   def atom_to_entries
     @rss.entries.map do |entry|
-      @feed.entries.build({
-                            title: entry.title.content,
-                            url: entry.link.href,
-                            published_at: entry.published.content,
-                            description: html_to_description(entry.content&.content || entry.summary.content),
-                            thumbnail_url: get_thumbnail_url(entry.link.href)
-                          })
+      Entry.new({
+                  feed_id: @feed.id,
+                  title: entry.title.content,
+                  url: entry.link.href,
+                  published_at: entry.published.content,
+                  description: html_to_description(entry.content&.content || entry.summary.content),
+                  thumbnail_url: get_thumbnail_url(entry.link.href)
+                })
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def rss_to_entries
     @rss.items.map do |item|
-      @feed.entries.build({
-                            title: item.title,
-                            url: item.link,
-                            published_at: item.pubDate,
-                            description: html_to_description(item.description || item.content_encoded),
-                            thumbnail_url: get_thumbnail_url(item.link)
-                          })
+      Entry.new({
+                  feed_id: @feed.id,
+                  title: item.title,
+                  url: item.link,
+                  published_at: item.pubDate,
+                  description: html_to_description(item.description || item.content_encoded),
+                  thumbnail_url: get_thumbnail_url(item.link)
+                })
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def html_to_description(html)
     ApplicationController.helpers.strip_tags(html).truncate(200)
