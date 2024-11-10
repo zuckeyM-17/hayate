@@ -5,14 +5,15 @@ class FeedResolver
     @url = url
   end
 
+  # @return [Array<String>] url and title
   def resolve
-    link = resolve_feed_link!(@url)
-    Feed.new(title: link[:title], url: link[:url])
+    link_h = resolve_feed_link(@url)
+    [link_h[:url], link_h[:title]]
   end
 
   private
 
-  def resolve_feed_link!(url)
+  def resolve_feed_link(url)
     uri = URI.parse(url)
     link_h = feed_url_and_title(uri.to_s)
     link_h = feed_url_and_title("#{uri.scheme}://#{uri.hostname}/") if link_h.blank?

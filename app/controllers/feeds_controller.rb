@@ -11,8 +11,10 @@ class FeedsController < ApplicationController
   end
 
   def create
-    feed = FeedResolver.new(create_params[:url]).resolve
-    feed.user = current_user
+    url, title = FeedResolver.new(create_params[:url]).resolve
+    feed = current_user.feeds.find_or_initialize_by(url: url) do |f|
+      f.title = title
+    end
     feed.save!
     FetchEntriesJob.perform_later(feed.id)
     redirect_to feeds_path
