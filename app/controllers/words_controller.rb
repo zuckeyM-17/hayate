@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WordsController < ApplicationController
+class WordsController < BaseController
   def index
     @words = current_user.words.order(created_at: :desc).page(params[:page])
     @word_search = WordSearch.new

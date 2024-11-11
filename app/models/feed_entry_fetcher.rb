@@ -51,7 +51,7 @@ class FeedEntryFetcher
   # rubocop:enable Metrics/AbcSize
 
   def html_to_description(html)
-    ApplicationController.helpers.strip_tags(html).truncate(200)
+    BaseController.helpers.strip_tags(html).truncate(200)
   end
 
   def get_thumbnail_url(url)

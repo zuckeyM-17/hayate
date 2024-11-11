@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TopController < ApplicationController
+class TopController < BaseController
   def index
     daily_task_sets
     @daily_task_items = current_user.daily_task_items.enabled.order(:created_at)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FeedsController < ApplicationController
+class FeedsController < BaseController
   def index
     @feeds = current_user.feeds.order(created_at: :desc).page(params[:page])
     @feed = current_user.feeds.new

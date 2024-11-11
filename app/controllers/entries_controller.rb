@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EntriesController < ApplicationController
+class EntriesController < BaseController
   def index
     @entries = current_user.entries.unread.includes(:feed).order(published_at: :desc).page(params[:page])
   end

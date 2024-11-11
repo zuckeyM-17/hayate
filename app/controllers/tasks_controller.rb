@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TasksController < ApplicationController
+class TasksController < BaseController
   def index
     @tasks = current_user.tasks.order(due_at: :desc).page(params[:page])
     @tasks = @tasks.todo if params[:all].blank?

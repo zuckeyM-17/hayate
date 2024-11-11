@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DailyTaskSetsController < ApplicationController
+class DailyTaskSetsController < BaseController
   def index
     @daily_task_sets = DailyTaskSet.includes(:daily_tasks).order(date: :desc).page(params[:page])
     @daily_task_items = DailyTaskItem.enabled.order(:created_at)

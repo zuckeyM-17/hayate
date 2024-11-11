@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LinksController < ApplicationController
+class LinksController < BaseController
   def index
     @links = current_user.links.order(created_at: :desc).page(params[:page])
     @links = @links.unread if params[:all].blank?

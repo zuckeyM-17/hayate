@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DailyTaskItemsController < ApplicationController
+class DailyTaskItemsController < BaseController
   def index
     @daily_task_items = current_user.daily_task_items.enabled
     @daily_task_item = DailyTaskItem.new

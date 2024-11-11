@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class WordSearchesController < ApplicationController
+class WordSearchesController < BaseController
   def new
     @word_search = WordSearch.new(user: current_user)
   end

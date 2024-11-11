@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NotesController < ApplicationController
+class NotesController < BaseController
   def create
     Note.create!(note_params.merge(user: current_user))
 

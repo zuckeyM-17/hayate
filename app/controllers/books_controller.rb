@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BooksController < ApplicationController
+class BooksController < BaseController
   def index
     books = current_user.books
     @unread_books = books.unread.page(params[:page])

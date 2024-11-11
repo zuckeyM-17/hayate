@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DailyTasksController < ApplicationController
+class DailyTasksController < BaseController
   def update
     task = current_user.daily_tasks.find(params[:id])
     task.update!(done: update_params[:done])

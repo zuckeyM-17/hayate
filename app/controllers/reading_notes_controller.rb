@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReadingNotesController < ApplicationController
+class ReadingNotesController < BaseController
   def create
     note = Note.create!(body: chapter_note_params[:body], user: current_user)
     reading_note = ReadingNote.create!(
