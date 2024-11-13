@@ -27,10 +27,10 @@ class DailyTaskSet < ApplicationRecord
     return nil if daily_task_set.persisted?
 
     daily_task_set.user = user
-    daily_task_set.save!
     user.daily_task_items.enabled.each do |item|
-      DailyTask.create!(daily_task_set:, daily_task_item: item)
+      daily_task_set.daily_tasks.build(daily_task_item: item)
     end
+    daily_task_set.save!
     daily_task_set
   end
 end
