@@ -26,6 +26,8 @@ class FeedEntryFetcher
   private
 
   def parse!
+    return if @rss.items.present?
+
     Nokogiri::XML::SAX::Parser.new(@rss).parse(OpenURI.open_uri(@feed.url).read)
   end
 
@@ -54,7 +56,11 @@ class FeedEntryFetcher
 
     def end_element(name)
       if %w[item entry].include?(name)
-        @current_item[:content] = BaseController.helpers.strip_tags(@current_item[:content].join).truncate(200)
+        @current_item[:content] = if @current_item[:content].present?
+                                    BaseController.helpers.strip_tags(@current_item[:content].join).truncate(200)
+                                  else
+                                    ''
+                                  end
         @items << @current_item
         @current_item = {}
       end
@@ -73,9 +79,9 @@ class FeedEntryFetcher
       case @current_element
       when 'title'
         @current_item[:title] = string.strip
-      when 'link'
+      when 'link', 'id'
         @current_item[:link] = string.strip
-      when 'description', 'content'
+      when 'description', 'content', 'summary', 'content:encoded'
         @current_item[:content] ||= []
         @current_item[:content] << string.strip
       when 'pubDate', 'updated'
