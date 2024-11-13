@@ -333,7 +333,7 @@ PLATFORMS
 DEPENDENCIES
   active_flag
   annotate
-  bootsnap (~> 1.18, >= 1.18.4)
+  bootsnap
   byebug
   debug
   factory_bot_rails
