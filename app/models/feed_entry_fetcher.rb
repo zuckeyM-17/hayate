@@ -5,57 +5,81 @@ class FeedEntryFetcher
 
   def initialize(feed)
     @feed = feed
-    @rss = RSS::Parser.parse(OpenURI.open_uri(@feed.url).read)
+    @rss = FeedEntryFetcher::Document.new
   end
 
   def fetch!(from: nil)
-    entries = case @rss
-              in RSS::Atom::Feed
-                atom_to_entries
-              in RSS::Rss
-                rss_to_entries
-              else
-                raise 'Unsupported feed type'
-              end
-    from.present? ? entries.select { |e| e.published_at > from } : entries.first(5)
+    parse!
+    items = from.present? ? @rss.items.select { |i| i[:date] > from } : @rss.items.first(5)
+    items.map do |item|
+      Entry.new({
+                  feed_id: @feed.id,
+                  title: item[:title],
+                  url: item[:link],
+                  published_at: item[:date],
+                  description: item[:content],
+                  thumbnail_url: get_thumbnail_url(item[:link])
+                })
+    end
   end
 
   private
 
-  # rubocop:disable Metrics/AbcSize
-  def atom_to_entries
-    @rss.entries.map do |entry|
-      Entry.new({
-                  feed_id: @feed.id,
-                  title: entry.title.content,
-                  url: entry.link.href,
-                  published_at: entry.published.content,
-                  description: html_to_description(entry.content&.content || entry.summary.content),
-                  thumbnail_url: get_thumbnail_url(entry.link.href)
-                })
-    end
-  end
-
-  def rss_to_entries
-    @rss.items.map do |item|
-      Entry.new({
-                  feed_id: @feed.id,
-                  title: item.title,
-                  url: item.link,
-                  published_at: item.pubDate,
-                  description: html_to_description(item.description || item.content_encoded),
-                  thumbnail_url: get_thumbnail_url(item.link)
-                })
-    end
-  end
-  # rubocop:enable Metrics/AbcSize
-
-  def html_to_description(html)
-    BaseController.helpers.strip_tags(html).truncate(200)
+  def parse!
+    Nokogiri::XML::SAX::Parser.new(@rss).parse(OpenURI.open_uri(@feed.url).read)
   end
 
   def get_thumbnail_url(url)
     doc = ::Nokogiri::HTML(OpenURI.open_uri(url).read)
     doc.css('meta[property="og:image"]').first&.[]('content')
+  end
+
+  class Document < Nokogiri::XML::SAX::Document
+    attr_accessor :items
+
+    def initialize
+      @items = []
+      @current_item = {}
+      @current_element = nil
+      super
+    end
+
+    def start_element(name, _attrs = [])
+      @current_element = name
+      return unless %w[item entry].include?(name)
+
+      @current_item = {}
+    end
+
+    def end_element(name)
+      if %w[item entry].include?(name)
+        @current_item[:content] = BaseController.helpers.strip_tags(@current_item[:content].join).truncate(200)
+        @items << @current_item
+        @current_item = {}
+      end
+      @current_element = nil
+    end
+
+    def characters(string)
+      element_value(string)
+    end
+
+    def cdata_block(string)
+      element_value(string)
+    end
+
+    def element_value(string)
+      case @current_element
+      when 'title'
+        @current_item[:title] = string.strip
+      when 'link'
+        @current_item[:link] = string.strip
+      when 'description', 'content'
+        @current_item[:content] ||= []
+        @current_item[:content] << string.strip
+      when 'pubDate', 'updated'
+        @current_item[:date] = string.strip
+      end
+    end
   end
 end
