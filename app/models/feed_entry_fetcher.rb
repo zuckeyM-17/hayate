@@ -41,6 +41,7 @@ class FeedEntryFetcher
       @items = []
       @current_item = {}
       @current_element = nil
+      @last_updated = nil
       super
     end
 
@@ -79,6 +80,8 @@ class FeedEntryFetcher
         @current_item[:content] << string.strip
       when 'pubDate', 'updated'
         @current_item[:date] = string.strip
+      when 'lastBuildDate'
+        @last_updated = string.strip
       end
     end
   end
