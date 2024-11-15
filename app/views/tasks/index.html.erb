@@ -19,22 +19,8 @@
           </div>
         <% end %>
       </div>
+      <% [@today_tasks, @inbox_tasks].each do |tasks| %>
       <div class="pt-4">
-        <% if all %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', tasks_path(today:) %></td>
-        <% else %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', tasks_path(all: true, today:) %></td>
-        <% end %>
-        all
-        <% if today %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', tasks_path(all:) %></td>
-        <% else %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', tasks_path(all:, today: true) %></td>
-        <% end %>
-        today
-      </div>
-      <div class="pt-4">
-        <%= paginate @tasks %>
         <table  class="border border-slate-500 table-auto">
           <thead>
             <tr>
@@ -47,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-          <% @tasks.each do |t| %>
+          <% tasks.each do |t| %>
             <tr>
               <% if t.done? %>
                 <td class="border border-slate-600 px-2 py-1">✅</td>
@@ -56,17 +42,17 @@
                   <%= link_to '⬜️', done_task_path(t), data: { "turbo-method": :patch } %>
                 </td>
               <% end %>
-              <% # <td class="border border-slate-600 px-2 py-1 underline"><%= link_to l.title, l.url, target: '_blank' </td> %>
               <td class="border border-slate-600 px-2 py-1"><%= t.title %></td>
               <td class="border border-slate-600 px-2 py-1"><%= l(t.created_at, format: :long) %></td>
               <td class="border border-slate-600 px-2 py-1"><%= task_priority(t.priority) %></td>
               <td class="border border-slate-600 px-2 py-1"><%= task_category(t.category) %></td>
               <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', task_path(t), data: { "turbo-method": :delete } %></td>
             </tr>
-          <% end%>
+          <% end %>
           </tbody>
         </table>
       </div>
+      <% end %>
     </div>
   </div>
 </main>

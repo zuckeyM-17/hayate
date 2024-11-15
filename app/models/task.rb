@@ -8,7 +8,7 @@
 #  user_id     :integer           not null
 #  title       :string           not null
 #  description :text
-#  priority    :integer          default("new_added"), not null
+#  priority    :integer          default("inbox"), not null
 #  category    :integer          default("other"), not null
 #  due_at      :datetime
 #  done_at     :datetime
@@ -24,8 +24,21 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  include Taskable
   belongs_to :user
+
+  enum :priority, { inbox: 0, today: 10 }
+  enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
+
+  validates :title, presence: true
+
+  scope :inbox, -> { where(priority: :inbox) }
+  scope :today, -> { where(priority: :today) }
+
+  scope :other, -> { where(category: :other) }
+  scope :work, -> { where(category: :work) }
+  scope :skill, -> { where(category: :skill) }
+  scope :personal, -> { where(category: :personal) }
+  scope :housework, -> { where(category: :housework) }
 
   scope :todo, -> { where(done_at: nil) }
   scope :done, -> { where.not(done_at: nil) }

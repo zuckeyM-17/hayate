@@ -3,9 +3,8 @@
 module TasksHelper
   def task_priority(priority)
     color_map = {
-      'new_added' => 'bg-gray-100',
-      'today' => 'bg-blue-100',
-      'later' => 'bg-yellow-100'
+      'inbox' => 'bg-gray-100',
+      'today' => 'bg-blue-100'
     }
 
     content_tag(:span, class: "rounded-md text-xs text-gray-900 #{color_map[priority]} py-0.5 px-1") do
