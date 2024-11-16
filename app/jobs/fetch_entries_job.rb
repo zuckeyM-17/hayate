@@ -8,11 +8,11 @@ class FetchEntriesJob < ApplicationJob
     feed = Feed.find(feed_id)
     latest_entry = feed.entries.order(published_at: :desc).first
     fetcher = FeedEntryFetcher.new(feed)
-    entries = if latest_entry.present?
-                fetcher.fetch!(from: latest_entry.published_at)
-              else
-                fetcher.fetch!
-              end
+    if latest_entry.present?
+      fetcher.fetch!(from: latest_entry.published_at)
+    else
+      fetcher.fetch!
+    end
     ApplicationRecord.transaction do
       feed.update!(fetched_at: Time.zone.now)
     end
