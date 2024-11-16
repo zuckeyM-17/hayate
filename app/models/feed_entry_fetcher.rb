@@ -12,14 +12,12 @@ class FeedEntryFetcher
     parse!
     items = from.present? ? @rss.items.select { |i| i[:date] > from } : @rss.items.first(5)
     items.map do |item|
-      Entry.new({
-                  feed_id: @feed.id,
-                  title: item[:title],
-                  url: item[:link],
-                  published_at: item[:date],
-                  description: item[:content],
-                  thumbnail_url: get_thumbnail_url(item[:link])
-                })
+      @feed.entries.find_or_initialize_by(url: item[:link]).tap do |entry|
+        entry.title = item[:title]
+        entry.published_at = item[:date]
+        entry.description = item[:content]
+        entry.thumbnail_url = get_thumbnail_url(item[:link])
+      end
     end
   end
 

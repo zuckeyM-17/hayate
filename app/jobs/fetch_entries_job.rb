@@ -14,7 +14,6 @@ class FetchEntriesJob < ApplicationJob
                 fetcher.fetch!
               end
     ApplicationRecord.transaction do
-      entries.each(&:save!)
       feed.update!(fetched_at: Time.zone.now)
     end
   end
