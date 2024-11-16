@@ -63,6 +63,7 @@ class FeedEntryFetcher
                                   else
                                     ''
                                   end
+        @current_item[:title] = @current_item[:title].join
         @items << @current_item
         @current_item = {}
       end
@@ -77,10 +78,12 @@ class FeedEntryFetcher
       element_value(string)
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def element_value(string)
       case @current_element
       when 'title'
-        @current_item[:title] = string.strip
+        @current_item[:title] ||= []
+        @current_item[:title] << string.strip
       when 'link', 'id'
         @current_item[:link] = string.strip
       when 'description', 'content', 'summary', 'content:encoded'
@@ -92,5 +95,6 @@ class FeedEntryFetcher
         @last_updated = string.strip
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
