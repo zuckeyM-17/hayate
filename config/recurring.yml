@@ -3,5 +3,9 @@ production:
     class: FetchFeedsJob
     queue: background
     schedule: "0 * * * *" # every hour
+  set_up_day:
+    class: SetUpDayJob
+    queue: background
+    schedule: "0 0 * * *" # every day at midnight
 
 
