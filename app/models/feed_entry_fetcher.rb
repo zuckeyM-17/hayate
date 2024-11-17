@@ -49,8 +49,9 @@ class FeedEntryFetcher
       super
     end
 
-    def start_element(name, _attrs = [])
+    def start_element(name, attrs = [])
       @current_element = name
+      @current_item[:link] = attrs.to_h['href'] if name == 'link' && attrs.to_h['href'].present?
       return unless %w[item entry].include?(name)
 
       @current_item = {}
@@ -78,14 +79,15 @@ class FeedEntryFetcher
       element_value(string)
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize
     def element_value(string)
       case @current_element
       when 'title'
         @current_item[:title] ||= []
         @current_item[:title] << string.strip
       when 'link', 'id'
-        @current_item[:link] = string.strip
+        url = string.strip
+        @current_item[:link] = url if URI::DEFAULT_PARSER.make_regexp.match(url).present? && url.start_with?('http')
       when 'description', 'content', 'summary', 'content:encoded'
         @current_item[:content] ||= []
         @current_item[:content] << string.strip
@@ -95,6 +97,6 @@ class FeedEntryFetcher
         @last_updated = string.strip
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize
   end
 end
