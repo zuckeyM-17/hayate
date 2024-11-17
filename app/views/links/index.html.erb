@@ -1,42 +1,40 @@
 <% content_for(:page_title) { 'Links' } %>
 
-<main class="container w-full">
-  <%= render 'shared/breadcrumb' %>
-  <div class="p-4">
-    <%= render 'shared/header', title: 'Links' %>
+<%= render 'shared/breadcrumb' %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Links' %>
 
-    <div>
-      <div class="pt-4">
-        <%= form_for @link, html: { data: { turbo_frame: "links-list" } } do |f| %>
-          <div class="pt-4">
-            <%= f.search_field :url, autofocus: true, class: 'w-8/12' %>
-            <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
-          </div>
-        <% end %>
-      </div>
-
-      <%= turbo_frame_tag 'links-list' do %>
-      <div class="pt-4">
-        <% if params[:all] %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', links_path %></td>
-        <% else %>
-          <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', links_path(all: true) %></td>
-        <% end %>
-        all
-      </div>
-      <div class="pt-4">
-        <%= paginate @links %>
-        <div class="flex items-center h-12">
-          <div class="w-12"></div>
-          <div class="grow">Title</div>
-          <div class="w-64">Created</div>
-          <div class="w-12"></div>
-          <div class="w-12"></div>
+  <div>
+    <div class="pt-4">
+      <%= form_for @link, html: { data: { turbo_frame: "links-list" } } do |f| %>
+        <div class="pt-4">
+          <%= f.search_field :url, autofocus: true, class: 'w-8/12' %>
+          <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
         </div>
-
-        <%= render @links %>
-      </div>
-      <% end %> <!-- turbo_frame_tag -->
+      <% end %>
     </div>
+
+    <%= turbo_frame_tag 'links-list' do %>
+    <div class="pt-4">
+      <% if params[:all] %>
+        <td class="border border-slate-600 px-2 py-1"><%= link_to '✅', links_path %></td>
+      <% else %>
+        <td class="border border-slate-600 px-2 py-1"><%= link_to '⬜️', links_path(all: true) %></td>
+      <% end %>
+      all
+    </div>
+    <div class="pt-4">
+      <%= paginate @links %>
+      <div class="flex items-center h-12">
+        <div class="w-12"></div>
+        <div class="grow">Title</div>
+        <div class="w-64">Created</div>
+        <div class="w-12"></div>
+        <div class="w-12"></div>
+      </div>
+
+      <%= render @links %>
+    </div>
+    <% end %> <!-- turbo_frame_tag -->
   </div>
-</main>
+</div>

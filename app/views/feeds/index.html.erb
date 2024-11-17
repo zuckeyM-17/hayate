@@ -1,38 +1,36 @@
 <% content_for(:page_title) { 'Feeds' } %>
 
-<main class="container w-full">
-  <%= render 'shared/breadcrumb', parents: [{ url: entries_path, title: 'Entries' }] %>
-  <div class="p-4">
-    <%= render 'shared/header', title: 'Feeds' %>
+<%= render 'shared/breadcrumb', parents: [{ url: entries_path, title: 'Entries' }] %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Feeds' %>
 
-    <div>
-      <div class="pt-4">
-        <%= form_for @feed do |f| %>
-          <div class="pt-4"><%= f.search_field :url, autofocus: true %><%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %></div>
-        <% end %>
-      </div>
+  <div>
+    <div class="pt-4">
+      <%= form_for @feed do |f| %>
+        <div class="pt-4"><%= f.search_field :url, autofocus: true %><%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %></div>
+      <% end %>
+    </div>
 
-      <div class="pt-4">
-        <%= paginate @feeds %>
-        <table  class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <th class="border border-slate-600 px-2 py-1">Title</th>
-              <th class="border border-slate-600 px-2 py-1">Url</th>
-              <th class="border border-slate-600 px-2 py-1"></th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @feeds.each do |f| %>
-            <tr>
-              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to f.title, feed_path(f) %></td>
-              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to f.url, f.url, target: '_blank' %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', feed_path(f), data: { "turbo-method": :delete } %></td>
-            </tr>
-          <% end%>
-          </tbody>
-        </table>
-      </div>
+    <div class="pt-4">
+      <%= paginate @feeds %>
+      <table  class="border border-slate-500 table-auto">
+        <thead>
+          <tr>
+            <th class="border border-slate-600 px-2 py-1">Title</th>
+            <th class="border border-slate-600 px-2 py-1">Url</th>
+            <th class="border border-slate-600 px-2 py-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @feeds.each do |f| %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to f.title, feed_path(f) %></td>
+            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to f.url, f.url, target: '_blank' %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', feed_path(f), data: { "turbo-method": :delete } %></td>
+          </tr>
+        <% end%>
+        </tbody>
+      </table>
     </div>
   </div>
-</main>
+</div>

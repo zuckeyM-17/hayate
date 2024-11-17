@@ -1,36 +1,34 @@
 <% content_for(:page_title) { 'Review Tool' } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb' %>
+<%= render 'shared/breadcrumb' %>
 
-  <div class="p-4">
-    <%= render 'shared/header', title: 'Review Tool' %>
-    <div class="mt-4 p-4 border rounded-lg">
+<div class="p-4">
+  <%= render 'shared/header', title: 'Review Tool' %>
+  <div class="mt-4 p-4 border rounded-lg">
 
-      <p>## まとめ</p>
-      <p>## やったこと</p>
-      <p>### daily task</p>
-      <p>### 読書</p>
+    <p>## まとめ</p>
+    <p>## やったこと</p>
+    <p>### daily task</p>
+    <p>### 読書</p>
 
-      <span>タイトル|進捗🏃‍♂️|一言</span><br />
-      <span>-|-|-</span><br />
-      <% @readings.each do |r| %>
-        <span><%= r.chapter.book.title %>|XX%=>YY%|ほげほげ</span><br />
-      <% end %>
-      <br />
+    <span>タイトル|進捗🏃‍♂️|一言</span><br />
+    <span>-|-|-</span><br />
+    <% @readings.each do |r| %>
+      <span><%= r.chapter.book.title %>|XX%=>YY%|ほげほげ</span><br />
+    <% end %>
+    <br />
 
-      <p>### しずかなインターネット</p>
+    <p>### しずかなインターネット</p>
 
-      <% @posts.each do |p| %>
-        <span><%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
-      <% end %>
-      <br />
+    <% @posts.each do |p| %>
+      <span><%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
+    <% end %>
+    <br />
 
-      <p>### その他</p>
-      <p>## やれなかったこと</p>
-      <p>## 来週のトピック</p>
-      <p>---</p>
-      <p>終わり</p>
-    </div>
+    <p>### その他</p>
+    <p>## やれなかったこと</p>
+    <p>## 来週のトピック</p>
+    <p>---</p>
+    <p>終わり</p>
   </div>
-</main>
+</div>

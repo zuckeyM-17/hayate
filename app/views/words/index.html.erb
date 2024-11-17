@@ -1,39 +1,37 @@
 <% content_for(:page_title) { 'Words' } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb' %>
-  <div class="p-4">
-    <%= render 'shared/header', title: 'Words' %>
+<%= render 'shared/breadcrumb' %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Words' %>
 
-    <div>
-      <div class="pt-4">
-        <%= render 'word_searches/form', word_search: @word_search %>
-      </div>
-      <div class="pt-4">
-        <%= paginate @words %>
-        <table  class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <th class="border border-slate-600 px-2 py-1">Word</th>
-              <th class="border border-slate-600 px-2 py-1">Japanese</th>
-              <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
-              <th class="border border-slate-600 px-2 py-1">Count</th>
-              <th class="border border-slate-600 px-2 py-1"></th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @words.each do |w| %>
-            <tr>
-              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
-              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.pronunciation_symbol, "https://youglish.com/pronounce/#{w.en}/english/us", target: '_blank'  %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></td>
-            </tr>
-          <% end%>
-          </tbody>
-        </table>
-      </div>
+  <div>
+    <div class="pt-4">
+      <%= render 'word_searches/form', word_search: @word_search %>
+    </div>
+    <div class="pt-4">
+      <%= paginate @words %>
+      <table  class="border border-slate-500 table-auto">
+        <thead>
+          <tr>
+            <th class="border border-slate-600 px-2 py-1">Word</th>
+            <th class="border border-slate-600 px-2 py-1">Japanese</th>
+            <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
+            <th class="border border-slate-600 px-2 py-1">Count</th>
+            <th class="border border-slate-600 px-2 py-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @words.each do |w| %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
+            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.pronunciation_symbol, "https://youglish.com/pronounce/#{w.en}/english/us", target: '_blank'  %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
+            <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></td>
+          </tr>
+        <% end%>
+        </tbody>
+      </table>
     </div>
   </div>
-</main>
+</div>

@@ -1,9 +1,7 @@
 <% content_for(:page_title) { 'Search word' } %>
 
-<main class="container">
-  <%= render 'shared/breadcrumb', parents: [{url: words_path, title: 'Words'}] %>
-  <div class="p-4">
-    <%= render 'shared/header', title: 'Search English Word' %>
-    <%= render "form", word_search: @word_search %>
-  </div>
-</main>
+<%= render 'shared/breadcrumb', parents: [{url: words_path, title: 'Words'}] %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Search English Word' %>
+  <%= render "form", word_search: @word_search %>
+</div>

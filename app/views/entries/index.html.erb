@@ -1,39 +1,37 @@
 <% content_for(:page_title) { 'Entries' } %>
 
-<main class="container w-full">
-  <%= render 'shared/breadcrumb' %>
-  <div class="p-4">
-    <%= render 'shared/header', title: "Entries<a class='text-lg pl-4' href='#{feeds_path}'>⚙️</a>".html_safe %>
+<%= render 'shared/breadcrumb' %>
+<div class="p-4">
+  <%= render 'shared/header', title: "Entries<a class='text-lg pl-4' href='#{feeds_path}'>⚙️</a>".html_safe %>
 
-    <div class="pt-4">
-      <% if @entries.present?%>
-        <%= paginate @entries %>
-        <p class="ml-4">
-          <%= link_to 'mark as read', mark_as_read_entries_path(entry_ids: @entries.map(&:id)), data: { "turbo-method": :post } %>
-        </p>
-        <div class="flex flex-wrap">
-          <% @entries.each do |e| %>
-            <div class="w-64 mt-12 ml-8 relative group">
-              <%= render 'card', entry: e %>
-              <div class="absolute top-0 right-0 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-x-1">
-                <button class="text-gray-400 hover:text-gray-200 text-3xl">
-                  <%= link_to '☆', fav_entry_path(e), data: { "turbo-method": :patch } %>
-                </button>
-                <button class="text-gray-400 hover:text-gray-200 text-3xl">
-                  <%= link_to '☑️', read_entry_path(e), data: { "turbo-method": :patch } %>
-                </button>
-              </div>
+  <div class="pt-4">
+    <% if @entries.present?%>
+      <%= paginate @entries %>
+      <p class="ml-4">
+        <%= link_to 'mark as read', mark_as_read_entries_path(entry_ids: @entries.map(&:id)), data: { "turbo-method": :post } %>
+      </p>
+      <div class="flex flex-wrap">
+        <% @entries.each do |e| %>
+          <div class="w-64 mt-12 ml-8 relative group">
+            <%= render 'card', entry: e %>
+            <div class="absolute top-0 right-0 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-x-1">
+              <button class="text-gray-400 hover:text-gray-200 text-3xl">
+                <%= link_to '☆', fav_entry_path(e), data: { "turbo-method": :patch } %>
+              </button>
+              <button class="text-gray-400 hover:text-gray-200 text-3xl">
+                <%= link_to '☑️', read_entry_path(e), data: { "turbo-method": :patch } %>
+              </button>
             </div>
-          <% end %>
-        </div>
-
-      <% else %>
-
-        <p class="ml-4">No entries found.</p>
-
-      <% end %>
-
+          </div>
+        <% end %>
       </div>
+
+    <% else %>
+
+      <p class="ml-4">No entries found.</p>
+
+    <% end %>
+
     </div>
   </div>
-</main>
+</div>
