@@ -7,7 +7,7 @@
         <%= link_to '⬜️', read_link_path(link), data: { "turbo-method": :patch, turbo_frame: "links-list" } %>
     <% end %>
     </div>
-    <div class="grow"><%= link_to link.title, link.url, class: 'underline line-clamp-1' %></div>
+    <div class="grow"><%= link_to link.title, link.url, class: 'underline line-clamp-1', target: '_blank' %></div>
     <div class="w-64"><%= l(link.created_at, format: :long) %></div>
     <div class="w-12"><%= link_to '🖋️', edit_link_path(link) %></div>
     <div class="w-12"><%= link_to '🗑️', link_path(link), data: { "turbo-method": :delete, turbo_frame: "links-list" } %></div>
