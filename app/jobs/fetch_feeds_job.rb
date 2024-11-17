@@ -8,7 +8,7 @@ class FetchFeedsJob < ApplicationJob
     users = User.all
 
     users.each do |user|
-      user.feeds.each do |feed|
+      user.feeds.find_each(batch_size: 10) do |feed|
         FetchEntriesJob.perform_later(feed.id)
       end
     end
