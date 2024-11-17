@@ -8,7 +8,10 @@
     <div>
       <div class="pt-4">
         <%= form_for @link, html: { data: { turbo_frame: "links-list" } } do |f| %>
-          <div class="pt-4"><%= f.search_field :url, autofocus: true %><%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %></div>
+          <div class="pt-4">
+            <%= f.search_field :url, autofocus: true, class: 'w-8/12' %>
+            <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
+          </div>
         <% end %>
       </div>
 
@@ -23,32 +26,15 @@
       </div>
       <div class="pt-4">
         <%= paginate @links %>
-        <table  class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <th class="border border-slate-600 px-2 py-1"></th>
-              <th class="border border-slate-600 px-2 py-1">Title</th>
-              <th class="border border-slate-600 px-2 py-1">Created</th>
-              <th class="border border-slate-600 px-2 py-1"></th>
-            </tr>
-          </thead>
-          <tbody>
-          <% @links.each do |l| %>
-            <tr>
-              <% if l.read? %>
-                <td class="border border-slate-600 px-2 py-1">✅</td>
-              <% else %>
-                <td class="border border-slate-600 px-2 py-1">
-                  <%= link_to '⬜️', read_link_path(l), data: { "turbo-method": :patch } %>
-                </td>
-              <% end %>
-              <td class="border border-slate-600 px-2 py-1 underline"><%= link_to l.title, l.url, target: '_blank' %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= l(l.created_at, format: :long) %></td>
-              <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', link_path(l), data: { "turbo-method": :delete } %></td>
-            </tr>
-          <% end%>
-          </tbody>
-        </table>
+        <div class="flex items-center h-12">
+          <div class="w-12"></div>
+          <div class="grow">Title</div>
+          <div class="w-64">Created</div>
+          <div class="w-12"></div>
+          <div class="w-12"></div>
+        </div>
+
+        <%= render @links %>
       </div>
       <% end %> <!-- turbo_frame_tag -->
     </div>

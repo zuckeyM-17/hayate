@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       post :mark_as_read
     end
   end
-  resources :links, only: %i[index create destroy] do
+  resources :links, only: %i[index create destroy edit update show] do
     member do
       patch :read
     end

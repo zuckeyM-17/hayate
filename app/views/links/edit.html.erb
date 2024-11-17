@@ -1,0 +1,12 @@
+<%= turbo_frame_tag @link do %>
+<%= form_for @link do |f| %>
+<div class="flex items-center border-t h-12">
+    <div class="w-12"></div>
+    <div class="grow">
+        <%= f.text_field :title, autofocus: true, class: 'w-11/12' %>
+    </div>
+    <div class="w-24"><%= f.submit 'Update' %></div>
+    <div class="w-24"><%= link_to 'Cancel', @link %></div>
+</div>
+<% end %>
+<% end %>
