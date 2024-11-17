@@ -11,16 +11,16 @@ class LinksController < BaseController
     @link = Link.find(params[:id])
   end
 
+  def edit
+    @link = current_user.links.find(params[:id])
+  end
+
   def create
     url = link_params[:url]
     title = Link.get_title(url) || url
     Link.create!(title:, url:, user: current_user)
 
     redirect_to links_path
-  end
-
-  def edit
-    @link = current_user.links.find(params[:id])
   end
 
   def update
