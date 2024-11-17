@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# 10分に一度前ユーザーのフィードを元に新しいEntryを取得するジョブ
+# 1時間ごとに全ユーザーのフィードを元に新しいEntryを取得するジョブ
 class FetchFeedsJob < ApplicationJob
   queue_as :background
 
