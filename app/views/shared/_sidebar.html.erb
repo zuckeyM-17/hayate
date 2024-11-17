@@ -1,17 +1,17 @@
-<div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100">
+<div class="h-full p-3 space-y-2 w-16 dark:bg-gray-900 dark:text-gray-100 md:w-60">
 	<div class="flex items-center p-2 space-x-4">
-    <h2 class="text-lg font-semibold">Hayate</h2>
+    <h2 class="text-lg font-semibold"><span>H</span><span class="invisible md:visible">ayate</span></h2>
 	</div>
 	<div class="divide-y dark:divide-gray-700">
 		<ul class="pt-2 pb-4 space-y-1 text-sm">
-			<%= sidebar_link_to root_path, "🖥️ Dashboard" %>
-			<%= sidebar_link_to tasks_path, "✅ Tasks"%>
-			<%= sidebar_link_to words_path, "🔤 Words" %>
-			<%= sidebar_link_to books_path, "📚 Books" %>
-			<%= sidebar_link_to daily_task_sets_path, "💪 Daily Task" %>
-			<%= sidebar_link_to entries_path, "🌐 RSS" %>
-			<%= sidebar_link_to links_path, "🔗 Links" %>
-			<%= sidebar_link_to review_tool_path, "📝 Review Tool" %>
+			<%= sidebar_link_to root_path, "🖥️", "Dashboard" %>
+			<%= sidebar_link_to tasks_path, "✅", "Tasks"%>
+			<%= sidebar_link_to words_path, "🔤", "Words" %>
+			<%= sidebar_link_to books_path, "📚", "Books" %>
+			<%= sidebar_link_to daily_task_sets_path, "💪", "Daily Task" %>
+			<%= sidebar_link_to entries_path, "🌐", "RSS" %>
+			<%= sidebar_link_to links_path, "🔗", "Links" %>
+			<%= sidebar_link_to review_tool_path, "📝", "Review Tool" %>
 		</ul>
 	</div>
 </div>
