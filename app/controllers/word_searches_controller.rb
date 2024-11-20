@@ -6,9 +6,8 @@ class WordSearchesController < BaseController
   end
 
   def create
-    word = Word.find_by(en: word_search_params[:word])
-
-    word = Word::Explain.new(word_search_params[:word]).call! if word.nil?
+    word = Word.find_or_initialize_by(en: word_search_params[:word])
+    Word::Explain.new(word).call! unless word.persisted?
 
     if word.save
       word.word_searches.create!(user: current_user)

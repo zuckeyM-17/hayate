@@ -50,7 +50,7 @@ class Word < ApplicationRecord
     SYSTEM_MESSAGE
 
     def initialize(word)
-      @word = Word.new(en: word)
+      @word = word
     end
 
     def call!
@@ -70,7 +70,6 @@ class Word < ApplicationRecord
           examples: res['examples']
         }
       }
-      @word
     end
   end
 end
