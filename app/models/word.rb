@@ -4,27 +4,23 @@
 #
 # Table name: words
 #
-#  id                   :integer           not null, primary key
-#  en                   :string           not null
-#  ja                   :string           not null
-#  pronunciation_symbol :string           not null
-#  meaning              :string           not null
-#  misc                 :json             not null
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  id         :integer          not null, primary key
+#  en         :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #
 #  index_words_on_en  (en) UNIQUE
 #
+
 class Word < ApplicationRecord
   has_many :word_searches, dependent: :destroy
+  has_one :explanation, class_name: 'WordExplanation', dependent: :destroy
 
   validates :en, presence: true, uniqueness: true
-  validates :ja, presence: true
-  validates :pronunciation_symbol, presence: true
-  validates :meaning, presence: true
-  validates :misc, presence: true
+
+  delegate :ja, :meaning, :phonetic_symbols, :misc, to: :explanation, allow_nil: true
 
   class Explain
     SYSTEM_MESSAGE = <<~SYSTEM_MESSAGE
@@ -61,15 +57,15 @@ class Word < ApplicationRecord
       ]
       res = JSON.parse(format('{ "additional_info": %s', ::Openai::ChatCompletion.new.call(messages)))
 
-      @word.attributes = {
-        ja: res['ja'],
-        pronunciation_symbol: res['phonetic_symbols'],
-        meaning: res['description'],
-        misc: {
-          thesaurus: res['thesaurus'],
-          examples: res['examples']
-        }
-      }
+      @word.explanation.build({
+                                ja: res['ja'],
+                                pronunciation_symbol: res['phonetic_symbols'],
+                                meaning: res['description'],
+                                misc: {
+                                  thesaurus: res['thesaurus'],
+                                  examples: res['examples']
+                                }
+                              })
     end
   end
 end

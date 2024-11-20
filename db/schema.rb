@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_10_132106) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_151106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -287,6 +287,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_10_132106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "word_explanations", force: :cascade do |t|
+    t.bigint "word_id", null: false
+    t.string "ja", null: false
+    t.string "meaning", null: false
+    t.string "phonetic_symbols", null: false
+    t.json "misc", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word_id"], name: "index_word_explanations_on_word_id"
+  end
+
   create_table "word_searches", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "word_id", null: false
@@ -298,10 +309,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_10_132106) do
 
   create_table "words", force: :cascade do |t|
     t.string "en", null: false
-    t.string "ja", null: false
-    t.string "pronunciation_symbol", null: false
-    t.string "meaning", null: false
-    t.json "misc", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["en"], name: "index_words_on_en", unique: true
@@ -332,6 +339,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_10_132106) do
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "tasks", "users"
   add_foreign_key "user_profiles", "users"
+  add_foreign_key "word_explanations", "words"
   add_foreign_key "word_searches", "users"
   add_foreign_key "word_searches", "words"
 end
