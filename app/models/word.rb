@@ -57,15 +57,17 @@ class Word < ApplicationRecord
       ]
       res = JSON.parse(format('{ "additional_info": %s', ::Openai::ChatCompletion.new.call(messages)))
 
-      @word.explanation.build({
-                                ja: res['ja'],
-                                pronunciation_symbol: res['phonetic_symbols'],
-                                meaning: res['description'],
-                                misc: {
-                                  thesaurus: res['thesaurus'],
-                                  examples: res['examples']
-                                }
-                              })
+      WordExplanation.find_or_initialize_by(word: @word) do |e|
+        e.assign_attributes(
+          ja: res['ja'],
+          meaning: res['description'],
+          phonetic_symbols: res['phonetic_symbols'],
+          misc: {
+            thesaurus: res['thesaurus'],
+            examples: res['examples']
+          }
+        ).save!
+      end
     end
   end
 end
