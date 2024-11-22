@@ -22,7 +22,7 @@ class WordExplanation < ApplicationRecord
   belongs_to :word
 
   validates :ja, presence: true
-  validates :pronunciation_symbol, presence: true
+  validates :phonetic_symbols, presence: true
   validates :meaning, presence: true
   validates :misc, presence: true
 end

@@ -66,7 +66,8 @@ class Word < ApplicationRecord
             thesaurus: res['thesaurus'],
             examples: res['examples']
           }
-        ).save!
+        )
+        e.save!
       end
     end
   end
