@@ -15,7 +15,7 @@ module SharedHelper
     tag.li class: "overflow-hidden h-10 flex items-center #{active}" do
       link_to(path, class: 'flex items-center p-2 space-x-3 rounded-md') do
         concat tag.span icon
-        concat tag.span " #{text}", class: 'invisible md:visible'
+        concat tag.span " #{text}", class: 'invisible lg:visible'
       end
     end
   end
