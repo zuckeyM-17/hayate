@@ -7,10 +7,10 @@ class WordSearchesController < BaseController
 
   def create
     word = Word.find_or_initialize_by(en: word_search_params[:word])
-    Word::Explain.new(word).call! unless word.persisted?
 
     if word.save
       word.word_searches.create!(user: current_user)
+      ExplainWordJob.perform_later(word.id)
       redirect_to word_path(word), notice: 'WordSearch was successfully created.'
     else
       redirect_to new_word_search_path, alert: 'WordSearch was failed to create.'
