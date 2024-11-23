@@ -1,7 +1,10 @@
-<%= form_for word_search do |f| %>
+<%= form_for word_search, html: { data: { turbo_frame: "words-list" } } do |f| %>
   <% if flash[:alert] %>
     <p class="alert alert-danger"><%= alert %></p>
   <% end %>
 
-  <div class="pt-4"><%= f.search_field :word, autofocus: true %><%= f.submit 'Search',  class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %></div>
+  <div class="pt-4">
+    <%= f.search_field :word, autofocus: true, class: "w-6/12" %>
+    <%= f.submit 'Search',  class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
+  </div>
 <% end %>

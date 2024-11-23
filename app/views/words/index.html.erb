@@ -8,30 +8,30 @@
     <div class="pt-4">
       <%= render 'word_searches/form', word_search: @word_search %>
     </div>
-    <div class="pt-4">
-      <%= paginate @words %>
-      <table  class="border border-slate-500 table-auto">
-        <thead>
-          <tr>
-            <th class="border border-slate-600 px-2 py-1">Word</th>
-            <th class="border border-slate-600 px-2 py-1">Japanese</th>
-            <th class="border border-slate-600 px-2 py-1">Pronunciation</th>
-            <th class="border border-slate-600 px-2 py-1">Count</th>
-            <th class="border border-slate-600 px-2 py-1"></th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @words.each do |w| %>
-          <tr>
-            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.en, word_path(w) %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= w.ja %></td>
-            <td class="border border-slate-600 px-2 py-1 underline"><%= link_to w.phonetic_symbols || '...', "https://youglish.com/pronounce/#{w.en}/english/us", target: '_blank'  %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= w.word_searches.size %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></td>
-          </tr>
-        <% end%>
-        </tbody>
-      </table>
-    </div>
+
+    <%= turbo_frame_tag 'words-list' %>
+      <div class="pt-4">
+        <%= paginate @words %>
+        <div class="flex items-center h-12">
+          <div class="w-48">Word</div>
+          <div class="w-48">Japanese</div>
+          <div class="w-48">Pronunciation</div>
+          <div class="w-12">Count</div>
+          <div class="w-12"></div>
+        </div>
+      </div>
+
+      <% @words.each do |w| %>
+        <%= turbo_frame_tag "word-#{w.id}" do %>
+          <div class="flex items-center h-12 border-t">
+            <div class="w-48 underline"><%= link_to w.en, word_path(w) %></div>
+            <div class="w-48"><%= w.ja %></div>
+            <div class="w-48 underline"><%= link_to w.phonetic_symbols || '...', "https://youglish.com/pronounce/#{w.en}/english/us", target: '_blank'  %></div>
+            <div class="w-16"><%= w.word_searches.size %></div>
+            <div class="w-12"><%= link_to '🗑️', word_path(w), data: { "turbo-method": :delete } %></div>
+          </div>
+        <% end %>
+      </div>
+    <% end %> <!-- turbo_flame_tag -->
   </div>
 </div>
