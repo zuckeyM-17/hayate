@@ -7,7 +7,7 @@
   <div>
     <p><%= @word.word_searches.count %></p>
     <p><%= @word.ja %></p>
-    <p class="underline"><%= link_to @word.phonetic_symbols, "https://youglish.com/pronounce/#{@word.en}/english/us", target: '_blank' %></p>
+    <p class="underline"><%= link_to @word.phonetic_symbols || '...', "https://youglish.com/pronounce/#{@word.en}/english/us", target: '_blank' %></p>
     <p><%= @word.meaning %></p>
     <p><%= @word.misc %></p>
   </div>
