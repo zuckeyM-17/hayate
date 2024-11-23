@@ -12,17 +12,21 @@ class SplitWordWordExplanations < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    remove_column :words, :ja, :string
-    remove_column :words, :pronunciation_symbol, :string
-    remove_column :words, :meaning, :string
-    remove_column :words, :misc, :json
+    change_table :words, bulk: true do |t|
+      remove_column :words, :ja, :string
+      remove_column :words, :pronunciation_symbol, :string
+      remove_column :words, :meaning, :string
+      remove_column :words, :misc, :json
+    end
   end
 
   def down
-    add_column :words, :ja, :string, null: false
-    add_column :words, :pronunciation_symbol, :string, null: false
-    add_column :words, :meaning, :string, null: false
-    add_column :words, :misc, :json, null: false
+    change_table :words, bulk: true do |t|
+      add_column :words, :ja, :string, null: false, default: ''
+      add_column :words, :pronunciation_symbol, :string, null: false, default: ''
+      add_column :words, :meaning, :string, null: false, default: ''
+      add_column :words, :misc, :json, null: false, default: {}
+    end
 
     drop_table :word_explanations
   end
