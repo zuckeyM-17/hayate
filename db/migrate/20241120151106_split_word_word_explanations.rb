@@ -12,7 +12,7 @@ class SplitWordWordExplanations < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    change_table :words, bulk: true do |t|
+    change_table :words, bulk: true do |_t|
       remove_column :words, :ja, :string
       remove_column :words, :pronunciation_symbol, :string
       remove_column :words, :meaning, :string
@@ -21,7 +21,7 @@ class SplitWordWordExplanations < ActiveRecord::Migration[8.0]
   end
 
   def down
-    change_table :words, bulk: true do |t|
+    change_table :words, bulk: true do |_t|
       add_column :words, :ja, :string, null: false, default: ''
       add_column :words, :pronunciation_symbol, :string, null: false, default: ''
       add_column :words, :meaning, :string, null: false, default: ''
