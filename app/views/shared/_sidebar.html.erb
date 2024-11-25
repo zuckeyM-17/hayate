@@ -2,7 +2,7 @@
 
 def sidebar_link_to(path, icon, text)
 	active = 'dark:bg-gray-800 dark:text-gray-50' if current_page?(path)
-	tag.li class: "overflow-hidden h-10 flex items-center #{active}" do
+	tag.li class: "w-10 sm:w-full overflow-hidden h-10 flex items-center #{active}" do
 		link_to(path, class: 'flex items-center p-2 space-x-3 rounded-md') do
 		concat tag.span icon
 		concat tag.span " #{text}", class: 'invisible lg:visible'
@@ -12,12 +12,12 @@ end
 
 %>
 
-<div class="h-full p-3 space-y-2 w-16 dark:bg-gray-900 dark:text-gray-100 lg:w-60">
-	<div class="flex items-center p-2 space-x-4">
-    <h2 class="text-lg font-semibold"><span>H</span><span class="invisible lg:visible">ayate</span></h2>
+<div class="dark:bg-gray-900 dark:text-gray-100 flex pl-2 sm:space-y-2 sm:pt-3 sm:pl-3 sm:flex-col sm:h-full sm:w-16 lg:w-60">
+	<div class="flex space-x-4 sm:p-2 items-center">
+	    <h2 class="text-lg font-semibold"><span>H</span><span class="hidden lg:inline-block">ayate</span></h2>
 	</div>
 	<div class="divide-y dark:divide-gray-700">
-		<ul class="pt-2 pb-4 space-y-1 text-sm">
+		<ul class="flex space-y-1 text-sm sm:flex-col px-2">
 			<%= sidebar_link_to root_path, "🖥️", "Dashboard" %>
 			<%= sidebar_link_to tasks_path, "✅", "Tasks"%>
 			<%= sidebar_link_to words_path, "🔤", "Words" %>
