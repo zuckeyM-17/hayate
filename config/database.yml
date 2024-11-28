@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: hayate_production
-  username: hayate
-  password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  database: postgres
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
