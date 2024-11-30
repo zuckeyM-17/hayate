@@ -1,0 +1,26 @@
+<div class="p-4">
+    <h1>Users</h1>
+    <div>
+        <div class="pt-4">
+            <div class="flex items-center h-12">
+                <div class="w-12">ID</div>
+                <div class="grow">Display Name</div>
+                <div class="w-96">Password</div>
+                <div class="w-24"></div>
+                <div class="w-64">Created</div>
+            </div>
+
+            <% @users.each do |user| %>
+                <%= form_with url: admin_user_path(user.id), method: :patch do |f| %>
+                <div class="flex items-center border-t h-12">
+                    <div class="w-12"><%= user.id %></div>
+                    <div class="grow"><%= user.user_credential.display_name %></div>
+                    <div class="w-96"><%= f.password_field :password, class: 'w-11/12 border-t-0 border-x-0 border-b-1' %></div>
+                    <div class="w-24"><%= f.submit 'Update' %></div>
+                    <div class="w-64"><%= l(user.created_at, format: :long) %></div>
+                </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

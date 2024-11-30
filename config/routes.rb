@@ -50,4 +50,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :links, only: %i[create]
   end
+
+  namespace :admin do
+    resources :users, only: %i[index update]
+  end
 end
