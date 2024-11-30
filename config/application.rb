@@ -46,5 +46,7 @@ module Hayate
     config.generators.system_tests = nil
 
     config.autoload_paths += Dir.glob("#{config.root}/app/lib")
+
+    config.mission_control.jobs.base_controller_class = "Admin::BaseController"
   end
 end
