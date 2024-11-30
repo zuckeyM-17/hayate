@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class BaseController < ApplicationController
-  before_action :authenticate if Rails.env.production?
+  # before_action :authenticate if Rails.env.production?
 
-  private
+  # private
 
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, _password|
-      username == Rails.application.credentials.dig(:basic_auth, :username) &&
-        - Rails.application.credentials.dig(:basic_auth, :password)
-    end
-  end
+  # def authenticate
+  #   authenticate_or_request_with_http_basic do |username, _password|
+  #     username == Rails.application.credentials.dig(:basic_auth, :username) &&
+  #       - Rails.application.credentials.dig(:basic_auth, :password)
+  #   end
+  # end
 end
