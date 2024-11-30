@@ -17,8 +17,8 @@
           <p class="line-clamp-3 font-bold"><%= book.title %></p>
           <p><%= book_category(book.category) %></p>
           <% if book.in_progress? %>
-          <p class="line-clamp-2 text-gray-800"><%= book.readings.first.chapter.title %>（<%= book.readings.first.chapter.number %>/<%= book.chapters.size %>）</p>
-          <p class="text-right underline"><%= link_to 'note', reading_path(book.readings.first) %></p>
+          <p class="line-clamp-2 text-gray-800"><%= book.now_reading.chapter.title %>（<%= book.now_reading.chapter.number %>/<%= book.chapters.size %>）</p>
+          <p class="text-right underline"><%= link_to 'note', reading_path(book.now_reading) %></p>
           <% else %>
           <p class="line-clamp-2 text-gray-800"><%= book.chapters.first %></p>
           <p class="text-right underline"><%= link_to 'Start', start_book_path(book), data: { "turbo-method": :post } %></p>

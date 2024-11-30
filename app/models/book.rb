@@ -41,6 +41,10 @@ class Book < ApplicationRecord
     book
   end
 
+  def now_reading
+    readings.in_progress.first
+  end
+
   def in_progress?
     readings.in_progress.present?
   end
