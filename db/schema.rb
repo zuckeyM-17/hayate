@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_151106) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_30_133215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -138,6 +138,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_151106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chapter_id"], name: "index_readings_on_chapter_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -274,6 +283,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_151106) do
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
+  create_table "user_credentials", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "display_name", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["display_name"], name: "index_user_credentials_on_display_name", unique: true
+    t.index ["user_id"], name: "index_user_credentials_on_user_id"
+  end
+
   create_table "user_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "display_name", null: false
@@ -338,6 +357,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_151106) do
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "tasks", "users"
+  add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"
   add_foreign_key "word_explanations", "words"
   add_foreign_key "word_searches", "users"

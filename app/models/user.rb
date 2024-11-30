@@ -10,6 +10,7 @@
 #
 
 class User < ApplicationRecord
+  has_one :user_credential, dependent: :destroy
   has_one :user_profile, dependent: :destroy
   has_many :books, dependent: :destroy
   has_many :chapters, through: :books, dependent: :destroy

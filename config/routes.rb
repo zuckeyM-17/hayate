@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
   root 'top#index'
 
+  get 'signin' => 'sessions#new'
+  post 'signin' => 'sessions#create'
+  delete 'signout' => 'sessions#destroy'
+
   resources :word_searches, only: %i[create new]
   resources :words, only: %i[index show destroy]
   resources :books, only: %i[index create show new] do
@@ -45,6 +49,5 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :links, only: %i[create]
-    resources :daily_task_sets, only: %i[create]
   end
 end
