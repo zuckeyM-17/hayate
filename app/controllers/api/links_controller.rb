@@ -7,7 +7,7 @@ module Api
     def create
       url = link_params[:url]
       title = Link.get_title(url) || url
-      Link.create!(title:, url:, user: current_user)
+      Link.create!(title:, url:, user: User.first)
 
       head :created
     end
