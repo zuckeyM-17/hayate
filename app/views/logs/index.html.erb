@@ -1,0 +1,16 @@
+<% content_for(:page_title) { 'Logs' } %>
+
+<%= render 'shared/breadcrumb' %>
+<div class="p-4">
+  <%= render 'shared/header', title: "Logs" %>
+
+  <div class="pt-4">
+        <div class="flex flex-wrap">
+        <% @months.each do |month| %>
+            <div class="w-64 h-64 mt-12 ml-8 shadow-lg rounded-lg">
+                <p class="font-bold p-2 underline"><%= month.to_s %></p>
+            </div>
+        <% end %>
+        </div>
+  </div>
+</div>
