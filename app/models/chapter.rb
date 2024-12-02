@@ -4,8 +4,8 @@
 #
 # Table name: chapters
 #
-#  id         :integer          not null, primary key
-#  book_id    :integer          not null
+#  id         :bigint           not null, primary key
+#  book_id    :bigint           not null
 #  title      :string           not null
 #  number     :integer          not null
 #  created_at :datetime         not null
@@ -14,6 +14,10 @@
 # Indexes
 #
 #  index_chapters_on_book_id  (book_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (book_id => books.id)
 #
 
 class Chapter < ApplicationRecord

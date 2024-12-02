@@ -4,9 +4,9 @@
 #
 # Table name: daily_tasks
 #
-#  id                 :integer           not null, primary key
-#  daily_task_set_id  :integer           not null
-#  daily_task_item_id :integer           not null
+#  id                 :bigint           not null, primary key
+#  daily_task_set_id  :bigint           not null
+#  daily_task_item_id :bigint           not null
 #  done               :boolean          default(FALSE), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

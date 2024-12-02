@@ -4,9 +4,9 @@
 #
 # Table name: link_notes
 #
-#  id         :integer          not null, primary key
-#  link_id    :integer          not null
-#  note_id    :integer          not null
+#  id         :bigint           not null, primary key
+#  link_id    :bigint           not null
+#  note_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -14,6 +14,11 @@
 #
 #  index_link_notes_on_link_id  (link_id)
 #  index_link_notes_on_note_id  (note_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (link_id => links.id)
+#  fk_rails_...  (note_id => notes.id)
 #
 
 class LinkNote < ApplicationRecord

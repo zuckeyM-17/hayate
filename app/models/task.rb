@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
+
+
 # == Schema Information
 #
 # Table name: tasks
 #
-#  id          :integer           not null, primary key
-#  user_id     :integer           not null
+#  id          :bigint           not null, primary key
+#  user_id     :bigint           not null
 #  title       :string           not null
 #  description :text
-#  priority    :integer          default("inbox"), not null
 #  category    :integer          default("other"), not null
-#  due_at      :datetime
+#  start_date  :date             not null
+#  end_date    :date             not null
 #  done_at     :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -26,13 +28,9 @@
 class Task < ApplicationRecord
   belongs_to :user
 
-  enum :priority, { inbox: 0, today: 10 }
   enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
 
   validates :title, presence: true
-
-  scope :inbox, -> { where(priority: :inbox) }
-  scope :today, -> { where(priority: :today) }
 
   scope :other, -> { where(category: :other) }
   scope :work, -> { where(category: :work) }

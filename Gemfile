@@ -66,13 +66,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 7.0.1'
+  gem 'rspec-rails', '~> 7.0'
   gem 'rubocop'
   gem 'rubocop-rails'
 end
 
 group :development do
-  gem 'annotate'
+  gem 'annotaterb'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
