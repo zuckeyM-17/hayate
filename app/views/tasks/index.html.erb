@@ -10,10 +10,19 @@
   <div>
     <div class="pt-4">
       <%= form_for @task do |f| %>
-        <div class="pt-4">
-          <%= f.text_field :title %>
-          <%= f.select :category, Task.categories.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
-          <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
+        <div class="p-4 w-8/12 bg-gray-200 rounded-md">
+          <div class="mt-2">
+            <%= f.text_field :title, class: 'w-full' %>
+          </div>
+          <div class="mt-2">
+            <%= f.select :category, Task.categories.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
+          </div>
+          <div class="mt-2">
+            <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %>
+          </div>
+          <div class="mt-2">
+            <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          </div>
         </div>
       <% end %>
     </div>
