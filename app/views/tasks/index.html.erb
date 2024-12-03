@@ -12,13 +12,11 @@
       <%= form_for @task do |f| %>
         <div class="pt-4">
           <%= f.text_field :title %>
-          <%= f.select :priority, Task.priorities.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
           <%= f.select :category, Task.categories.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
           <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2" %>
         </div>
       <% end %>
     </div>
-    <% [@today_tasks, @inbox_tasks].each do |tasks| %>
     <div class="pt-4">
       <table  class="border border-slate-500 table-auto">
         <thead>
@@ -26,13 +24,12 @@
             <th class="border border-slate-600 px-2 py-1">Done</th>
             <th class="border border-slate-600 px-2 py-1">Title</th>
             <th class="border border-slate-600 px-2 py-1">Created</th>
-            <th class="border border-slate-600 px-2 py-1">Priority</th>
             <th class="border border-slate-600 px-2 py-1">Category</th>
             <th class="border border-slate-600 px-2 py-1">Delete</th>
           </tr>
         </thead>
         <tbody>
-        <% tasks.each do |t| %>
+        <% @tasks.each do |t| %>
           <tr>
             <% if t.done? %>
               <td class="border border-slate-600 px-2 py-1">✅</td>
@@ -43,7 +40,6 @@
             <% end %>
             <td class="border border-slate-600 px-2 py-1"><%= t.title %></td>
             <td class="border border-slate-600 px-2 py-1"><%= l(t.created_at, format: :long) %></td>
-            <td class="border border-slate-600 px-2 py-1"><%= task_priority(t.priority) %></td>
             <td class="border border-slate-600 px-2 py-1"><%= task_category(t.category) %></td>
             <td class="border border-slate-600 px-2 py-1"><%= link_to '🗑️', task_path(t), data: { "turbo-method": :delete } %></td>
           </tr>
@@ -51,6 +47,5 @@
         </tbody>
       </table>
     </div>
-    <% end %>
   </div>
 </div>

@@ -2,8 +2,7 @@
 
 class TasksController < BaseController
   def index
-    @today_tasks = current_user.tasks.today
-    @inbox_tasks = current_user.tasks.inbox
+    @tasks = current_user.tasks
     @task = Task.new
   end
 
@@ -30,6 +29,6 @@ class TasksController < BaseController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :priority, :category, :due_at)
+    params.require(:task).permit(:title, :description, :category, :due_at)
   end
 end

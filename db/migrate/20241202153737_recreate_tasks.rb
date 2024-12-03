@@ -12,6 +12,7 @@ class RecreateTasks < ActiveRecord::Migration[8.0]
       t.date :start_date, null: false
       t.date :end_date, null: false
       t.datetime :done_at
+      t.datetime :rescheduled_at
 
       t.timestamps
     end
