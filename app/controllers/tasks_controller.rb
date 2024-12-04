@@ -6,12 +6,26 @@ class TasksController < BaseController
     @task = Task.new
   end
 
+  def show
+    @task = current_user.tasks.find(params[:id])
+  end
+
   def create
     task = Task.new(user: current_user)
     task.assign_attributes(task_params)
     task.save!
 
     redirect_to tasks_path
+  end
+
+  def edit
+    @task = current_user.tasks.find(params[:id])
+  end
+
+  def update
+    @task = current_user.tasks.find(params[:id])
+    @task.update!(task_params)
+    redirect_to @task
   end
 
   def destroy
@@ -29,6 +43,10 @@ class TasksController < BaseController
   private
 
   def task_params
+    params.require(:task).permit(:title, :description, :category, :start_date, :end_date)
+  end
+
+  def update_params
     params.require(:task).permit(:title, :description, :category, :start_date, :end_date)
   end
 end

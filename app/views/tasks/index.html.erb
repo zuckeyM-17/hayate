@@ -28,26 +28,10 @@
         <div class="grow">Title</div>
         <div class="w-32">Category</div>
         <div class="w-48">Date</div>
-        <div class="w-12"></div>
+        <div class="w-24"></div>
       </div>
       <%= turbo_frame_tag 'tasks-list' do %>
-      <% @tasks.each do |t| %>
-        <%= turbo_frame_tag "task-#{t.id}" do %>
-          <div class="flex items-center h-12 border-t">
-            <div class="w-12">
-              <% if t.done? %>
-                ✅
-              <% else %>
-                <%= link_to '⬜️', done_task_path(t), data: { "turbo-method": :patch } %>
-              <% end %>
-            </div>
-            <div class="grow"><span class="line-clamp-1"><%= t.title %></span></div>
-            <div class="w-32"><%= task_category(t.category) %></div>
-            <div class="w-48 text-sm"><%= "#{l(t.start_date)} ~ #{l(t.end_date)}" %></div>
-            <div class="w-12"><%= link_to '🗑️', task_path(t), data: { "turbo-method": :delete } %></div>
-          </div>
-        <% end %>
-      <% end%>
+      <%= render @tasks %>
       <% end %> <!-- turbo_flame_tag -->
     </div>
 
