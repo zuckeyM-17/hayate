@@ -10,16 +10,16 @@ class TasksController < BaseController
     @task = current_user.tasks.find(params[:id])
   end
 
+  def edit
+    @task = current_user.tasks.find(params[:id])
+  end
+
   def create
     task = Task.new(user: current_user)
     task.assign_attributes(task_params)
     task.save!
 
     redirect_to tasks_path
-  end
-
-  def edit
-    @task = current_user.tasks.find(params[:id])
   end
 
   def update
