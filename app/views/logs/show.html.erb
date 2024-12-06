@@ -4,7 +4,7 @@
 
 def color_for_day(day)
   if day.today?
-    'underline text-orange-600'
+    'underline text-green-500'
   elsif day.saturday?
     'text-blue-600'
   elsif day.sunday?
@@ -22,7 +22,7 @@ end
 <div class="p-4 w-full lg:w-8/12 mx-auto">
     <div class="flex items-center w-fit mx-auto">
         <p><%= link_to '< Prev', log_path(@month.prev.id), class: 'underline' %></p>
-        <p class="font-bold p-2 underline">
+        <p class="font-bold p-2">
             <%= @month.to_s %>
         </p>
         <p><%= link_to 'Next >', log_path(@month.next.id), class: 'underline' %></p>
