@@ -7,14 +7,27 @@ class Month
 
   validates :year, :month, presence: true
 
-  def initialize(date)
+  def initialize(id)
+    date = Date.parse("#{id}-01")
     @year = date.year
     @month = date.month
   end
 
-  def self.future
-    today = Time.zone.today
-    (0..11).map { |i| new(today + i.months) }
+  class << self
+    def future
+      today = Time.zone.today
+      (0..11).map do |i|
+        new(date_to_id(today + i.months))
+      end
+    end
+
+    def date_to_id(date)
+      "#{date.year}-#{date.month}"
+    end
+  end
+
+  def id
+    "#{year}-#{month}"
   end
 
   def days

@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   end
 
   resource :review_tool, only: %i[show]
-  resources :logs, only: %i[index]
+  resources :logs, only: %i[index show]
 
   namespace :api do
     resources :links, only: %i[create]

@@ -1,0 +1,35 @@
+<% content_for(:page_title) { 'Monthly Logs' } %>
+
+<%
+
+def color_for_day(day)
+  if day.today?
+    'underline text-orange-600'
+  elsif day.saturday?
+    'text-blue-600'
+  elsif day.sunday?
+    'text-red-600'
+  end
+end
+
+
+%>
+
+<%= render 'shared/breadcrumb', parents: [{ url: logs_path, title: 'Logs' }] %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Monthly Logs' %>
+
+<div class="p-4 w-full lg:w-8/12 mx-auto">
+    <div class="w-full">
+        <% @month.days.each do |day| %>
+            <div class="flex w-full border-t items-center">
+                <p class="font-bold p-2 <%= color_for_day(day) %>">
+                    <%= day.to_s %>
+                </p>
+                <div>
+                    events will be here
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

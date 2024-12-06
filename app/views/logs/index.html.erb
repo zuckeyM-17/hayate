@@ -8,7 +8,9 @@
         <div class="flex flex-wrap">
         <% @months.each do |month| %>
             <div class="w-64 h-64 mt-12 ml-8 shadow-lg rounded-lg">
-                <p class="font-bold p-2 underline"><%= month.to_s %></p>
+                <p class="font-bold p-2 underline">
+                  <%= link_to month.to_s, log_path(month.id) %>
+                </p>
             </div>
         <% end %>
         </div>
