@@ -20,11 +20,18 @@ end
   <%= render 'shared/header', title: 'Monthly Logs' %>
 
 <div class="p-4 w-full lg:w-8/12 mx-auto">
+    <div class="flex items-center w-fit mx-auto">
+        <p><%= link_to '< Prev', log_path(@month.prev.id), class: 'underline' %></p>
+        <p class="font-bold p-2 underline">
+            <%= @month.to_s %>
+        </p>
+        <p><%= link_to 'Next >', log_path(@month.next.id), class: 'underline' %></p>
+    </div>
     <div class="w-full">
         <% @month.days.each do |day| %>
             <div class="flex w-full border-t items-center">
                 <p class="font-bold p-2 <%= color_for_day(day) %>">
-                    <%= day.to_s %>
+                    <%= day.day %>
                 </p>
                 <div>
                     events will be here

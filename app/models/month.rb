@@ -38,4 +38,14 @@ class Month
   def to_s
     "#{year}年#{month}月"
   end
+
+  def next
+    date = Date.parse("#{year}-#{month}-01") + 1.month
+    self.class.new(self.class.date_to_id(date))
+  end
+
+  def prev
+    date = Date.parse("#{year}-#{month}-01") - 1.month
+    self.class.new(self.class.date_to_id(date))
+  end
 end
