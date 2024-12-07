@@ -1,16 +1,16 @@
 <%= turbo_frame_tag task do %>
-<div class="flex items-center h-12 border-t">
-    <div class="w-12">
+<div class="flex items-center h-12 border-t flex-wrap lg:flex-nowrap">
+    <div class="w-full lg:grow"><span class="line-clamp-1"><%= task.title %></span></div>
+    <div class="w-32"><%= task_category(task.category) %></div>
+    <div class="w-48 text-sm"><%= "#{l(task.start_date)} ~ #{l(task.end_date)}" %></div>
+    <div class="w-8">
         <% if task.done? %>
         ✅
         <% else %>
         <%= link_to '⬜️', done_task_path(task), data: { "turbo-method": :patch } %>
         <% end %>
     </div>
-    <div class="grow"><span class="line-clamp-1"><%= task.title %></span></div>
-    <div class="w-32"><%= task_category(task.category) %></div>
-    <div class="w-48 text-sm"><%= "#{l(task.start_date)} ~ #{l(task.end_date)}" %></div>
-    <div class="w-12"><%= link_to '🖋️', edit_task_path(task) %></div>
-    <div class="w-12"><%= link_to '🗑️', task_path(task), data: { "turbo-method": :delete } %></div>
+    <div class="w-8"><%= link_to '🖋️', edit_task_path(task) %></div>
+    <div class="w-8"><%= link_to '🗑️', task_path(task), data: { "turbo-method": :delete } %></div>
 </div>
 <% end %>

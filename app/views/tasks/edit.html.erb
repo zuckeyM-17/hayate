@@ -1,16 +1,17 @@
 <%= turbo_frame_tag @task do %>
 <%= form_for @task do |f| %>    
-    <div class="flex items-center h-12 border-t">
-        
-        <div class="grow"><%= f.text_field :title, autofocus: true, class: "w-11/12" %></div>
-        <div class="">
+    <div class="flex items-center h-12 border-t flex-wrap">
+        <div class="w-full lg:grow"><%= f.text_field :title, autofocus: true, class: "w-11/12" %></div>
+        <div class="w-full pt-2 lg:p-0 lg:w-3/12">
             <%= f.select :category, Task.categories.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
         </div>
-        <div class="">
+        <div class="w-full pt-2 lg:p-0 lg:w-6/12">
             <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %>
         </div>
-        <div class="w-24"><%= f.submit 'Update' %></div>
-        <div class="w-24"><%= link_to 'Cancel', @task %></div>
+        <div class="w-3/12 pt-2 lg:p-0">
+            <%= f.submit 'Update', class: 'underline' %>
+            <%= link_to 'Cancel', @task, class: 'underline' %>
+        </div>
     </div>
 <% end %>
 <% end %>

@@ -23,12 +23,11 @@
     </div>
     
     <div class="pt-4 w-full lg:w-8/12">
-      <div class="flex items-center h-12">
-        <div class="w-12"></div>
-        <div class="grow">Title</div>
+      <div class="items-center h-12 flex-wrap hidden lg:flex lg:flex-nowrap">
+        <div class="w-full lg:grow">Title</div>
         <div class="w-32">Category</div>
         <div class="w-48">Date</div>
-        <div class="w-24"></div>
+        <div class="w-36"></div>
       </div>
       <%= turbo_frame_tag 'tasks-list' do %>
       <%= render @tasks %>
