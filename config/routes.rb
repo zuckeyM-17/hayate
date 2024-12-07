@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
   root 'top#index'
 
+  get "/sw.js", to: "pwa#service_worker", as: "service_worker"
+  get "/manifest.json", to: "pwa#manifest", as: "pwa_manifest"
+
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
