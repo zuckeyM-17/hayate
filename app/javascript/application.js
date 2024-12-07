@@ -3,7 +3,7 @@ import "@hotwired/turbo-rails"
 
 if ('serviceWorker' in navigator) {
     // Register the service worker
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('/service_worker.js')
       .then(function(registration) {
         console.log('Service Worker registered with scope:', registration.scope);
       })
