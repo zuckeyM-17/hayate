@@ -92,7 +92,7 @@
     <%= render 'shared/header', title: 'Tasks' %>
 
     <div class="p-4 w-full border rounded-md">
-      <%= form_with url: root_path, model: Task.new do |f| %>
+      <%= form_for Task.new do |f| %>
       <%= f.hidden_field :start_date, value: Time.zone.today %>
       <%= f.hidden_field :end_date, value: Time.zone.today %>    
       <div class="flex items-center flex-wrap">
@@ -119,7 +119,7 @@
     <!-- Weekly Tasks -->
     <%= render 'shared/header', title: 'Weekly Tasks' %>
     <div class="pt-4 w-full divide-y">
-      <%= turbo_frame_tag 'weekly-tasks-list' do %>
+      <%= turbo_frame_tag 'tasks-list' do %>
       <% @weekly_tasks.each do |task| %>
         <%= render 'tasks/task', task: %>
       <% end %>

@@ -19,7 +19,7 @@ class TasksController < BaseController
     task.assign_attributes(task_params)
     task.save!
 
-    redirect_to tasks_path
+    redirect_to request.referer
   end
 
   def update
