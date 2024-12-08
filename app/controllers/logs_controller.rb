@@ -16,6 +16,11 @@ class LogsController < BaseController
     @events = current_user.events.by_month(@month).group_by(&:date)
   end
 
+  def show_day
+    day = Date.parse(params[:day])
+    render partial: 'logs/day_show', locals: { events: current_user.events.where(date: day), day: day }
+  end
+
   def add_event
     day = Date.parse(params[:day])
     render partial: 'logs/day_add', locals: { events: current_user.events.where(date: day), day: }

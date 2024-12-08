@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   resource :review_tool, only: %i[show]
   resources :logs, only: %i[index show] do
     member do
+      get :show_day
       get :add_event
       post :create_event
     end
