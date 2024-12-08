@@ -45,76 +45,48 @@
   </div>
 
   <div class="w-full lg:w-1/2 px-2">
-    <!-- Daily Tasks -->
-    <%= render 'shared/header', title: 'Daily Tasks' %>
+    <!-- Daily Task -->
+    <%= render 'shared/header', title: 'Daily Task' %>
     <div>
-      <div class="pt-4">
-        <span class="underline"><%= link_to 'Past...', daily_task_sets_path %></span>
-        <span> | </span>
-        <% if params[:last_week]%>
-          <span class="underline"><%= link_to 'This Week', root_path %></span>
-        <% else %>
-          <span class="underline"><%= link_to 'Last Week', root_path(last_week: true) %></span>
-        <% end %>
-        <span> | </span>
-        <span><%= link_to '⚙️', daily_task_items_path %></span>
-      </div>
       <div class="pt-4">
         <table  class="border border-slate-500 table-auto">
           <thead>
             <tr>
-              <th class="border border-slate-600 px-2 py-1">Date</th>
               <% @daily_task_items.each do |i| %>
                 <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
-          <% if !params[:last_week] && !@daily_task_sets[0]&.date&.today? %>
+          <% if @daily_task_set.blank? %>
             <tr>
-              <td class="border border-slate-600 px-2 py-1"><%= Time.zone.today %></td>
               <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
                 <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
               </td>
             </tr>
           <% end %>
-          <% @daily_task_sets.each do |task_set| %>
-            <% tasks = task_set.daily_tasks.index_by(&:daily_task_item_id) %>
+          
+          <% if @daily_task_set %>
+            <% tasks = @daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
             <tr>
-              <td class="border border-slate-600 px-2 py-1"><%= task_set.date %></td>
               <% @daily_task_items.each do |i| %>
                 <% task = tasks[i.id] %>
                 <% if task.nil? %>
                   <td class="border border-slate-600 px-2 py-1"></td>
                 <% elsif task.done %>
                   <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '✅', daily_task_path(task, done: false, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                    <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch } %>
                   </td>
                 <% else %>
                   <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '⬜️', daily_task_path(task, done: true, last_week: params[:last_week]), data: { "turbo-method": :patch } %>
+                    <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
                   </td>
                 <% end %>
               <% end %>
             </tr>
-          <% end%>
+          <% end %>
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- Readings -->
-    <div class="pt-4">
-      <%= render 'shared/header', title: 'Readings' %>
-      <div class="pt-4 sm:flex sm:flex-wrap">
-        <% @readings.each do |r| %>
-        <div class="w-full rounded-lg shadow-lg p-2 mt-2 sm:w-64">
-          <p class="line-clamp-3 font-bold"><%= r.chapter.book.title %></p>
-          <p><%= book_category(r.chapter.book.category) %></p>
-          <p class="line-clamp-2 text-gray-800"><%= r.chapter.title %>（<%= r.chapter.number %>/<%= r.chapter.book.chapters.size %>）</p>
-          <p class="text-right underline"><%= link_to 'note', reading_path(r) %></p>
-        </div>
-        <% end %> <!-- @readings.each -->
       </div>
     </div>
   </div>

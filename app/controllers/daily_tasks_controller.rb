@@ -5,12 +5,12 @@ class DailyTasksController < BaseController
     task = current_user.daily_tasks.find(params[:id])
     task.update!(done: update_params[:done])
 
-    redirect_to root_path(last_week: update_params[:last_week])
+    redirect_to daily_task_sets_path
   end
 
   private
 
   def update_params
-    params.permit(:done, :last_week)
+    params.permit(:done)
   end
 end
