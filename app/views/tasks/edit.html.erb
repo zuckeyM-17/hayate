@@ -1,16 +1,16 @@
 <%= turbo_frame_tag @task do %>
 <%= form_for @task do |f| %>    
-    <div class="flex items-center h-12 border-t flex-wrap">
-        <div class="w-full lg:grow"><%= f.text_field :title, autofocus: true, class: "w-11/12" %></div>
-        <div class="w-full pt-2 lg:p-0 lg:w-3/12">
-            <%= f.select :category, Task.categories.keys, {}, class: "rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"%>
+    <div class="flex items-center flex-wrap">
+        <div class="w-full mb-2"><%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full' %></div>
+        <div class="w-full lg:w-3/12">
+            <%= f.select :category, Task.categories.keys, {}, class: 'border-x-0 border-t-0 border-b' %>
         </div>
-        <div class="w-full pt-2 lg:p-0 lg:w-6/12">
-            <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %>
+        <div class="w-full lg:w-6/12">
+            <%= f.date_field :start_date, class: 'border-x-0 border-t-0 border-b' %> ~ <%= f.date_field :end_date, class: 'border-x-0 border-t-0 border-b' %>
         </div>
-        <div class="w-3/12 pt-2 lg:p-0">
+        <div class="w-3/12 flex items-center justify-end">
             <%= f.submit 'Update', class: 'underline' %>
-            <%= link_to 'Cancel', @task, class: 'underline' %>
+            <%= link_to 'Cancel', @task, class: 'ml-4 underline' %>
         </div>
     </div>
 <% end %>
