@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "log-#{day.to_s}" do %>
+
+<div class='w-full'>
+    <% events&.each do |e| %>
+    <div class="flex items-center">
+        <p class="w-2/12"><%= task_category(e.category) %></p>
+        <p class="w-10/12 line-clamp-1"><%= e.title %></p>
+    </div>
+    <% end %><!-- @events[day]&.each -->
+
+    <%= form_with model: Event.new, url: create_event_log_path(id: Month.date_to_id(day)) do |f| %>
+    <div class="flex items-center flex-wrap mt-2">
+        <%= f.hidden_field :date, value: day %>
+        <%= f.select :category, Event.categories.keys, {}, class: 'border-x-0 border-t-0 border-b w-4/12 lg:w-2/12 lg:border-none' %>
+        <%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full lg:w-8/12 lg:ml-2 lg:border-none' %>
+        <div class="w-full lg:w-1/12 flex items-center justify-end lg:justify-start mt-1 lg:mt-0">
+        <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded" %>
+        </div>
+    </div>
+    <% end %><!-- form_for @event -->
+</div>
+
+<% end %>

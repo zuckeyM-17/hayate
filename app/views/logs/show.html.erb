@@ -30,13 +30,13 @@ end
     <div class="w-full">
         <% @month.days.each do |day| %>
             <div class="flex w-full border-t items-center">
-                <p class="font-bold p-2 <%= color_for_day(day) %>">
+                <p class="w-1/12 font-bold p-2 <%= color_for_day(day) %>">
                     <%= day.day %>
                 </p>
-                <div>
-                    events will be here
+                <div class="w-11/12">
+                  <%= render 'logs/day_show', day: day, events: @events[day] %>
                 </div>
             </div>
-        <% end %>
+        <% end %><!-- @month.days.each -->
     </div>
 </div>

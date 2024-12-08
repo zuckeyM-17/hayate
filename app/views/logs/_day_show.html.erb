@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "log-#{day.to_s}" do %>
+
+<div class="flex items-center">
+    <div class="w-11/12">
+        <% events&.each do |e| %>
+        <div class="flex items-center">
+            <p class="w-2/12"><%= task_category(e.category) %></p>
+            <p class="w-10/12 line-clamp-1"><%= e.title %></p>
+        </div>
+        <% end %><!-- @events[day]&.each -->
+    </div>
+    <div class="w-1/12">
+        <%= link_to 'Add', add_event_log_path(id: Month.date_to_id(day), day: day), class: 'underline' %>
+    </div>
+</div>
+
+<% end %>

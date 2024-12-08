@@ -35,6 +35,10 @@ class Month
     (first_day..first_day.end_of_month).to_a
   end
 
+  def all_month
+    Date.new(year, month, 1).all_month
+  end
+
   def to_s
     "#{year}年#{month}月"
   end

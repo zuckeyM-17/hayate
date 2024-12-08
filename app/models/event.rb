@@ -37,4 +37,8 @@ class Event < ApplicationRecord
     now = Time.zone.now
     where(date: now.beginning_of_day..).where(date: ..now.end_of_day)
   }
+
+  scope :by_month, lambda { |month|
+    where(date: month.all_month)
+  }
 end

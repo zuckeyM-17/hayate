@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       patch :done
     end
   end
+  resources :events, only: %i[create]
   resources :notes, only: %i[create]
   resources :readings, only: %i[show]
   resources :reading_notes, only: %i[create]
@@ -49,7 +50,12 @@ Rails.application.routes.draw do
   end
 
   resource :review_tool, only: %i[show]
-  resources :logs, only: %i[index show]
+  resources :logs, only: %i[index show] do
+    member do
+      get :add_event
+      post :create_event
+    end
+  end
 
   namespace :api do
     resources :links, only: %i[create]
