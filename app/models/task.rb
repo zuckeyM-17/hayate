@@ -38,6 +38,7 @@ class Task < ApplicationRecord
   scope :housework, -> { where(category: :housework) }
 
   scope :today, -> { where(start_date: ..Time.zone.now).where(end_date: Time.zone.now..) }
+  scope :this_week, -> { where(start_date: Time.zone.now.all_week) }
   scope :todo, -> { where(done_at: nil).where(rescheduled_at: nil) }
   scope :done, -> { where.not(done_at: nil) }
 

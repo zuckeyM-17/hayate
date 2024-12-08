@@ -47,47 +47,84 @@
   <div class="w-full lg:w-1/2 px-2">
     <!-- Daily Task -->
     <%= render 'shared/header', title: 'Daily Task' %>
-    <div>
-      <div class="pt-4">
-        <table  class="border border-slate-500 table-auto">
-          <thead>
-            <tr>
-              <% @daily_task_items.each do |i| %>
-                <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
+    <div class="py-4">
+      <table  class="border border-slate-500 table-auto">
+        <thead>
+          <tr>
+            <% @daily_task_items.each do |i| %>
+              <th class="border border-slate-600 px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+        <% if @daily_task_set.blank? %>
+          <tr>
+            <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
+              <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
+            </td>
+          </tr>
+        <% end %>
+        
+        <% if @daily_task_set %>
+          <% tasks = @daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
+          <tr>
+            <% @daily_task_items.each do |i| %>
+              <% task = tasks[i.id] %>
+              <% if task.nil? %>
+                <td class="border border-slate-600 px-2 py-1"></td>
+              <% elsif task.done %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch } %>
+                </td>
+              <% else %>
+                <td class="border border-slate-600 px-2 py-1">
+                  <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
+                </td>
               <% end %>
-            </tr>
-          </thead>
-          <tbody>
-          <% if @daily_task_set.blank? %>
-            <tr>
-              <td class="border border-slate-600 px-2 py-1" colspan="<%= @daily_task_items.size + 2 %>">
-                <%= link_to 'Start Day!', daily_task_sets_path, data: { "turbo-method": :post } %>
-              </td>
-            </tr>
-          <% end %>
-          
-          <% if @daily_task_set %>
-            <% tasks = @daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
-            <tr>
-              <% @daily_task_items.each do |i| %>
-                <% task = tasks[i.id] %>
-                <% if task.nil? %>
-                  <td class="border border-slate-600 px-2 py-1"></td>
-                <% elsif task.done %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch } %>
-                  </td>
-                <% else %>
-                  <td class="border border-slate-600 px-2 py-1">
-                    <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch } %>
-                  </td>
-                <% end %>
-              <% end %>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
+
+    <!-- Tasks -->
+    <%= render 'shared/header', title: 'Tasks' %>
+
+    <div class="p-4 w-full border rounded-md">
+      <%= form_with url: root_path, model: Task.new do |f| %>
+      <%= f.hidden_field :start_date, value: Time.zone.today %>
+      <%= f.hidden_field :end_date, value: Time.zone.today %>    
+      <div class="flex items-center flex-wrap">
+        <div class="w-full mb-2"><%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full' %></div>
+        <div class="w-full lg:w-3/12">
+            <%= f.select :category, Task.categories.keys, {}, class: 'border-x-0 border-t-0 border-b' %>
+        </div>
+        <div class="flex items-center justify-end w-full mt-2 lg:mt-0 lg:w-9/12">
+          <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        </div>
+      </div>
+      <% end %> <!-- form_for -->
+    </div>
+
+    <div class="py-4 w-full divide-y">
+      <%= turbo_frame_tag 'tasks-list' do %>
+      <% @tasks.each do |task| %>
+        <%= render 'tasks/task', task: %>
+      <% end %>
+      <% end %> <!-- turbo_flame_tag -->
+    </div>
+
+    <% if @weekly_tasks.present? %>
+    <!-- Weekly Tasks -->
+    <%= render 'shared/header', title: 'Weekly Tasks' %>
+    <div class="pt-4 w-full divide-y">
+      <%= turbo_frame_tag 'weekly-tasks-list' do %>
+      <% @weekly_tasks.each do |task| %>
+        <%= render 'tasks/task', task: %>
+      <% end %>
+      <% end %> <!-- turbo_flame_tag -->
+    </div>
+    <% end %>
   </div>
 </div>
