@@ -7,7 +7,7 @@ class LogsController < BaseController
               .events
               .future
               .group_by { |e| Month.date_to_id(e.date) }
-              .transform_values { |events| events.sort_by(&:category) }
+              .transform_values { |events| events.sort_by(&:date) }
   end
 
   def show

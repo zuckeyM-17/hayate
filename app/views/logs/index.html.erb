@@ -14,7 +14,7 @@
                 <div>
                   <% @events[month.id]&.each do |event| %>
                     <div class="flex items-center sm:flex-col sm:items-start">
-                      <p class="w-fit"><%= task_category(event.category) %></p>
+                      <p class="w-fit"><%= event.date %><%= task_category(event.category) %></p>
                       <p class="grow line-clamp-1 sm:w-full"><%= event.title %></p>
                     </div>
                   <% end %>
