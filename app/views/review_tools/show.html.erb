@@ -18,13 +18,6 @@
     <% end %>
     <br />
 
-    <p>### しずかなインターネット</p>
-
-    <% @posts.each do |p| %>
-      <span><%= "[#{p.title}](https://sizu.me/zuckey/posts/#{p.slug}) / #{l(Time.zone.parse(p.createdAt), format: :date)}"%></span><br />
-    <% end %>
-    <br />
-
     <p>### その他</p>
     <p>## やれなかったこと</p>
     <p>## 来週のトピック</p>
