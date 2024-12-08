@@ -7,10 +7,18 @@
   <div class="w-full sm:p-4 lg:w-8/12 mx-auto">
         <div class="flex flex-wrap">
         <% @months.each do |month| %>
-            <div class="w-full h-64 sm:w-1/3 sm:h-80 border">
+            <div class="w-full min-h-64 sm:w-1/3 sm:min-h-80 border">
                 <p class="font-bold p-2 underline">
                   <%= link_to month.to_s, log_path(month.id) %>
                 </p>
+                <div>
+                  <% @events[month.id]&.each do |event| %>
+                    <div class="flex items-center sm:flex-col sm:items-start">
+                      <p class="w-fit"><%= task_category(event.category) %></p>
+                      <p class="grow line-clamp-1 sm:w-full"><%= event.title %></p>
+                    </div>
+                  <% end %>
+                </div>
             </div>
         <% end %>
         </div>

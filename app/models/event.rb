@@ -41,4 +41,10 @@ class Event < ApplicationRecord
   scope :by_month, lambda { |month|
     where(date: month.all_month)
   }
+
+  scope :future, lambda {
+    from = Month.future.first.all_month.first
+    to = Month.future.last.all_month.last
+    where(date: from..to)
+  }
 end
