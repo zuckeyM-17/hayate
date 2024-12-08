@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_02_153737) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,6 +73,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_153737) do
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_entries_on_feed_id"
     t.index ["url"], name: "index_entries_on_url", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.integer "category", default: 0, null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "favorite_links", force: :cascade do |t|
@@ -341,6 +352,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_153737) do
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
   add_foreign_key "entries", "feeds"
+  add_foreign_key "events", "users"
   add_foreign_key "favorite_links", "links"
   add_foreign_key "favorite_links", "users"
   add_foreign_key "feeds", "users"
