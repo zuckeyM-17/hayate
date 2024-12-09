@@ -1,1 +1,10 @@
-<%= render @task %>
+<% content_for(:page_title) { @task.title } %>
+
+<%= render 'shared/breadcrumb', parents: [{ url: tasks_path, title: 'Tasks' }]  %>
+<div class="p-4">
+  <%= render 'shared/header', title: @task.title %>
+
+  <div class="pt-4 w-full flex flex-col items-center">
+
+    <%= render 'task', task: @task %>
+</div>

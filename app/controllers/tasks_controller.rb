@@ -25,7 +25,7 @@ class TasksController < BaseController
   def update
     @task = current_user.tasks.find(params[:id])
     @task.update!(task_params)
-    render :show
+    render 'tasks/_task', locals: { task: @task }
   end
 
   def destroy

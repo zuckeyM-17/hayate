@@ -49,6 +49,11 @@ class Task < ApplicationRecord
   end
 
   def done!
-    update(done_at: Time.zone.now)
+    ApplicationRecord.transaction do
+      update!(done_at: Time.zone.now)
+      Note.create!(user:, body: <<~BODY)
+        #{ApplicationController.helpers.task_category(category)} [#{title}](#{Rails.application.routes.url_helpers.task_path(self)}) Done
+      BODY
+    end
   end
 end
