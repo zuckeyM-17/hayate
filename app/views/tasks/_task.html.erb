@@ -7,7 +7,7 @@
         <%= link_to '⬜️', done_task_path(task), data: { "turbo-method": :patch } %>
     <% end %>
     </div>
-    <div class="w-11/12 mb-2"><span class="line-clamp-1"><%= task.title %></span></div>
+    <div class="w-11/12 mb-2"><span class="line-clamp-1"><%= link_to task.title, task_notes_path(task), data: { "turbo_frame": task }, class: 'underline text-lg' %></span></div>
     <div class="w-3/12"><%= task_category(task.category) %></div>
     <div class="w-6/12<%= task.end_date <= Time.zone.now ? ' text-red-500' : '' %>">
         <%= "#{l(task.start_date)} ~ #{l(task.end_date)}" %>

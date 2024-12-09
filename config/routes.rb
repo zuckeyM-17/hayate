@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     member do
       patch :done
     end
+    resources :notes, only: %i[index create], controller: 'tasks/notes'
   end
   resources :events, only: %i[create]
   resources :notes, only: %i[create]

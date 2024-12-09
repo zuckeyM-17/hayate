@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_09_154411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,6 +73,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_entries_on_feed_id"
     t.index ["url"], name: "index_entries_on_url", unique: true
+  end
+
+  create_table "event_notes", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_notes_on_event_id"
+    t.index ["note_id"], name: "index_event_notes_on_note_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -281,6 +290,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "task_notes", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "note_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_task_notes_on_note_id"
+    t.index ["task_id"], name: "index_task_notes_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title", null: false
@@ -352,6 +370,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
   add_foreign_key "daily_tasks", "daily_task_items"
   add_foreign_key "daily_tasks", "daily_task_sets"
   add_foreign_key "entries", "feeds"
+  add_foreign_key "event_notes", "events"
+  add_foreign_key "event_notes", "notes"
   add_foreign_key "events", "users"
   add_foreign_key "favorite_links", "links"
   add_foreign_key "favorite_links", "users"
@@ -369,6 +389,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_08_151839) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "task_notes", "notes"
+  add_foreign_key "task_notes", "tasks"
   add_foreign_key "tasks", "users"
   add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"

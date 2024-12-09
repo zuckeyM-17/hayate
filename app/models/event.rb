@@ -23,6 +23,8 @@
 #
 class Event < ApplicationRecord
   belongs_to :user
+  has_many :event_notes, dependent: :destroy
+  has_many :notes, through: :event_notes
 
   enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
   validates :title, :date, presence: true

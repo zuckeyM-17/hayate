@@ -26,6 +26,8 @@
 #
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :task_notes, dependent: :destroy
+  has_many :notes, through: :task_notes
 
   enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
 
