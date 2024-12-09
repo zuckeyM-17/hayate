@@ -112,7 +112,7 @@
       <% @tasks.each do |task| %>
         <%= render 'tasks/task', task: %>
       <% end %>
-      <% end %> <!-- turbo_flame_tag -->
+      <% end %> <!-- turbo_frame_tag -->
     </div>
 
     <% if @weekly_tasks.present? %>
@@ -123,7 +123,7 @@
       <% @weekly_tasks.each do |task| %>
         <%= render 'tasks/task', task: %>
       <% end %>
-      <% end %> <!-- turbo_flame_tag -->
+      <% end %> <!-- turbo_frame_tag -->
     </div>
     <% end %>
   </div>
