@@ -40,6 +40,8 @@ class Event < ApplicationRecord
     where(date: now.beginning_of_day..).where(date: ..now.end_of_day)
   }
 
+  scope :by_date, ->(date) { where(date: date) }
+
   scope :by_month, lambda { |month|
     where(date: month.all_month)
   }
@@ -49,4 +51,15 @@ class Event < ApplicationRecord
     to = Month.future.last.all_month.last
     where(date: from..to)
   }
+
+  def today?
+    date == Time.zone.today
+  end
+
+  def to_note_body
+    <<~BODY
+      # Event: #{title} #{ApplicationController.helpers.task_category(category)}
+      #{description}
+    BODY
+  end
 end

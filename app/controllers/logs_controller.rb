@@ -29,9 +29,13 @@ class LogsController < BaseController
   def create_event
     event = Event.new(user: current_user)
     event.assign_attributes(create_params)
-    event.save!
+    ApplicationRecord.transaction do
+      event.save!
+      Note.create!(user: current_user, body: event.to_note_body) if event.today?
+    end
 
-    render partial: 'logs/day_show', locals: { events: current_user.events.where(date: event.date), day: event.date }
+    date = event.date
+    render partial: 'logs/day_show', locals: { events: current_user.events.by_date(date), day: date }
   end
 
   private

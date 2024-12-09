@@ -7,6 +7,9 @@ class SetUpDayJob < ApplicationJob
   def perform
     User.find_each(batch_size: 10) do |user|
       DailyTaskSet.init!(user: user)
+      user.events.today.each do |event|
+        Note.create!(user:, body: event.to_note_body)
+      end
     end
   end
 end
