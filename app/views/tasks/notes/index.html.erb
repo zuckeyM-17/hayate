@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="w-full mt-2">
-        <%= form_with url: task_notes_path(@task), data: { turbo_frame: @task } do |f| %>
+        <%= form_with url: task_notes_path(@task), data: { turbo_frame: "task_#{@task.id}" } do |f| %>
         <div class="grid
             after:px-3.5
             after:py-2.5
