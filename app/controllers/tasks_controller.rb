@@ -2,7 +2,7 @@
 
 class TasksController < BaseController
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.order(end_date: :asc)
     @task = Task.new
   end
 
