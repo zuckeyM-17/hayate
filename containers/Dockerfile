@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.3.5
+FROM ruby:3.3.6
 RUN apt-get update -qq && apt-get install -y postgresql-client vim
 WORKDIR /hayate
 COPY Gemfile /hayate/Gemfile

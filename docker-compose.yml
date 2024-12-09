@@ -8,7 +8,9 @@ services:
     ports:
       - "5432:5432"
   app:
-    build: containers/Dockerfile
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
     tty: true
     stdin_open: true
     command: sh -c "rm -f tmp/pids/server.pid && bundle install && ./bin/dev"
@@ -19,7 +21,9 @@ services:
     depends_on:
       - db
   worker:
-    build: containers/Dockerfile
+    build:
+      context: .
+      dockerfile: ./containers/Dockerfile
     tty: true
     stdin_open: true
     command: sh -c "bundle install && ./bin/jobs"
