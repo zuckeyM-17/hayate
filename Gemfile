@@ -48,7 +48,7 @@ gem 'ostruct'
 gem 'rss'
 
 # solid queue
-gem "solid_queue", "~> 1.0"
+gem "solid_queue", "~> 1.1"
 gem "mission_control-jobs"
 
 gem 'activerecord-session_store'
