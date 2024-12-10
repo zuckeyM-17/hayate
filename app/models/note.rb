@@ -24,5 +24,24 @@ class Note < ApplicationRecord
   has_one :reading, through: :reading_note
   belongs_to :user
 
+  before_save :set_url_href
+
   scope :today, -> { where(created_at: Time.zone.today.all_day) }
+
+  validates :body, presence: true
+
+  private
+
+  def set_url_href
+    url_regex = %r{
+      (?<=^|\s)         # 文頭またはスペースの直後（肯定の先読み）
+      (https?|ftp)      # スキーム (http, https, ftp)
+      ://
+      [^\s/$.?#].[^\s]* # ドメイン名とパス
+      (?=$|\s)          # 文末またはスペースの直前（肯定の先読み）
+    }ix
+    self.body = body.gsub(url_regex) do |url|
+      "[#{url}](#{url})"
+    end
+  end
 end
