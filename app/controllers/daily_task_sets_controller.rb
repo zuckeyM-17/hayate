@@ -10,6 +10,8 @@ class DailyTaskSetsController < BaseController
   def create
     DailyTaskSet.init!(user: current_user)
 
-    redirect_to root_path
+    daily_task_items = current_user.daily_task_items.enabled.order(:created_at)
+    daily_task_set = DailyTaskSet.find_by(date: Time.zone.today)
+    render 'daily_task_sets/_date', locals: { daily_task_set:, daily_task_items: }
   end
 end

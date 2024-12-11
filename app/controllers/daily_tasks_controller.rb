@@ -5,7 +5,8 @@ class DailyTasksController < BaseController
     task = current_user.daily_tasks.find(params[:id])
     task.update!(done: update_params[:done])
 
-    redirect_to daily_task_sets_path
+    daily_task_items = current_user.daily_task_items.enabled.order(:created_at)
+    render 'daily_task_sets/_date', locals: { daily_task_set: task.daily_task_set, daily_task_items: }
   end
 
   private
