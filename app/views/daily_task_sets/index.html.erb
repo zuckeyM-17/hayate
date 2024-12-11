@@ -6,11 +6,13 @@
   <%= render 'shared/header', title: "Daily Tasks #{link_to '⚙️', daily_task_items_path}".html_safe %>
   <div>
     <div class="pt-4">
-      <div class="w-fit border">
-        <div class="w-fit flex divide-x">
-          <div class="px-2 py-1 w-32">Date</div>
+      <div class="w-fit border sm:w-fit">
+        <div class="flex divide-x w-fit">
+          <div class="px-2 py-1 w-24">Date</div>
           <% @daily_task_items.each do |i| %>
-            <div class="px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></div>
+            <div class="w-12 px-2 sm:w-20 truncate hover:text-clip text-xs sm:text-base flex items-center">
+              <%= i.name %>
+            </div>
           <% end %>
         </div>
 
@@ -27,28 +29,30 @@
       <%= render 'shared/header', title: 'Past Daily Tasks' %>
       <%= paginate @past_daily_task_sets %>
 
-      <div class="w-fit border">
-        <div class="w-fit flex divide-x">
-          <div class="px-2 py-1 w-32">Date</div>
+      <div class="w-fit border sm:w-fit">
+        <div class="flex divide-x w-fit">
+          <div class="px-2 py-1 w-24">Date</div>
           <% @daily_task_items.each do |i| %>
-            <div class="px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></div>
+            <div class="w-12 px-2 sm:w-20 truncate hover:text-clip text-xs sm:text-base flex items-center">
+              <%= i.name %>
+            </div>
           <% end %>
         </div>
 
         <% @past_daily_task_sets.each do |daily_task_set| %>
         <% tasks = daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
         <div class="w-fit flex divide-x border-t">
-          <div class="w-32 px-2 py-1"><%= daily_task_set.date.to_s %></div>
+          <div class="w-24 px-2 py-1 text-sm"><%= daily_task_set.date.to_s %></div>
 
           <% @daily_task_items.each do |i| %>
             <% task = tasks[i.id] %>
-            <% if task.nil? %>
-              <div class="w-20"></div>
-            <% elsif task.done %>
-            <div class="w-20 px-2 py-1">✅</div>
-            <% else %>
-            <div class="w-20 px-2 py-1">⬜️</div>
+            <div class="w-12 sm:w-20 px-2 py-1">
+            <% if task && task.done %>
+              ✅
+            <% elsif task && !task.done %>
+              ⬜️
             <% end %>
+            </div>
           <% end %> <!-- daily_task_items.each -->
         </div>
         <% end %>

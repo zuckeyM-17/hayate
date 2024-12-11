@@ -48,11 +48,13 @@
     <!-- Daily Task -->
     <%= render 'shared/header', title: 'Daily Task' %>
     <div class="py-4">
-      <div class="w-fit border">
-        <div class="w-fit flex divide-x">
-          <div class="px-2 py-1 w-32">Date</div>
+      <div class="w-fit border sm:w-fit">
+        <div class="flex divide-x w-fit">
+          <div class="px-2 py-1 w-24">Date</div>
           <% @daily_task_items.each do |i| %>
-            <div class="px-2 py-1 w-20"><span class="line-clamp-1"><%= i.name %></span></div>
+            <div class="w-12 px-2 sm:w-20 truncate hover:text-clip text-xs sm:text-base flex items-center">
+              <%= i.name %>
+            </div>
           <% end %>
         </div>
   

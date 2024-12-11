@@ -5,18 +5,18 @@
 
 <div class="w-fit flex divide-x border-t">
 
-    <div class="w-32 px-2 py-1"><%= daily_task_set.date.to_s %></div>
+    <div class="w-24 px-2 py-1 text-sm"><%= daily_task_set.date.to_s %></div>
 
     <% daily_task_items.each do |i| %>
         <% task = tasks[i.id] %>
         <% if task.nil? %>
-            <div class="w-20"></div>
+            <div class="w-12 sm:w-20"></div>
         <% elsif task.done %>
-        <div class="w-20 px-2 py-1">
+        <div class="w-12 sm:w-20 px-2 py-1">
             <%= link_to '✅', daily_task_path(task, done: false), data: { "turbo-method": :patch, turbo_frame: } %>
         </div>
         <% else %>
-        <div class="w-20 px-2 py-1">
+        <div class="w-12 sm:w-20 px-2 py-1">
             <%= link_to '⬜️', daily_task_path(task, done: true), data: { "turbo-method": :patch, turbo_frame: } %>
         </div>
         <% end %>
