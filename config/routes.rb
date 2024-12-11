@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   end
 
   resource :review_tool, only: %i[show]
+  resource :future_log, only: %i[show]
   resources :logs, only: %i[index show] do
     member do
       get :show_day
