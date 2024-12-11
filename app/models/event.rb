@@ -52,6 +52,13 @@ class Event < ApplicationRecord
     where(date: from..to)
   }
 
+  def save_with_note!
+    ApplicationRecord.transaction do
+      save!
+      Note.create!(user: user, body: to_note_body) if today?
+    end
+  end
+
   def today?
     date == Time.zone.today
   end

@@ -30,11 +30,6 @@ class Month
     "#{year}-#{month}"
   end
 
-  def days
-    first_day = Date.new(year, month, 1)
-    (first_day..first_day.end_of_month).to_a
-  end
-
   def all_month
     Date.new(year, month, 1).all_month
   end

@@ -2,12 +2,12 @@
 
 <%
 
-def color_for_day(day)
-  if day.today?
+def color_for(date)
+  if date.today?
     'underline text-green-500'
-  elsif day.saturday?
+  elsif date.saturday?
     'text-blue-600'
-  elsif day.sunday?
+  elsif date.sunday?
     'text-red-600'
   end
 end
@@ -28,15 +28,15 @@ end
         <p><%= link_to 'Next >', log_path(@month.next.id), class: 'underline' %></p>
     </div>
     <div class="w-full">
-        <% @month.days.each do |day| %>
+        <% @month.all_month.each do |date| %>
             <div class="flex w-full border-t items-center">
-                <p class="w-1/12 font-bold p-2 <%= color_for_day(day) %>">
-                    <%= day.day %>
+                <p class="w-1/12 font-bold p-2 <%= color_for(date) %>">
+                    <%= date.day %>
                 </p>
                 <div class="w-11/12">
-                  <%= render 'logs/day_show', day: day, events: @events[day] %>
+                  <%= render 'events/list', events: @events[date] || [], date: %>
                 </div>
             </div>
-        <% end %><!-- @month.days.each -->
+        <% end %><!-- @month.all_month.each -->
     </div>
 </div>
