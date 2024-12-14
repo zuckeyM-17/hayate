@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "task_#{task.id}" do %>
+<%= turbo_frame_tag "task_#{task.id}", class: "w-full" do %>
 <div class="flex items-center h-fit flex-wrap border-t py-2">
     <div class="w-1/12 mb-2">
     <% if task.done? %>
@@ -14,7 +14,6 @@
     </div>
     <div class="w-3/12 flex items-center justify-end">
         <%= link_to 'edit', edit_task_path(task), class: 'underline' %>
-        <%= link_to 'delete', task_path(task), data: { "turbo-method": :delete, turbo_frame: 'tasks-list' }, class: 'ml-4 underline' %>
     </div>
 </div>
 <% end %>

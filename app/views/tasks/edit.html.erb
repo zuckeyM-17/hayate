@@ -2,15 +2,16 @@
 <%= form_for @task do |f| %>    
     <div class="flex items-center flex-wrap">
         <div class="w-full mb-2"><%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full' %></div>
-        <div class="w-full lg:w-3/12">
+        <div class="w-full">
             <%= f.select :category, Task.categories.keys, {}, class: 'border-x-0 border-t-0 border-b' %>
         </div>
-        <div class="w-full lg:w-6/12">
+        <div class="w-full">
             <%= f.date_field :start_date, class: 'border-x-0 border-t-0 border-b' %> ~ <%= f.date_field :end_date, class: 'border-x-0 border-t-0 border-b' %>
         </div>
-        <div class="w-3/12 flex items-center justify-end">
+        <div class="w-full flex items-center justify-end">
             <%= f.submit 'Update', class: 'underline' %>
             <%= link_to 'Cancel', @task, class: 'ml-4 underline' %>
+            <%= link_to 'delete', task_path(@task), data: { "turbo-method": :delete, turbo_frame: 'tasks-list' }, class: 'ml-4 underline text-red-500' %>
         </div>
     </div>
 <% end %>

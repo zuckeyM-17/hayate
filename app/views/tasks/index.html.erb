@@ -5,7 +5,7 @@
   <%= render 'shared/header', title: 'Tasks' %>
 
   <div class="pt-4 w-full flex flex-col items-center">
-    <div class="p-4 w-full border rounded-md lg:w-8/12">
+    <div class="p-4 w-full border rounded-md">
       <%= form_for @task do |f| %>    
       <div class="flex items-center flex-wrap">
         <div class="w-full mb-2"><%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full' %></div>
@@ -22,7 +22,7 @@
       <% end %> <!-- form_for -->
     </div>
     
-    <div class="pt-4 w-full lg:w-8/12 divide-y">
+    <div class="pt-4 w-full divide-y">
       <%= turbo_frame_tag 'tasks-list' do %>
       <%= render @tasks %>
       <% end %> <!-- turbo_frame_tag -->
