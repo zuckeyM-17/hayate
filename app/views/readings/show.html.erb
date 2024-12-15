@@ -17,31 +17,41 @@
 
   <div class="mt-4">
     <h2 class="text-2xl lg:text-4xl">Notes</h2>
-    <div class="px-4 lg:px-8 pt-4 lg:pt-8 mt-4 bg-gray-100">
+
+    <div class="pt-4 mt-4">
       <%= form_with url: reading_notes_path do |f| %>
         <%= f.hidden_field :reading_id, value: @reading.id %>
-        <div>
-          <%= f.text_area :body, value: '', class: "w-full rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" %>
+        <div class="grid
+            after:px-3.5
+            after:py-2.5
+            [&>textarea]:text-inherit
+            after:text-inherit
+            [&>textarea]:resize-none
+            [&>textarea]:overflow-hidden
+            [&>textarea]:[grid-area:1/1/2/2]
+            after:[grid-area:1/1/2/2]
+            after:whitespace-pre-wrap
+            after:invisible
+            after:content-[attr(data-cloned-val)_'_']
+            after:border
+        ">
+            <%= f.text_area :body, value: '', class: "w-full rounded-md border-gray-300", onInput: "this.parentNode.dataset.clonedVal = this.value" %>
         </div>
-        <%= f.submit 'Add note', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <div>
+          <%= f.submit 'Add', class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto" %>
+        </div>
       <% end %>
     </div>
 
-    <ul class="p-4 lg:p-8 bg-gray-100 text-gray-800">
+    <div>
       <% @reading.notes.order(created_at: :desc).each do |n| %>
-        <li>
-          <article>
-            <div class="grid p-2 overflow-hidden lg:grid-cols-5 rounded-xl lg:p-4 xl:grid-cols-12">
-              <time datetime="" class="row-start-1 mb-1 lg:col-start-1 xl:col-span-2 text-gray-600">
-                <%= l n.created_at, format: :long %>
-              </time>
-              <p class="ml-8 lg:col-start-2 lg:col-span-4 xl:col-start-3 xl:col-span-9 lg:ml-0 text-gray-700">
-                <%= n.body %>
-              </p>
-            </div>
-          </article>
-        </li>
+        <div class="mt-2">
+          <p class="text-gray-600 text-xs"><%= n.created_at.strftime('%H:%M') %></p>
+          <div class="text-base">
+            <%= markdown(n.body).html_safe %>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
   </div>
 </div>
