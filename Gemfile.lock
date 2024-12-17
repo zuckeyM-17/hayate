@@ -44,7 +44,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_flag (2.0.2)
+    active_flag (2.0.3)
       activerecord (>= 5)
       bigdecimal
       logger
