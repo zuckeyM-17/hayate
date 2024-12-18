@@ -2,7 +2,7 @@
 
 class TasksController < BaseController
   def index
-    @tasks = current_user.tasks.order(end_date: :asc)
+    @tasks = current_user.tasks.todo.order(end_date: :asc)
     @task = Task.new
   end
 
@@ -35,9 +35,14 @@ class TasksController < BaseController
   end
 
   def done
-    task = current_user.tasks.find(params[:id])
-    task.done!
-    redirect_to tasks_path
+    @task = current_user.tasks.find(params[:id])
+    @note = Note.new(user: current_user, body: <<~BODY)
+      #{ApplicationController.helpers.task_category(@task.category)} [#{@task.title}](#{task_path(@task)}) Done
+    BODY
+    ApplicationRecord.transaction do
+      @task.done!
+      @note.save!
+    end
   end
 
   private
