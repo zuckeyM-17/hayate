@@ -15,11 +15,9 @@ class TasksController < BaseController
   end
 
   def create
-    task = Task.new(user: current_user)
-    task.assign_attributes(task_params)
-    task.save!
-
-    redirect_to request.referer
+    @task = Task.new(user: current_user)
+    @task.assign_attributes(task_params)
+    @task.save!
   end
 
   def update

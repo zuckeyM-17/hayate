@@ -94,7 +94,7 @@
     <!-- Weekly Tasks -->
     <%= render 'shared/header', title: 'Weekly Tasks' %>
     <div class="pt-4 w-full divide-y">
-      <%= turbo_frame_tag 'tasks-list' do %>
+      <%= turbo_frame_tag 'weekly-tasks-list' do %>
       <% @weekly_tasks.each do |task| %>
         <%= render 'tasks/task', task: %>
       <% end %>
