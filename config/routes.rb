@@ -62,6 +62,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :links, only: %i[create]
+    resources :word_searches, only: %i[create]
   end
 
   namespace :admin do
