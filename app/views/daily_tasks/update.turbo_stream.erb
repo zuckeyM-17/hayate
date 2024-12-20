@@ -1,0 +1,23 @@
+<%= turbo_stream.update "past-daily-tasks-set-date-#{@task.daily_task_set.date.to_s}" do %>
+    <% daily_task_set = @task.daily_task_set%>
+    <% tasks = daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
+    <div class="w-fit flex divide-x border-t">
+        <div class="w-24 px-2 py-1 text-xs sm:text-sm flex items-center"><%= daily_task_set.date.to_s %></div>
+
+        <% @daily_task_items.each do |i| %>
+        <% task = tasks[i.id] %>
+        <div class="w-12 sm:w-20 px-2 py-1">
+        <% if task && task.done %>
+            ✅
+        <% elsif task && !task.done %>
+            ⬜️
+        <% end %>
+        </div>
+        <% end %> <!-- daily_task_items.each -->
+    </div>
+<% end %>
+
+<%= turbo_stream.update "daily-tasks-set-date-#{@task.daily_task_set.date.to_s}" do %>
+    <%= render partial: 'daily_task_sets/date',
+        locals: { daily_task_set: @task.daily_task_set, daily_task_items: @daily_task_items } %>
+<% end %>

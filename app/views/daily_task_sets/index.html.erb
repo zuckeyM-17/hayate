@@ -40,6 +40,7 @@
         </div>
 
         <% @past_daily_task_sets.each do |daily_task_set| %>
+        <%= turbo_frame_tag "past-daily-tasks-set-date-#{daily_task_set.date.to_s}" do %>
         <% tasks = daily_task_set.daily_tasks.index_by(&:daily_task_item_id) %>
         <div class="w-fit flex divide-x border-t">
           <div class="w-24 px-2 py-1 text-xs sm:text-sm flex items-center"><%= daily_task_set.date.to_s %></div>
@@ -56,6 +57,8 @@
           <% end %> <!-- daily_task_items.each -->
         </div>
         <% end %>
+
+        <% end %> <!-- @past_daily_task_sets.each -->
       </div>
     </div>
   </div>
