@@ -1,3 +1,4 @@
 {
-  "CREATE_LINK_API_URL": ""
+  "CREATE_LINK_API_URL": "",
+  "CREATE_WORD_SEARCH_API_URL": ""
 }
