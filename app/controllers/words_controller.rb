@@ -2,7 +2,10 @@
 
 class WordsController < BaseController
   def index
-    @words = current_user.words.order(created_at: :desc).page(params[:page])
+    word_ids = current_user.word_searches.select('word_id as id').group(:word_id)
+    @words = Word.where(id: word_ids).includes(%i[explanation
+                                                  word_searches]).order(created_at: :desc).page(params[:page])
+
     @word_search = WordSearch.new
   end
 
