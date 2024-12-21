@@ -66,21 +66,7 @@
     <!-- Tasks -->
     <%= render 'shared/header', title: 'Tasks' %>
 
-    <div class="p-4 w-full border rounded-md">
-      <%= form_for Task.new do |f| %>
-      <%= f.hidden_field :start_date, value: Time.zone.today %>
-      <%= f.hidden_field :end_date, value: Time.zone.today %>    
-      <div class="flex items-center flex-wrap">
-        <div class="w-full mb-2"><%= f.text_field :title, autofocus: true, class: 'border-x-0 border-t-0 border-b w-full' %></div>
-        <div class="w-full lg:w-3/12">
-            <%= f.select :category, Task.categories.keys, {}, class: 'border-x-0 border-t-0 border-b' %>
-        </div>
-        <div class="flex items-center justify-end w-full mt-2 lg:mt-0 lg:w-9/12">
-          <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-        </div>
-      </div>
-      <% end %> <!-- form_for -->
-    </div>
+    <%= render 'tasks/form', set_date: false %>
 
     <div class="py-4 w-full divide-y">
       <%= turbo_frame_tag 'tasks-list' do %>
