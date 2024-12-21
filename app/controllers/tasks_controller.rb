@@ -10,6 +10,10 @@ class TasksController < BaseController
     @task = current_user.tasks.find(params[:id])
   end
 
+  def new
+    @set_date = !!params[:set_date]
+  end
+
   def edit
     @task = current_user.tasks.find(params[:id])
   end

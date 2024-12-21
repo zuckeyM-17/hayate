@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       post :finish
     end
   end
-  resources :tasks, only: %i[index show edit update create destroy] do
+  resources :tasks, only: %i[index show edit update new create destroy] do
     member do
       patch :done
     end

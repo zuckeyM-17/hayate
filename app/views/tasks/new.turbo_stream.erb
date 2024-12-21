@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "task-form" do %>
+    <%= render partial: 'tasks/form', locals: { set_date: @set_date } %>
+<% end %>
+<%= turbo_stream.remove "task-new-button" %>

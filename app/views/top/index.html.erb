@@ -65,8 +65,10 @@
 
     <!-- Tasks -->
     <%= render 'shared/header', title: 'Tasks' %>
-
-    <%= render 'tasks/form', set_date: false %>
+    <%= link_to 'new', new_task_path, data: { turbo_stream: true },
+      id: 'task-new-button',
+      class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto w-fit" %>
+    <%= turbo_frame_tag 'task-form' %>
 
     <div class="py-4 w-full divide-y">
       <%= turbo_frame_tag 'tasks-list' do %>
