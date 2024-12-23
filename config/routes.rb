@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
     resources :notes, only: %i[index create], controller: 'tasks/notes'
   end
-  resources :events, only: %i[index new create]
+  resources :events, only: %i[index new create show]
   resources :notes, only: %i[create]
   resources :readings, only: %i[show]
   resources :reading_notes, only: %i[create]

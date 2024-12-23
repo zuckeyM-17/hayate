@@ -5,6 +5,10 @@ class EventsController < BaseController
     @events = current_user.events.where(date:)
   end
 
+  def show
+    @event = current_user.events.find(params[:id])
+  end
+
   def new
     @events = current_user.events.where(date:)
     @event = Event.new

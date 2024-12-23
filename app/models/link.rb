@@ -23,6 +23,8 @@
 
 class Link < ApplicationRecord
   belongs_to :user
+  has_many :link_notes, dependent: :destroy
+  has_many :notes, through: :link_notes
 
   def self.get_title(url)
     html = OpenURI.open_uri(url).read

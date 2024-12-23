@@ -3,4 +3,17 @@
     <div class="text-base">
     <%= markdown(note.body).html_safe %>
     </div>
+
+    <p class="text-blue-600 text-xs underline line-clamp-1">
+    <% if note.link %>
+        <%= link_to note.link.title, link_path(note.link) %>
+    <% elsif note.task %>
+        <%= link_to note.task.title, task_path(note.task) %>
+    <% elsif note.event %>
+        <%= link_to note.event.title, event_path(note.event) %>
+    <% elsif note.reading %>
+        <% chap = note.reading.chapter %>
+        <%= link_to "#{chap.book.title} - #{chap.title}", reading_path(note.reading) %>
+    <% end %>
+    </p>
 </div>

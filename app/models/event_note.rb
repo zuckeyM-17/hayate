@@ -22,4 +22,6 @@
 #
 
 class EventNote < ApplicationRecord
+  belongs_to :event
+  belongs_to :note
 end

@@ -22,6 +22,12 @@
 class Note < ApplicationRecord
   has_one :reading_note, dependent: :destroy
   has_one :reading, through: :reading_note
+  has_one :link_note, dependent: :destroy
+  has_one :link, through: :link_note
+  has_one :task_note, dependent: :destroy
+  has_one :task, through: :task_note
+  has_one :event_note, dependent: :destroy
+  has_one :event, through: :event_note
   belongs_to :user
 
   before_save :set_url_href

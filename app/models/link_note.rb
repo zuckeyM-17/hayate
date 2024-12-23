@@ -22,4 +22,6 @@
 #
 
 class LinkNote < ApplicationRecord
+  belongs_to :link
+  belongs_to :note
 end
