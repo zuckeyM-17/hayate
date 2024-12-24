@@ -44,7 +44,9 @@
     </div>
 
     <div>
-      <%= render @reading.notes %>
+      <% @reading.notes.each do |note| %>
+        <%= render 'notes/note', note:, simple: true %>
+      <% end %>
     </div>
   </div>
 </div>

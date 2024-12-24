@@ -1,9 +1,12 @@
+<% simple = simple || false %>
 <div class="mt-2">
     <p class="text-gray-600 text-xs"><%= note.created_at.strftime('%H:%M') %></p>
     <div class="text-base">
     <%= markdown(note.body).html_safe %>
     </div>
 
+
+    <% unless simple %>
     <p class="text-blue-600 text-xs underline line-clamp-1">
     <% if note.link %>
         <%= link_to note.link.title, link_path(note.link) %>
@@ -16,4 +19,5 @@
         <%= link_to "#{chap.book.title} - #{chap.title}", reading_path(note.reading) %>
     <% end %>
     </p>
+    <% end %> <!-- unless simple -->
 </div>
