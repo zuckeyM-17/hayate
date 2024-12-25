@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  mount MissionControl::Jobs::Engine, at: "/admin/jobs"
   root 'top#index'
 
   get "/sw.js", to: "pwa#service_worker", as: "service_worker"
