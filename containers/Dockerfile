@@ -4,7 +4,7 @@ RUN apt-get update -qq && apt-get install -y postgresql-client vim
 WORKDIR /hayate
 COPY Gemfile /hayate/Gemfile
 COPY Gemfile.lock /hayate/Gemfile.lock
-RUN bundle install
+RUN bundle install --path 'vendor/bundle'
 
 RUN export EDITOR=vim
 
