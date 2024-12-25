@@ -3,7 +3,7 @@
 module Tasks
   class NotesController < BaseController
     def index
-      @notes = task.notes
+      @notes = task.notes.order(created_at: :desc)
     end
 
     def create

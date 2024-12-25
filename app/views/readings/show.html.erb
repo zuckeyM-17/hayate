@@ -44,7 +44,7 @@
     </div>
 
     <div>
-      <% @reading.notes.each do |note| %>
+      <% @reading.notes.order(created_at: :desc).each do |note| %>
         <%= render 'notes/note', note:, simple: true %>
       <% end %>
     </div>
