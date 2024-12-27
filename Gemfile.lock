@@ -162,6 +162,7 @@ GEM
     marcel (1.0.4)
     method_source (1.1.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.8)
     minitest (5.25.4)
     mission_control-jobs (1.0.1)
       actioncable (>= 7.1)
@@ -186,9 +187,8 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.17.2-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.17.2-x86_64-linux)
+    nokogiri (1.17.2)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     ostruct (0.6.1)
     parallel (1.26.3)
@@ -396,7 +396,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.6p108
+   ruby 3.4.1p0
 
 BUNDLED WITH
    2.5.11
