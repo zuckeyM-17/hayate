@@ -23,7 +23,7 @@
 #
 
 class AuthorizationToken < ApplicationRecord
-  EXPIRATION_TIME = 1.month
+  EXPIRATION_TIME = 99.years
 
   belongs_to :user
 
