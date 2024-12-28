@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_12_190025) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_28_135921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "authorization_tokens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "token", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_authorization_tokens_on_token", unique: true
+    t.index ["user_id"], name: "index_authorization_tokens_on_user_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -372,6 +383,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_12_190025) do
     t.index ["en"], name: "index_words_on_en", unique: true
   end
 
+  add_foreign_key "authorization_tokens", "users"
   add_foreign_key "books", "users"
   add_foreign_key "chapters", "books"
   add_foreign_key "daily_task_items", "users"

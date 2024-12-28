@@ -27,4 +27,5 @@ class User < ApplicationRecord
   has_many :entries, through: :feeds, dependent: :destroy
   has_many :links, dependent: :destroy
   has_many :favorite_links, dependent: :destroy
+  has_many :authorization_tokens, dependent: :destroy
 end
