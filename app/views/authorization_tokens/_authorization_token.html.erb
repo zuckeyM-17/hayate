@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "authorization_token_#{authorization_token.id}", class: "w-full" do %>
+<div class="flex items-center h-fit flex-wrap border-t py-2">
+  <div class="w-4/12">
+    <%= authorization_token.name%>
+  </div>
+  <div class="w-3/12">
+    <%= authorization_token.expires_at %>
+  </div>
+  <div class="w-3/12">
+    <%= authorization_token.created_at %>
+  </div>
+  <div class="w-2/12">
+    <%= link_to '🗑️', authorization_token_path(authorization_token), data: { "turbo-method": :delete } %>
+  </div>
+</div>
+<% end %> <!-- turbo_frame_tag -->

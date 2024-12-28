@@ -8,13 +8,11 @@ class AuthorizationTokensController < BaseController
   def create
     @authorization_token = current_user.authorization_tokens.create!(create_params.merge(token: SecureRandom.hex(16),
                                                                                          expires_at: 1.month.from_now))
-    redirect_to authorization_tokens_path # TODO: implement with turbo_stream
   end
 
   def destroy
-    authorization_token = current_user.authorization_tokens.find(params[:id])
-    authorization_token.destroy!
-    redirect_to authorization_tokens_path # TODO: implement with turbo_stream
+    @authorization_token = current_user.authorization_tokens.find(params[:id])
+    @authorization_token.destroy!
   end
 
   private

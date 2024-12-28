@@ -15,18 +15,9 @@
 
   <div class="pt-4 w-full flex flex-col items-center">
     <div class="pt-4 w-full divide-y">
-      <% @authorization_tokens.each do |token| %>
-        <div>
-          <%= token.name%>
-        </div>
-        <div>
-          <%= token.expires_at %>
-        </div>
-        <div>
-          <%= token.created_at %>
-        </div>
-      <% end %>
+      <%= turbo_frame_tag "authorization_tokens" do %>
+      <%= render @authorization_tokens %>
+      <% end %> <!-- turbo_frame_tag -->
     </div>
-
   </div>
 </div>
