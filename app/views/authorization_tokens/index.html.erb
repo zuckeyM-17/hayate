@@ -1,0 +1,32 @@
+<% content_for(:page_title) { 'Authorization Tokens' } %>
+
+<%= render 'shared/breadcrumb' %>
+<div class="p-4">
+  <%= render 'shared/header', title: 'Authorization Tokens' %>
+
+  <div class="p-4 w-full border rounded-md">
+    <%= form_for AuthorizationToken.new do |f| %>
+    <div><%= f.text_field :name %></div>
+    <div>
+        <%= f.submit 'Create' %>
+    </div>
+    <% end %> <!-- form_for -->
+  </div>
+
+  <div class="pt-4 w-full flex flex-col items-center">
+    <div class="pt-4 w-full divide-y">
+      <% @authorization_tokens.each do |token| %>
+        <div>
+          <%= token.name%>
+        </div>
+        <div>
+          <%= token.expires_at %>
+        </div>
+        <div>
+          <%= token.created_at %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

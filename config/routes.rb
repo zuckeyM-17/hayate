@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'signin' => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
 
+  resources :authorization_tokens, only: %i[index create destroy]
   resources :word_searches, only: %i[create new]
   resources :words, only: %i[index show destroy]
   resources :books, only: %i[index create show new] do

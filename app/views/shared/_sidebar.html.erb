@@ -1,4 +1,4 @@
-<% 
+<%
 
 def sidebar_link_to(path, icon, text)
 	active = 'dark:bg-gray-800 dark:text-gray-50' if current_page?(path)
@@ -28,6 +28,7 @@ end
 			<%= sidebar_link_to entries_path, "🌐", "RSS" %>
 			<%= sidebar_link_to links_path, "🔗", "Links" %>
 			<%= sidebar_link_to review_tool_path, "📝", "Review Tool" %>
+			<%= sidebar_link_to authorization_tokens_path, "🔐", "Authorization Tokens" %>
 		</ul>
 	</div>
 
