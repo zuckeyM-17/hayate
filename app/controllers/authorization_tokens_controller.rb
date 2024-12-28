@@ -6,8 +6,7 @@ class AuthorizationTokensController < BaseController
   end
 
   def create
-    @authorization_token = current_user.authorization_tokens.create!(create_params.merge(token: SecureRandom.hex(16),
-                                                                                         expires_at: 1.month.from_now))
+    @authorization_token = current_user.authorization_tokens.create!(create_params)
   end
 
   def destroy

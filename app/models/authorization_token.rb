@@ -23,5 +23,27 @@
 #
 
 class AuthorizationToken < ApplicationRecord
+  EXPIRATION_TIME = 1.month
+
   belongs_to :user
+
+  validates :name, presence: true
+  validates :token, presence: true, uniqueness: true, length: { is: 32 }
+
+  before_validation :generate_token, on: :create
+  before_validation :set_expiration, on: :create
+
+  private
+
+  def generate_token
+    return if token.present?
+
+    self.token = SecureRandom.hex(16)
+  end
+
+  def set_expiration
+    return if expires_at.present?
+
+    self.expires_at = EXPIRATION_TIME.from_now
+  end
 end
