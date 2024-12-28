@@ -4,10 +4,10 @@
     <%= authorization_token.name%>
   </div>
   <div class="w-3/12">
-    <%= authorization_token.expires_at %>
+    <%= authorization_token.expires_at.strftime('%Y-%m-%d %H:%M') %>
   </div>
   <div class="w-3/12">
-    <%= authorization_token.created_at %>
+    <%= authorization_token.created_at.strftime('%Y-%m-%d %H:%M') %>
   </div>
   <div class="w-2/12">
     <%= link_to '🗑️', authorization_token_path(authorization_token), data: { "turbo-method": :delete } %>

@@ -1,1 +1,6 @@
 <%= turbo_stream.append 'authorization_tokens', @authorization_token %>
+<%= turbo_stream.update 'created_authorization_token_value' do %>
+  <div class="text-red-500">
+    <%= @authorization_token.token %>
+  </div>
+<% end %>
