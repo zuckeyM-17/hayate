@@ -33,6 +33,8 @@ class AuthorizationToken < ApplicationRecord
   before_validation :generate_token, on: :create
   before_validation :set_expiration, on: :create
 
+  scope :active, -> { where('expires_at > ?', Time.current) }
+
   private
 
   def generate_token

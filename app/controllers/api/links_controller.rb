@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Api
-  class LinksController < ApplicationController
+  class LinksController < Api::BaseController
     protect_from_forgery
 
     def create
       url = link_params[:url]
       title = Link.get_title(url) || url
-      Link.create!(title:, url:, user: User.first)
+      Link.create!(title:, url:, user: current_user)
 
       head :created
     end
