@@ -1,6 +1,19 @@
 const CREATE_LINK = 'create_link'
 const CREATE_WORD_SEARCH = 'create_word_search'
 
+async function getAuthorizationToken() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(['hayateApiAuthorizationToken'], (result) => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError);
+        reject("Failed to save authorization token.");
+      } else {
+        resolve(result.hayateApiAuthorizationToken);
+      }
+    });
+  })
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: CREATE_LINK,
@@ -16,14 +29,18 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  const authorizationToken = await getAuthorizationToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authorizationToken}`
+  };
+
   if (info.menuItemId === CREATE_LINK) {
     chrome.tabs.sendMessage(tab.id, { type: CREATE_LINK });
 
     await fetch('CREATE_LINK_API_URL', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({ link: { url: tab.url } }),
     });
 
@@ -37,9 +54,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
     await fetch('CREATE_WORD_SEARCH_API_URL', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({ word_search: { word: info.selectionText } }),
     });
 
