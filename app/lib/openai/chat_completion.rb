@@ -14,7 +14,7 @@ module Openai
       request = Net::HTTP::Post.new(@uri)
       request.content_type = 'application/json'
       request['Authorization'] = "Bearer #{@open_ai_api_key}"
-      request.body = { model: 'gpt-4', messages: }.to_json
+      request.body = { model: 'gpt-4o', messages: }.to_json
 
       Net::HTTP.start(@uri.hostname, @uri.port, @req_options) do |http|
         res = http.request(request)
