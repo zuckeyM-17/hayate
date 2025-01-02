@@ -17,6 +17,7 @@ AllCops:
     - 'Gemfile'
     - 'db/schema.rb'
     - '**/*.rake'
+    - 'scripts/**/*'
 
 Style/FrozenStringLiteralComment:
   Enabled: true

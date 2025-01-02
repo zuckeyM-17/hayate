@@ -46,5 +46,8 @@
 chrome_extension/config.json
 chrome_extension/dist/**
 
+scripts/config.json
+scripts/dist/**
+
 .kamal/*.key
 .kamal/.env
