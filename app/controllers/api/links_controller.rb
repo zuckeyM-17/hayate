@@ -5,6 +5,7 @@ module Api
     protect_from_forgery
 
     def create
+      authenticate!
       url = link_params[:url]
       title = Link.get_title(url) || url
       Link.create!(title:, url:, user: current_user)

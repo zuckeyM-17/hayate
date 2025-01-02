@@ -5,6 +5,7 @@ module Api
     protect_from_forgery
 
     def create
+      authenticate!
       word = Word.find_or_initialize_by(en: word_search_params[:word])
 
       word.save!
