@@ -6,4 +6,8 @@ export default class extends Controller {
   toggle() {
     this.linksTarget.classList.toggle('hidden')
   }
+
+  close() {
+    this.linksTarget.classList.add('hidden')
+  }
 }
