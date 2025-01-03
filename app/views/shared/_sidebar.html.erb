@@ -36,7 +36,11 @@ links = [
 		</div>
 
 		<div class="flex space-x-4 items-center ml-2 sm:ml-0 sm:py-2 sm:px-5">
-				<h2 class="text-lg font-semibold"><span>H</span><span class="inline-block sm:hidden lg:inline-block">ayate</span></h2>
+				<h2 class="text-lg font-semibold">
+					<%= link_to root_path do %>
+						<span>H</span><span class="inline-block sm:hidden lg:inline-block">ayate</span>
+					<% end %>
+				</h2>
 		</div>
 
 		<div class="divide-y dark:divide-gray-700 hidden sm:inline-block">
