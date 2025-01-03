@@ -1,6 +1,10 @@
 <%
 
-def sidebar_link_to(path, icon, text)
+def sidebar_link_to(link)
+	path = link[:path]
+	icon = link[:icon]
+	text = link[:text]
+
 	active = 'dark:bg-gray-800 dark:text-gray-50' if current_page?(path)
 	tag.li class: "px-2 w-full overflow-hidden h-12 flex items-center #{active} sm:px-0" do
 		link_to(path, class: 'flex items-center sm:px-5 space-x-3 rounded-md') do
@@ -9,6 +13,19 @@ def sidebar_link_to(path, icon, text)
 		end
 	end
 end
+
+links = [
+	{ path: root_path, icon: "🖥️", text: "Dashboard" },
+	{ path: future_log_path, icon: "📅", text: "Logs" },
+	{ path: tasks_path, icon: "✅", text: "Tasks" },
+	{ path: words_path, icon: "🔤", text: "Words" },
+	{ path: books_path, icon: "📚", text: "Books" },
+	{ path: daily_task_sets_path, icon: "💪", text: "Daily Task" },
+	{ path: entries_path, icon: "🌐", text: "RSS" },
+	{ path: links_path, icon: "🔗", text: "Links" },
+	{ path: review_tool_path, icon: "📝", text: "Review Tool" },
+	{ path: authorization_tokens_path, icon: "🔐", text: "Authorization Tokens" }
+]
 
 %>
 
@@ -24,16 +41,7 @@ end
 
 		<div class="divide-y dark:divide-gray-700 hidden sm:inline-block">
 			<ul class="flex text-sm space-y-1 flex-col px-2">
-				<%= sidebar_link_to root_path, "🖥️", "Dashboard" %>
-				<%= sidebar_link_to future_log_path, "📅", "Logs" %>
-				<%= sidebar_link_to tasks_path, "✅", "Tasks"%>
-				<%= sidebar_link_to words_path, "🔤", "Words" %>
-				<%= sidebar_link_to books_path, "📚", "Books" %>
-				<%= sidebar_link_to daily_task_sets_path, "💪", "Daily Task" %>
-				<%= sidebar_link_to entries_path, "🌐", "RSS" %>
-				<%= sidebar_link_to links_path, "🔗", "Links" %>
-				<%= sidebar_link_to review_tool_path, "📝", "Review Tool" %>
-				<%= sidebar_link_to authorization_tokens_path, "🔐", "Authorization Tokens" %>
+				<% links.each do |l| %><%= sidebar_link_to l %><% end %>
 			</ul>
 		</div>
 
@@ -48,16 +56,7 @@ end
 	>
 		<div class="dark:bg-gray-900 dark:text-gray-100 absolute top-0 left-0 z-20">
 			<ul class="flex text-sm space-y-1 flex-col px-2">
-				<%= sidebar_link_to root_path, "🖥️", "Dashboard" %>
-				<%= sidebar_link_to future_log_path, "📅", "Logs" %>
-				<%= sidebar_link_to tasks_path, "✅", "Tasks"%>
-				<%= sidebar_link_to words_path, "🔤", "Words" %>
-				<%= sidebar_link_to books_path, "📚", "Books" %>
-				<%= sidebar_link_to daily_task_sets_path, "💪", "Daily Task" %>
-				<%= sidebar_link_to entries_path, "🌐", "RSS" %>
-				<%= sidebar_link_to links_path, "🔗", "Links" %>
-				<%= sidebar_link_to review_tool_path, "📝", "Review Tool" %>
-				<%= sidebar_link_to authorization_tokens_path, "🔐", "Authorization Tokens" %>
+				<% links.each do |l| %><%= sidebar_link_to l %><% end %>
 			</ul>
 		</div>
 
