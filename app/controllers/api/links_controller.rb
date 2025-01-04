@@ -8,9 +8,9 @@ module Api
       authenticate!
       url = link_params[:url]
       title = Link.get_title(url) || url
-      Link.create!(title:, url:, user: current_user)
+      link = Link.create!(title:, url:, user: current_user)
 
-      head :created
+      render json: { link: { id: link.id } }
     end
 
     private

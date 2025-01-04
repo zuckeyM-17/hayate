@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :links, only: %i[create]
     resources :word_searches, only: %i[create]
+    resources :words, only: %i[show]
   end
 
   namespace :admin do

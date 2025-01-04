@@ -11,7 +11,8 @@ module Api
       word.save!
       word.word_searches.create!(user: current_user)
       ExplainWordJob.perform_later(word.id)
-      head :created
+
+      render json: { word: { id: word.id }, word_search: { id: word.word_searches.last.id } }
     end
 
     private
