@@ -23,10 +23,11 @@
 # frozen_string_literal: true
 
 class WordExplanation < ApplicationRecord
+  self.ignored_columns += [:phonetic_symbols]
+
   belongs_to :word
 
   validates :ja, presence: true
-  validates :phonetic_symbols, presence: true
   validates :meaning, presence: true
   validates :misc, presence: true
 end

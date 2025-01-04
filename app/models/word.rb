@@ -20,7 +20,7 @@ class Word < ApplicationRecord
 
   validates :en, presence: true, uniqueness: true
 
-  delegate :ja, :meaning, :phonetic_symbols, :misc, to: :explanation, allow_nil: true
+  delegate :ja, :meaning, :misc, to: :explanation, allow_nil: true
 
   class Explain
     SYSTEM_MESSAGE = <<~SYSTEM_MESSAGE
@@ -37,7 +37,6 @@ class Word < ApplicationRecord
         "ja": "記述、叙述、描写",
         "description": "a statement that represents something in words",
         "thesaurus": "account, characterization, chronicle, depiction, description, detail",
-        "phonetic_symbols": "dɪskrípʃən",
         "examples": [
           "the description of the event was quite different from what had actually happened.",
           "The description of the book was accurate."
@@ -61,7 +60,6 @@ class Word < ApplicationRecord
         e.assign_attributes(
           ja: res['ja'],
           meaning: res['description'],
-          phonetic_symbols: res['phonetic_symbols'],
           misc: {
             thesaurus: res['thesaurus'],
             examples: res['examples']
