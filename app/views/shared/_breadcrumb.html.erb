@@ -14,7 +14,7 @@
 		<% unless root %>
 			<li class="flex items-center space-x-1">
 				<span class="text-gray-600">/</span>
-				<a rel="noopener noreferrer" href="#" class="flex items-center px-1 capitalize hover:no-underline cursor-default">Current</a>
+				<a rel="noopener noreferrer" href="<%= request.referer %>" class="flex items-center px-1 capitalize hover:underline cursor-default">Current</a>
 			</li>
 		<% end%>
 	</ol>
