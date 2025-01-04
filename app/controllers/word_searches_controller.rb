@@ -6,7 +6,7 @@ class WordSearchesController < BaseController
   end
 
   def create
-    word = Word.find_or_initialize_by(en: word_search_params[:word])
+    word = Word.find_or_initialize_by(en: word_search_params[:word].downcase)
 
     if word.save
       word.word_searches.create!(user: current_user)

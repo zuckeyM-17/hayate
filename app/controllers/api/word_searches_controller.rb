@@ -6,7 +6,7 @@ module Api
 
     def create
       authenticate!
-      word = Word.find_or_initialize_by(en: word_search_params[:word])
+      word = Word.find_or_initialize_by(en: word_search_params[:word].downcase)
 
       word.save!
       word.word_searches.create!(user: current_user)
