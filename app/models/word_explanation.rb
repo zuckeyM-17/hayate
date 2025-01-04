@@ -2,14 +2,13 @@
 #
 # Table name: word_explanations
 #
-#  id               :bigint           not null, primary key
-#  word_id          :bigint           not null
-#  ja               :string           not null
-#  meaning          :string           not null
-#  phonetic_symbols :string           not null
-#  misc             :json             not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id         :bigint           not null, primary key
+#  word_id    :bigint           not null
+#  ja         :string           not null
+#  meaning    :string           not null
+#  misc       :json             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #
@@ -23,8 +22,6 @@
 # frozen_string_literal: true
 
 class WordExplanation < ApplicationRecord
-  self.ignored_columns += [:phonetic_symbols]
-
   belongs_to :word
 
   validates :ja, presence: true

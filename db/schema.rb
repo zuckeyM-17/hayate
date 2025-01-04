@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_28_135921) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -356,11 +356,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_28_135921) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "webpush_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "endpoint", null: false
+    t.string "auth_key", null: false
+    t.string "p256dh_key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_webpush_subscriptions_on_user_id"
+  end
+
   create_table "word_explanations", force: :cascade do |t|
     t.bigint "word_id", null: false
     t.string "ja", null: false
     t.string "meaning", null: false
-    t.string "phonetic_symbols", null: false
     t.json "misc", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -416,6 +425,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_28_135921) do
   add_foreign_key "tasks", "users"
   add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"
+  add_foreign_key "webpush_subscriptions", "users"
   add_foreign_key "word_explanations", "words"
   add_foreign_key "word_searches", "users"
   add_foreign_key "word_searches", "words"
