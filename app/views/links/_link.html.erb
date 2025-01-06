@@ -1,4 +1,4 @@
-<%= turbo_frame_tag link do %>
+<%= turbo_frame_tag "link_#{link.id}" do %>
 <div class="flex items-center border-t h-12">
     <div class="w-12">
     <% if link.read? %>

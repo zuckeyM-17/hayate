@@ -36,9 +36,8 @@ class LinksController < BaseController
   end
 
   def read
-    link = current_user.links.find(params[:id])
-    link.read!
-    redirect_to link
+    @link = current_user.links.find(params[:id])
+    @link.read!
   end
 
   private
