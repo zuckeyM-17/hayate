@@ -10,6 +10,6 @@ class NotesController < BaseController
   private
 
   def note_params
-    params.permit(:body)
+    params.require(:note).permit(:body)
   end
 end

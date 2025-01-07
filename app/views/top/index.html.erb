@@ -7,7 +7,7 @@
     <div>
       <div class="my-4">
         <div class="pt-4 mt-4">
-          <%= form_with url: notes_path do |f| %>
+          <%= form_with url: notes_path, model: Note.new do |f| %>
             <div class="grid
                 after:px-3.5
                 after:py-2.5
@@ -50,7 +50,7 @@
             </div>
           <% end %>
         </div>
-  
+
         <% if @daily_task_set.blank? %>
           <%= turbo_frame_tag "daily-tasks-set-date-#{Time.zone.today.to_s}" do %>
           <div class="w-full flex border-t">
