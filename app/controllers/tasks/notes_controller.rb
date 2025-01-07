@@ -7,13 +7,11 @@ module Tasks
     end
 
     def create
-      note = Note.new(user: current_user, body: note_params[:body])
+      @note = Note.new(user: current_user, body: note_params[:body])
       ActiveRecord::Base.transaction do
-        note.save!
-        TaskNote.create!(task: task, note: note)
+        @note.save!
+        TaskNote.create!(task: task, note: @note)
       end
-
-      redirect_to task_notes_path(task)
     end
 
     private
