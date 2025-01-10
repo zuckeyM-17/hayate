@@ -9,6 +9,7 @@ class NotesController < BaseController
 
   def destroy
     @note = Note.find(params[:id])
+    @task = @note.task
     @note.destroy
   end
 

@@ -35,7 +35,7 @@
     <div class="w-full">
         <%= turbo_frame_tag "task_#{@task.id}_notes" do %>
         <% @notes.each do |note| %>
-            <%= render 'notes/note', note: %>
+            <%= render 'tasks/notes/note', note:, task: @task %>
         <% end %>
         <% end %> <!-- turbo_frame_tag -->
     </div>

@@ -1,2 +1,2 @@
-<%= turbo_stream.prepend "task_#{@note.task.id}_notes", partial: 'notes/note', locals: { note: @note } %>
+<%= turbo_stream.prepend "task_#{@note.task.id}_notes", partial: 'tasks/notes/note', locals: { note: @note, task: @task } %>
 <%= turbo_stream.prepend "notes", partial: 'notes/note', locals: { note: @note } %>
