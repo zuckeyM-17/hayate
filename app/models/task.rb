@@ -4,17 +4,16 @@
 #
 # Table name: tasks
 #
-#  id             :bigint           not null, primary key
-#  user_id        :bigint           not null
-#  title          :string           not null
-#  description    :text
-#  category       :integer          default("other"), not null
-#  start_date     :date             not null
-#  end_date       :date             not null
-#  done_at        :datetime
-#  rescheduled_at :datetime
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id          :bigint           not null, primary key
+#  user_id     :bigint           not null
+#  title       :string           not null
+#  description :text
+#  category    :integer          default("other"), not null
+#  start_date  :date             not null
+#  end_date    :date             not null
+#  done_at     :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
@@ -42,7 +41,7 @@ class Task < ApplicationRecord
 
   scope :today, -> { where(start_date: ..Time.zone.now).where(end_date: Time.zone.now..) }
   scope :this_week, -> { where(start_date: Time.zone.now.all_week) }
-  scope :todo, -> { where(done_at: nil).where(rescheduled_at: nil) }
+  scope :todo, -> { where(done_at: nil) }
   scope :done, -> { where.not(done_at: nil) }
 
   def done?

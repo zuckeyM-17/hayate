@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -327,10 +327,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.datetime "done_at"
-    t.datetime "rescheduled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
+  create_table "today_tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "done_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_today_tasks_on_task_id"
+    t.index ["user_id"], name: "index_today_tasks_on_user_id"
   end
 
   create_table "user_credentials", force: :cascade do |t|
@@ -423,6 +432,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
   add_foreign_key "task_notes", "notes"
   add_foreign_key "task_notes", "tasks"
   add_foreign_key "tasks", "users"
+  add_foreign_key "today_tasks", "tasks"
+  add_foreign_key "today_tasks", "users"
   add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"
   add_foreign_key "webpush_subscriptions", "users"
