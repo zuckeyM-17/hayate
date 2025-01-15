@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -180,6 +180,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
     t.index ["chapter_id"], name: "index_readings_on_chapter_id"
   end
 
+  create_table "scheduled_tasks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "done_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_scheduled_tasks_on_task_id"
+    t.index ["user_id"], name: "index_scheduled_tasks_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
@@ -329,7 +339,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
     t.datetime "done_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "rescheduled_at"
     t.datetime "datetime"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -415,6 +424,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_122429) do
   add_foreign_key "reading_notes", "notes"
   add_foreign_key "reading_notes", "readings"
   add_foreign_key "readings", "chapters"
+  add_foreign_key "scheduled_tasks", "tasks"
+  add_foreign_key "scheduled_tasks", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

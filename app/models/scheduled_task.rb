@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: today_tasks
+# Table name: scheduled_tasks
 #
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_today_tasks_on_task_id  (task_id)
-#  index_today_tasks_on_user_id  (user_id)
+#  index_scheduled_tasks_on_task_id  (task_id)
+#  index_scheduled_tasks_on_user_id  (user_id)
 #
 # Foreign Keys
 #

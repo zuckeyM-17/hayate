@@ -4,18 +4,17 @@
 #
 # Table name: tasks
 #
-#  id             :bigint           not null, primary key
-#  user_id        :bigint           not null
-#  title          :string           not null
-#  description    :text
-#  category       :integer          default("other"), not null
-#  start_date     :date             not null
-#  end_date       :date             not null
-#  done_at        :datetime
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  rescheduled_at :datetime
-#  datetime       :datetime
+#  id          :bigint           not null, primary key
+#  user_id     :bigint           not null
+#  title       :string           not null
+#  description :text
+#  category    :integer          default("other"), not null
+#  start_date  :date             not null
+#  end_date    :date             not null
+#  done_at     :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  datetime    :datetime
 #
 # Indexes
 #
