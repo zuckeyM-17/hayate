@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateTodayTasks < ActiveRecord::Migration[8.0]
+class CreateScheduledTasks < ActiveRecord::Migration[8.0]
   def up
-    create_table :today_tasks do |t|
+    create_table :scheduled_tasks do |t|
       t.references :user, null: false, foreign_key: true
       t.references :task, null: false, foreign_key: true
       t.datetime :done_at

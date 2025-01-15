@@ -21,5 +21,16 @@
 #  fk_rails_...  (task_id => tasks.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class TodayTask < ApplicationRecord
+class ScheduledTask < ApplicationRecord
+  belongs_to :user
+  belongs_to :task
+
+  scope :today, -> { where(created_at: Time.zone.now.all_day) }
+
+  def done!
+    ActiveRecord::Base.transaction do
+      update(done_at: Time.zone.now)
+      task.done!
+    end
+  end
 end
