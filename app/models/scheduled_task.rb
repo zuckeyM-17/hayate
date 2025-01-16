@@ -25,7 +25,7 @@ class ScheduledTask < ApplicationRecord
   belongs_to :user
   belongs_to :task
 
-  scope :today, -> { where(created_at: Time.zone.now.all_day) }
+  scope :today, -> { where(created_at: Time.zone.now.all_day).where(done_at: nil) }
 
   def done!
     ActiveRecord::Base.transaction do
