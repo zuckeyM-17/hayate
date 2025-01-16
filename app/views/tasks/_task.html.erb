@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "task_#{task.id}", class: "w-full" do %>
 <div class="flex items-center h-fit flex-wrap border-t py-2">
     <div class="w-1/12 mb-2">
-    <% if task.done? %>
-        ✅
+    <% if task.scheduled_tasks.today.present? %>
+        <p>scheduled</p>
     <% else %>
-        <%= link_to '⬜️', done_task_path(task), data: { "turbo-method": :patch, turbo_frame: "task_#{task.id}" } %>
+        <%= link_to 'schedule', scheduled_tasks_path(task_id: task.id), data: { "turbo-method": :post }, class: 'underline' %>
     <% end %>
     </div>
     <div class="w-11/12 mb-2"><span class="line-clamp-1"><%= link_to task.title, task_notes_path(task), data: { turbo_frame: "task_#{task.id}" }, class: 'underline text-lg' %></span></div>

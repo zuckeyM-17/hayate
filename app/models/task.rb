@@ -28,6 +28,7 @@ class Task < ApplicationRecord
   belongs_to :user
   has_many :task_notes, dependent: :destroy
   has_many :notes, through: :task_notes
+  has_many :scheduled_tasks, dependent: :destroy
 
   enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
 
@@ -54,7 +55,7 @@ class Task < ApplicationRecord
   end
 
   def schedule_for_today!
-    TodayTask.create!(user: user, task: self)
+    ScheduledTask.create!(user: user, task: self)
   end
 
   private

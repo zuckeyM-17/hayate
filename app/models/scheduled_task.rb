@@ -31,6 +31,9 @@ class ScheduledTask < ApplicationRecord
     ActiveRecord::Base.transaction do
       update(done_at: Time.zone.now)
       task.done!
+      Note.new(user: , body: <<~BODY)
+        #{ApplicationController.helpers.task_category(task.category)} [#{task.title}](#{task_path(task)}) Done
+      BODY
     end
   end
 end

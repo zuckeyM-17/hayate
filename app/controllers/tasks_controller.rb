@@ -38,9 +38,7 @@ class TasksController < BaseController
 
   def done
     @task = current_user.tasks.find(params[:id])
-    @note = Note.new(user: current_user, body: <<~BODY)
-      #{ApplicationController.helpers.task_category(@task.category)} [#{@task.title}](#{task_path(@task)}) Done
-    BODY
+
     ApplicationRecord.transaction do
       @task.done!
       @note.save!

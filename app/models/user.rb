@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :readings, through: :chapters, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :scheduled_tasks, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :daily_task_items, dependent: :destroy
   has_many :daily_task_sets, dependent: :destroy

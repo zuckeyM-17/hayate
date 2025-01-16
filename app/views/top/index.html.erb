@@ -72,22 +72,10 @@
 
     <div class="py-4 w-full divide-y">
       <%= turbo_frame_tag 'tasks-list' do %>
-      <% @tasks.each do |task| %>
-        <%= render 'tasks/task', task: %>
+      <% @today_tasks.each do |scheduled_task| %>
+        <%= render 'scheduled_tasks/scheduled_task', scheduled_task: %>
       <% end %>
       <% end %> <!-- turbo_frame_tag -->
     </div>
-
-    <% if @weekly_tasks.present? %>
-    <!-- Weekly Tasks -->
-    <%= render 'shared/header', title: 'Weekly Tasks' %>
-    <div class="pt-4 w-full divide-y">
-      <%= turbo_frame_tag 'weekly-tasks-list' do %>
-      <% @weekly_tasks.each do |task| %>
-        <%= render 'tasks/task', task: %>
-      <% end %>
-      <% end %> <!-- turbo_frame_tag -->
-    </div>
-    <% end %>
   </div>
 </div>
