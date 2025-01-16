@@ -36,15 +36,6 @@ class TasksController < BaseController
     redirect_to tasks_path
   end
 
-  def done
-    @task = current_user.tasks.find(params[:id])
-
-    ApplicationRecord.transaction do
-      @task.done!
-      @note.save!
-    end
-  end
-
   private
 
   def task_params

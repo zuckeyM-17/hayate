@@ -25,9 +25,6 @@ Rails.application.routes.draw do
     end
   end
   resources :tasks, only: %i[index show edit update new create destroy] do
-    member do
-      patch :done
-    end
     resources :notes, only: %i[index create], controller: 'tasks/notes'
   end
   resources :scheduled_tasks, only: %i[create update]
