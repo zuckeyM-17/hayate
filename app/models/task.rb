@@ -51,7 +51,12 @@ class Task < ApplicationRecord
   end
 
   def done!
-    update!(done_at: Time.zone.now)
+    ActiveRecord::Base.transaction do
+      update!(done_at: Time.zone.now)
+      Note.new(user:, body: <<~BODY)
+        #{ApplicationController.helpers.task_category(task.category)} [#{task.title}](#{Rails.application.routes.url_helpers.task_path(task)}) Done
+      BODY
+    end
   end
 
   def schedule_for_today!
