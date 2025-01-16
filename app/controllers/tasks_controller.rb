@@ -19,9 +19,12 @@ class TasksController < BaseController
   end
 
   def create
-    task = Task.new(user: current_user)
-    task.assign_attributes(task_params)
-    task.save!
+    @task = Task.new(user: current_user)
+    @task.assign_attributes(task_params.except(:schedule_for_today))
+    ApplicationRecord.transaction do
+      @task.save!
+      @task.schedule_for_today! if task_params[:schedule_for_today]
+    end
     @tasks = current_user.tasks.todo.order(end_date: :asc)
   end
 
@@ -40,7 +43,7 @@ class TasksController < BaseController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :category, :start_date, :end_date)
+    params.require(:task).permit(:title, :description, :category, :start_date, :end_date, :schedule_for_today)
   end
 
   def update_params

@@ -3,3 +3,7 @@
     <%= render @tasks %>
   <% end %> <!-- turbo_frame_tag -->
 <% end %>
+
+<% if @task.scheduled_tasks.first %>
+<%= turbo_stream.prepend "today-tasks-list", partial: "scheduled_tasks/scheduled_task", locals: { scheduled_task: @task.scheduled_tasks.first } %>
+<% end %>

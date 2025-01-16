@@ -6,9 +6,9 @@
     <div class="w-full lg:w-3/12">
         <%= f.select :category, Task.categories.keys, {}, class: 'border-x-0 border-t-0 border-b' %>
     </div>
-    <div class="w-full lg:w-6/12">
-        <%= f.date_field :start_date, class: 'border-x-0 border-t-0 border-b' %> ~ <%= f.date_field :end_date, class: 'border-x-0 border-t-0 border-b' %>
-    </div>
+    <%= f.hidden_field :start_date, value: Time.zone.today %>
+    <%= f.hidden_field :end_date, value: Time.zone.today %>
+    <%= f.hidden_field :schedule_for_today, value: true %>
     <div class="flex items-center justify-end w-full mt-2 lg:mt-0 lg:w-9/12">
         <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
     </div>

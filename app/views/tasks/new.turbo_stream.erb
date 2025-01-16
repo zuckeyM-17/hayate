@@ -1,4 +1,4 @@
 <%= turbo_stream.replace "task-form" do %>
-    <%= render partial: 'tasks/form', locals: { set_date: @set_date } %>
+    <%= render partial: 'tasks/form_with_scheduled' %>
 <% end %>
 <%= turbo_stream.remove "task-new-button" %>
