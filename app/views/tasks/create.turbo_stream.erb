@@ -1,1 +1,5 @@
-<%= turbo_stream.prepend "tasks-list", @task %>
+<%= turbo_stream.update "tasks-list" do %>
+  <%= turbo_frame_tag 'tasks-list' do %>
+    <%= render @tasks %>
+  <% end %> <!-- turbo_frame_tag -->
+<% end %>

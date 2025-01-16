@@ -2,7 +2,7 @@
 
 class ScheduledTasksController < BaseController
   def create
-    @today_task = current_user.tasks.find(params[:task_id]).schedule_for_today!
+    @scheduled_task = current_user.tasks.find(params[:task_id]).schedule_for_today!
   end
 
   def update

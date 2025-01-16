@@ -19,9 +19,10 @@ class TasksController < BaseController
   end
 
   def create
-    @task = Task.new(user: current_user)
-    @task.assign_attributes(task_params)
-    @task.save!
+    task = Task.new(user: current_user)
+    task.assign_attributes(task_params)
+    task.save!
+    @tasks = current_user.tasks.todo.order(end_date: :asc)
   end
 
   def update
