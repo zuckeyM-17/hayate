@@ -14,7 +14,6 @@
 #  done_at     :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  datetime    :datetime
 #
 # Indexes
 #
@@ -28,7 +27,8 @@ class Task < ApplicationRecord
   belongs_to :user
   has_many :task_notes, dependent: :destroy
   has_many :notes, through: :task_notes
-  has_many :scheduled_tasks, dependent: :destroy
+  has_one :scheduled_task, dependent: :destroy
+  has_one :completed_task, dependent: :destroy
 
   enum :category, { other: 0, work: 10, skill: 20, personal: 30, housework: 40 }
 
@@ -43,8 +43,8 @@ class Task < ApplicationRecord
 
   scope :today, -> { where(start_date: ..Time.zone.now).where(end_date: Time.zone.now..) }
   scope :this_week, -> { where(start_date: Time.zone.now.all_week) }
-  scope :todo, -> { where(done_at: nil) }
-  scope :done, -> { where.not(done_at: nil) }
+  scope :todo, -> { where.missing(:completed_task) }
+  scope :done, -> { where.not(completed_task: nil) }
 
   def done?
     done_at.present?
@@ -55,7 +55,14 @@ class Task < ApplicationRecord
   end
 
   def schedule_for_today!
-    ScheduledTask.create!(user: user, task: self)
+    ScheduledTask.create!(user: user, task: self, date: Time.zone.now.to_date)
+  end
+
+  def complete!
+    ActiveRecord::Base.transaction do
+      scheduled_task.destroy!
+      CompletedTask.create!(task: self)
+    end
   end
 
   private

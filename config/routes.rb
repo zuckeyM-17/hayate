@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :notes, only: %i[index create], controller: 'tasks/notes'
   end
   resources :scheduled_tasks, only: %i[create update]
+  resources :completed_tasks, only: %i[create]
   resources :events, only: %i[index new create show]
   resources :notes, only: %i[create destroy]
   resources :readings, only: %i[show]

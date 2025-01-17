@@ -36,6 +36,12 @@ class Note < ApplicationRecord
 
   validates :body, presence: true
 
+  def self.completion_of_task(user:, task:)
+    new(user:, body: <<~BODY)
+      #{ApplicationController.helpers.task_category(task.category)} [#{task.title}](#{Rails.application.routes.url_helpers.task_path(task)}) Done
+    BODY
+  end
+
   private
 
   def set_url_href

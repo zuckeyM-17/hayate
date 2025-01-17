@@ -14,7 +14,7 @@ class CreateScheduledTasks < ActiveRecord::Migration[8.0]
   end
 
   def down
-    drop_table :today_tasks
+    drop_table :scheduled_tasks
 
     change_table :tasks, bulk: true do |t|
       t.datetime :rescheduled_at, :datetime, default: nil

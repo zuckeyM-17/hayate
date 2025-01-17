@@ -7,9 +7,10 @@
 #  id         :bigint           not null, primary key
 #  user_id    :bigint           not null
 #  task_id    :bigint           not null
-#  done_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  datetime   :datetime
+#  date       :date
 #
 # Indexes
 #
@@ -25,12 +26,9 @@ class ScheduledTask < ApplicationRecord
   belongs_to :user
   belongs_to :task
 
-  scope :today, -> { where(created_at: Time.zone.now.all_day).where(done_at: nil) }
+  scope :today, -> { where(date: Time.zone.now.to_date) }
 
-  def done!
-    ActiveRecord::Base.transaction do
-      update(done_at: Time.zone.now)
-      task.done!
-    end
+  def reschedule_for_tommorow!
+    update(date: date + 1.day)
   end
 end

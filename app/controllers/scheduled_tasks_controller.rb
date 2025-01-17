@@ -7,15 +7,7 @@ class ScheduledTasksController < BaseController
 
   def update
     @scheduled_task = current_user.today_tasks.find(params[:id])
-    task = @scheduled_task.task
-    @note = Note.new(user: current_user, body: <<~BODY)
-      #{ApplicationController.helpers.task_category(task.category)} [#{task.title}](#{task_path(task)}) Done
-    BODY
-
-    ApplicationRecord.transaction do
-      @scheduled_task.done!
-      @note.save!
-    end
+    @scheduled_task.reschedule_for_tommorow!
   end
 
   private

@@ -1,1 +1,2 @@
 <%= turbo_stream.remove "scheduled_task_#{@scheduled_task.id}" %>
+<%= turbo_stream.prepend "notes", @note %>

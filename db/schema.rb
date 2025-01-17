@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_17_151007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,6 +43,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_chapters_on_book_id"
+  end
+
+  create_table "completed_tasks", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_completed_tasks_on_task_id"
   end
 
   create_table "daily_task_items", force: :cascade do |t|
@@ -183,9 +190,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
   create_table "scheduled_tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "task_id", null: false
-    t.datetime "done_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "datetime"
+    t.date "date"
     t.index ["task_id"], name: "index_scheduled_tasks_on_task_id"
     t.index ["user_id"], name: "index_scheduled_tasks_on_user_id"
   end
@@ -339,7 +347,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
     t.datetime "done_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "datetime"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -405,6 +412,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_124732) do
   add_foreign_key "authorization_tokens", "users"
   add_foreign_key "books", "users"
   add_foreign_key "chapters", "books"
+  add_foreign_key "completed_tasks", "tasks"
   add_foreign_key "daily_task_items", "users"
   add_foreign_key "daily_task_sets", "users"
   add_foreign_key "daily_tasks", "daily_task_items"
