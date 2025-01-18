@@ -47,11 +47,7 @@ class Task < ApplicationRecord
   scope :done, -> { where.not(completed_task: nil) }
 
   def done?
-    done_at.present?
-  end
-
-  def done!
-    update!(done_at: Time.zone.now)
+    completed_task.present?
   end
 
   def schedule_for_today!
