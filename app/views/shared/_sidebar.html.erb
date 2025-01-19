@@ -6,7 +6,7 @@ def sidebar_link_to(link)
 	text = link[:text]
 
 	active = 'dark:bg-gray-800 dark:text-gray-50' if current_page?(path)
-	tag.li class: "px-2 w-full overflow-hidden h-12 flex items-center #{active} sm:px-0" do
+	tag.li class: "px-4 w-full overflow-hidden h-12 flex items-center #{active} sm:px-0" do
 		link_to(path, class: 'flex items-center sm:px-5 space-x-3 rounded-md') do
 		concat tag.span icon
 		concat tag.span " #{text}", class: 'inline-block sm:hidden lg:inline-block'
@@ -29,10 +29,24 @@ links = [
 
 %>
 
-<div data-controller="sidebar" class="dark:bg-gray-900 dark:text-gray-100">
+<div class="dark:bg-gray-900 dark:text-gray-100">
 	<div class="flex pl-2 sticky top-0 sm:pt-3 sm:px-0 sm:flex-col sm:h-full sm:w-16 lg:w-60" >
 		<div class="inline-block text-2xl h-12 sm:hidden">
-			<button data-action="click->sidebar#toggle">...</button>
+			<input type="checkbox" id="drawer-toggle" class="relative sr-only peer hidden">
+			<label for="drawer-toggle" class="h-12 block flex items-center peer-checked:rotate-90 duration-500">
+				<span class="text-sm">▶︎</span>
+			</label>
+			<div
+				class="fixed top-12 left-0 z-20 transition-all duration-500 transform -translate-x-full peer-checked:translate-x-0 dark:bg-gray-900 dark:text-gray-100"
+			>
+				<ul class="flex text-sm space-y-1 flex-col my-2">
+					<% links.each do |l| %><%= sidebar_link_to l %><% end %>
+				</ul>
+			</div>
+
+			<div class="z-10 fixed top-12 left-0 w-dvw h-dvh transition-all transform -translate-x-full peer-checked:translate-x-0">
+				<label for="drawer-toggle" class="w-full h-full block"></label>
+			</div>
 		</div>
 
 		<div class="flex space-x-4 items-center ml-2 sm:ml-0 sm:py-2 sm:px-5">
@@ -44,7 +58,7 @@ links = [
 		</div>
 
 		<div class="divide-y dark:divide-gray-700 hidden sm:inline-block">
-			<ul class="flex text-sm space-y-1 flex-col px-2">
+			<ul class="flex text-sm space-y-1 flex-col my-2">
 				<% links.each do |l| %><%= sidebar_link_to l %><% end %>
 			</ul>
 		</div>
@@ -53,18 +67,4 @@ links = [
 			<%= link_to 'Sign Out', signout_path, data: { "turbo-method": :delete } %>
 		</div>
 	</div>
-
-	<div
-		class="divide-y hidden sm:hidden relative"
-		data-sidebar-target="links"
-	>
-		<div class="dark:bg-gray-900 dark:text-gray-100 absolute top-0 left-0 z-20">
-			<ul class="flex text-sm space-y-1 flex-col px-2">
-				<% links.each do |l| %><%= sidebar_link_to l %><% end %>
-			</ul>
-		</div>
-
-		<div class="z-10 absolute -top-12 left-0 w-dvw h-dvh" data-action="click->sidebar#close"></div>
-		</div>
-	</div>
-</div> <!-- data-controller="sidebar" -->
+</div>
