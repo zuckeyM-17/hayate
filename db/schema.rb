@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_17_151007) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_20_140708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -383,6 +383,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_17_151007) do
     t.index ["user_id"], name: "index_webpush_subscriptions_on_user_id"
   end
 
+  create_table "weekly_objectives", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.string "objective", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_weekly_objectives_on_user_id"
+  end
+
+  create_table "weekly_reviews", force: :cascade do |t|
+    t.bigint "weekly_objective_id", null: false
+    t.text "review", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weekly_objective_id"], name: "index_weekly_reviews_on_weekly_objective_id"
+  end
+
   create_table "word_explanations", force: :cascade do |t|
     t.bigint "word_id", null: false
     t.string "ja", null: false
@@ -446,6 +464,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_17_151007) do
   add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"
   add_foreign_key "webpush_subscriptions", "users"
+  add_foreign_key "weekly_objectives", "users"
+  add_foreign_key "weekly_reviews", "weekly_objectives"
   add_foreign_key "word_explanations", "words"
   add_foreign_key "word_searches", "users"
   add_foreign_key "word_searches", "words"
