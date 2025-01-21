@@ -4,37 +4,34 @@
   <div class="w-full lg:w-1/2 px-2">
     <!-- Notes -->
     <%= render 'shared/header', title: 'Notes' %>
-    <div>
-      <div class="my-4">
-        <div class="pt-4 mt-4">
-          <%= form_with url: notes_path, model: Note.new do |f| %>
-            <div class="grid
-                after:px-3.5
-                after:py-2.5
-                [&>textarea]:text-inherit
-                after:text-inherit
-                [&>textarea]:resize-none
-                [&>textarea]:overflow-hidden
-                [&>textarea]:[grid-area:1/1/2/2]
-                after:[grid-area:1/1/2/2]
-                after:whitespace-pre-wrap
-                after:invisible
-                after:content-[attr(data-cloned-val)_'_']
-                after:border
-            ">
-               <%= f.text_area :body, value: '', class: "w-full rounded-md border-gray-300", onInput: "this.parentNode.dataset.clonedVal = this.value" %>
-            </div>
-            <div>
-              <%= f.submit 'Add', class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto" %>
-            </div>
-          <% end %>
+    <div class="mt-4">
+      <%= form_with url: notes_path, model: Note.new do |f| %>
+        <div class="grid
+            after:px-3.5
+            after:py-2.5
+            [&>textarea]:text-inherit
+            after:text-inherit
+            [&>textarea]:resize-none
+            [&>textarea]:overflow-hidden
+            [&>textarea]:[grid-area:1/1/2/2]
+            after:[grid-area:1/1/2/2]
+            after:whitespace-pre-wrap
+            after:invisible
+            after:content-[attr(data-cloned-val)_'_']
+            after:border
+        ">
+            <%= f.text_area :body, value: '', class: "w-full rounded-md border-gray-300", onInput: "this.parentNode.dataset.clonedVal = this.value" %>
         </div>
-
-        <div id="notes">
-          <%= render @notes %>
+        <div>
+          <%= f.submit 'Add', class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto" %>
         </div>
-      </div>
+      <% end %>
     </div>
+
+    <div id="notes">
+      <%= render @notes %>
+    </div>
+
   </div>
 
   <div class="w-full lg:w-1/2 px-2">
