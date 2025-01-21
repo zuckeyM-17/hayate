@@ -14,7 +14,7 @@ module Api
     private
 
     def note_params
-      params.require(:note).permit(:body)
+      params.expect(note: [:body])
     end
   end
 end

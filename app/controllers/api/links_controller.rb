@@ -16,7 +16,7 @@ module Api
     private
 
     def link_params
-      params.require(:link).permit(:url)
+      params.expect(link: [:url])
     end
   end
 end

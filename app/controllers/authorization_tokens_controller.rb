@@ -17,6 +17,6 @@ class AuthorizationTokensController < BaseController
   private
 
   def create_params
-    params.require(:authorization_token).permit(:name)
+    params.expect(authorization_token: [:name])
   end
 end

@@ -29,6 +29,6 @@ class EventsController < BaseController
   end
 
   def create_params
-    params.require(:event).permit(:title, :description, :category, :date)
+    params.expect(event: %i[title description category date])
   end
 end

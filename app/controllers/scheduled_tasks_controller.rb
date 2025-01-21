@@ -13,6 +13,6 @@ class ScheduledTasksController < BaseController
   private
 
   def create_params
-    params.require(:today_task).permit(:task_id)
+    params.expect(today_task: [:task_id])
   end
 end

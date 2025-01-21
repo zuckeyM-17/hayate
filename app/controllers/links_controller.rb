@@ -43,10 +43,10 @@ class LinksController < BaseController
   private
 
   def link_params
-    params.require(:link).permit(:url)
+    params.expect(link: [:url])
   end
 
   def update_params
-    params.require(:link).permit(:title)
+    params.expect(link: [:title])
   end
 end

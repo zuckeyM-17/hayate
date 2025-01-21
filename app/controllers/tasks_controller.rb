@@ -43,10 +43,10 @@ class TasksController < BaseController
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :category, :start_date, :end_date, :schedule_for_today)
+    params.expect(task: %i[title description category start_date end_date schedule_for_today])
   end
 
   def update_params
-    params.require(:task).permit(:title, :description, :category, :start_date, :end_date)
+    params.expect(task: %i[title description category start_date end_date])
   end
 end

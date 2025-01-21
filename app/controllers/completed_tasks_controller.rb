@@ -15,6 +15,6 @@ class CompletedTasksController < BaseController
   private
 
   def create_params
-    params.require(:completed_task).permit(:scheduled_task_id)
+    params.expect(completed_task: [:scheduled_task_id])
   end
 end

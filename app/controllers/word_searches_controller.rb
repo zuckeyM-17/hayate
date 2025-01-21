@@ -20,6 +20,6 @@ class WordSearchesController < BaseController
   private
 
   def word_search_params
-    params.require(:word_search).permit(:word)
+    params.expect(word_search: [:word])
   end
 end

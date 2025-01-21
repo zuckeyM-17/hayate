@@ -22,6 +22,6 @@ class DailyTaskItemsController < BaseController
   private
 
   def daily_task_item_params
-    params.require(:daily_task_item).permit(:name)
+    params.expect(daily_task_item: [:name])
   end
 end

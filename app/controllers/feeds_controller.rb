@@ -37,10 +37,10 @@ class FeedsController < BaseController
   private
 
   def create_params
-    params.require(:feed).permit(:url)
+    params.expect(feed: [:url])
   end
 
   def edit_params
-    params.require(:feed).permit(:title)
+    params.expect(feed: [:title])
   end
 end

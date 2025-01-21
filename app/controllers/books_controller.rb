@@ -42,6 +42,6 @@ class BooksController < BaseController
   private
 
   def book_params
-    params.require(:book).permit(:title, :category, :chapters)
+    params.expect(book: %i[title category chapters])
   end
 end
