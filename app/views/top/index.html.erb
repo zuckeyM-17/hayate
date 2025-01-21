@@ -2,7 +2,7 @@
   @daily_task_set = @current_user.daily_task_sets.today.first
   @daily_task_items = @current_user.daily_task_items.enabled.order(:created_at)
   @notes = @current_user.notes.today.order(created_at: :desc)
-  @today_tasks = @current_user.today_tasks
+  @scheduled_tasks = @current_user.scheduled_tasks.today_or_past.order(date: :desc)
   @weekly_objective = @current_user.weekly_objectives.current_week.first
 %>
 
@@ -95,7 +95,7 @@
 
     <div class="py-4 w-full divide-y">
       <%= turbo_frame_tag 'today-tasks-list' do %>
-      <% @today_tasks.each do |scheduled_task| %>
+      <% @scheduled_tasks.each do |scheduled_task| %>
         <%= render 'scheduled_tasks/scheduled_task', scheduled_task: %>
       <% end %>
       <% end %> <!-- turbo_frame_tag -->

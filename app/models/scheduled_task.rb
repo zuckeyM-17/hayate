@@ -26,9 +26,9 @@ class ScheduledTask < ApplicationRecord
   belongs_to :user
   belongs_to :task
 
-  scope :today, -> { where(date: Time.zone.now.to_date) }
+  scope :today_or_past, -> { where(date: ..Time.zone.now.to_date) }
 
   def reschedule_for_tommorow!
-    update(date: date + 1.day)
+    update(date: Time.zone.tomorrow)
   end
 end

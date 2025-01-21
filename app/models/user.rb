@@ -30,8 +30,4 @@ class User < ApplicationRecord
   has_many :favorite_links, dependent: :destroy
   has_many :authorization_tokens, dependent: :destroy
   has_many :weekly_objectives, dependent: :destroy
-
-  def today_tasks
-    scheduled_tasks.today.includes(:task)
-  end
 end
