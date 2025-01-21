@@ -10,7 +10,7 @@
         <% end %><!-- events.each -->
     </div>
     <div class="w-1/12">
-        <%= link_to 'Add', new_event_path(date:), class: 'underline', data: { turbo_frame: "events-list-#{date.to_s}" } %>
+        <%= link_to '+', new_event_path(date:), class: 'text-lg', data: { turbo_frame: "events-list-#{date.to_s}" } %>
     </div>
 </div>
 
