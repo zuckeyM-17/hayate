@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "weekly_objective" do %>
+  <%= turbo_frame_tag 'weekly_objective' do %>
+    <p><%= @weekly_objective.objective %></p>
+  <% end %> <!-- turbo_frame_tag -->
+<% end %>

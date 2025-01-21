@@ -32,7 +32,10 @@ class Note < ApplicationRecord
 
   before_save :set_url_href
 
-  scope :today, -> { where(created_at: Time.zone.today.all_day) }
+  scope :today, lambda {
+    includes(%i[link link_note event event_note task task_note reading reading_note])
+      .where(created_at: Time.zone.today.all_day)
+  }
 
   validates :body, presence: true
 

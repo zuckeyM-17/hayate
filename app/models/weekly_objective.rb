@@ -22,11 +22,18 @@
 #
 class WeeklyObjective < ApplicationRecord
   belongs_to :user
-  has_one :weekly_review, dependent: :destroy
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :objective, presence: true
   validate :end_date_is_after_start_date
+
+  scope :by_user, ->(user) { where(user: user) }
+  scope :current_week, lambda {
+    today = Time.zone.today
+    where('start_date <= ? AND end_date >= ?', today, today)
+  }
+
+  private
 
   def end_date_is_after_start_date
     return if end_date.blank? || start_date.blank?

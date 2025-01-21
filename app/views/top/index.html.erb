@@ -1,7 +1,33 @@
+<%
+  @daily_task_set = @current_user.daily_task_sets.today.first
+  @daily_task_items = @current_user.daily_task_items.enabled.order(:created_at)
+  @notes = @current_user.notes.today.order(created_at: :desc)
+  @today_tasks = @current_user.today_tasks
+  @weekly_objective = @current_user.weekly_objectives.current_week.first
+%>
+
+
 <%= render 'shared/breadcrumb', root: true %>
 <div class="flex flex-wrap p-4">
 
   <div class="w-full lg:w-1/2 px-2">
+    <!-- Weekly Objectives -->
+    <%= render 'shared/header', title: 'Weekly Objectives' %>
+    <div class="my-4">
+      <%= turbo_frame_tag "weekly_objective" do %>
+      <% if @weekly_objective.present? %>
+        <p><%= @weekly_objective.objective %></p>
+      <% else %>
+        <%= form_for WeeklyObjective.new do |f| %>
+          <div class="w-full mb-2">
+            <%= f.text_field :objective, class: 'border-gray-300 rounded-md w-10/12' %>
+            <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          </div>
+        <% end %> <!-- form_for weekly_objective -->
+      <% end %>
+      <% end %><!-- turbo_frame_tag weekly_objective -->
+    </div>
+
     <!-- Notes -->
     <%= render 'shared/header', title: 'Notes' %>
     <div class="mt-4">

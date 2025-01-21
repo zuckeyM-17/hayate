@@ -23,6 +23,7 @@ class DailyTaskSet < ApplicationRecord
   has_many :daily_tasks, dependent: :destroy
   belongs_to :user
 
+  scope :today, -> { where(date: Time.zone.today) }
   scope :this_week, -> { where(date: Time.zone.today.all_week) }
   scope :last_week, -> { where(date: Time.zone.today.last_week.all_week) }
 
