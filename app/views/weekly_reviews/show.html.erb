@@ -2,30 +2,29 @@
 
 <%= render 'shared/breadcrumb' %>
 
-<div class="p-4">
+<div class="p-4 h-full">
   <%= render 'shared/header', title: 'Weekly Review' %>
-  <div class="mt-4 p-4 border rounded-lg">
+  <%
+    books = @readings.map { |r| "#{r.chapter.book.title}|XX%=>YY%|ほげほげ" }.join("\n")
+    review = <<~BODY
+      ## 週間目標
 
-    <p>## まとめ</p>
+      ## やったこと
+      ### daily task
+      ### 読書
 
-    <p>
-      <%= @weekly_objective.objective %>
-    </p>
-    <p>## やったこと</p>
-    <p>### daily task</p>
+      タイトル|進捗🏃‍♂️|一言
+      -|-|-
+      #{books}
 
-      <!-- TODO: daily tasks の画像を作りたい -->
+      ## まとめ
+      ---
+      終わり
+    BODY
+  %>
 
-    <p>### 読書</p>
-
-    <span>タイトル|進捗🏃‍♂️|一言</span><br />
-    <span>-|-|-</span><br />
-    <% @readings.each do |r| %>
-      <span><%= r.chapter.book.title %>|XX%=>YY%|ほげほげ</span><br />
-    <% end %>
-    <br />
-
-    <p>---</p>
-    <p>終わり</p>
-  </div>
+  <%= form_with model: WeeklyReview.new, url: weekly_review_path, class: "h-[calc(100%_-_1.25rem)] w-full pt-4" do |f| %>
+    <%= f.text_area :review, value: review, class: "block w-full h-[calc(100%_-_3rem)] rounded-md border-gray-300" %>
+    <%= f.submit 'Submit', class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto" %>
+  <% end %>
 </div>
