@@ -22,6 +22,8 @@
 #
 class WeeklyObjective < ApplicationRecord
   belongs_to :user
+  has_one :weekly_review, dependent: :destroy
+
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :objective, presence: true

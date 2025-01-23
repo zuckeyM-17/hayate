@@ -1,14 +1,21 @@
-<% content_for(:page_title) { 'Review Tool' } %>
+<% content_for(:page_title) { 'Weekly Review' } %>
 
 <%= render 'shared/breadcrumb' %>
 
 <div class="p-4">
-  <%= render 'shared/header', title: 'Review Tool' %>
+  <%= render 'shared/header', title: 'Weekly Review' %>
   <div class="mt-4 p-4 border rounded-lg">
 
     <p>## まとめ</p>
+
+    <p>
+      <%= @weekly_objective.objective %>
+    </p>
     <p>## やったこと</p>
     <p>### daily task</p>
+
+      <!-- TODO: daily tasks の画像を作りたい -->
+
     <p>### 読書</p>
 
     <span>タイトル|進捗🏃‍♂️|一言</span><br />
@@ -18,9 +25,6 @@
     <% end %>
     <br />
 
-    <p>### その他</p>
-    <p>## やれなかったこと</p>
-    <p>## 来週のトピック</p>
     <p>---</p>
     <p>終わり</p>
   </div>
