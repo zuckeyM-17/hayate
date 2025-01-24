@@ -3,8 +3,9 @@
     <p class="text-gray-600 text-xs">
         <%= note.created_at.today? ? note.created_at.strftime('%H:%M') : note.created_at.strftime('%Y-%m-%d %H:%M') %>
     </p>
-    <div class="text-base">
-    <%= markdown(note.body).html_safe %>
+    <div class="flex align-center w-full">
+        <div class="text-base grow"><%= markdown(note.body).html_safe %></div>
+        <%= link_to '🗑️', note_path(note), data: { "turbo-method": :delete }, class: 'ml-2' %>
     </div>
 
     <p class="text-blue-600 text-xs underline line-clamp-1">
@@ -19,7 +20,5 @@
         <%= link_to "#{chap.book.title} - #{chap.title}", reading_path(note.reading) %>
     <% end %>
     </p>
-
-    <%= link_to 'delete', note_path(note), data: { "turbo-method": :delete }, class: 'ml-4 underline text-red-500' %>
 </div>
 <% end %><!-- turbo_frame_tag -->

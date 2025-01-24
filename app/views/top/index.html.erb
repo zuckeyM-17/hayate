@@ -19,9 +19,9 @@
         <p><%= @weekly_objective.objective %></p>
       <% else %>
         <%= form_for WeeklyObjective.new do |f| %>
-          <div class="w-full mb-2">
-            <%= f.text_field :objective, class: 'border-gray-300 rounded-md w-10/12' %>
-            <%= f.submit 'Add', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          <div class="w-full mb-2 flex">
+            <%= f.text_field :objective, class: 'border-gray-300 rounded-md grow' %>
+            <%= f.submit 'Submit', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2" %>
           </div>
         <% end %> <!-- form_for weekly_objective -->
       <% end %>
