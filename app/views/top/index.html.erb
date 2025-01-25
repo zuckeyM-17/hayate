@@ -2,7 +2,7 @@
   @daily_task_set = @current_user.daily_task_sets.today.first
   @daily_task_items = @current_user.daily_task_items.enabled.order(:created_at)
   @notes = @current_user.notes.today.order(created_at: :desc)
-  @scheduled_tasks = @current_user.scheduled_tasks.today_or_past.order(date: :desc)
+  @scheduled_tasks = @current_user.scheduled_tasks.includes(:task).today_or_past.order(date: :desc)
   @weekly_objective = @current_user.weekly_objectives.current_week.first
 %>
 
@@ -87,10 +87,11 @@
     </div>
 
     <!-- Today Tasks -->
-    <%= render 'shared/header', title: 'Today Tasks' %>
-    <%= link_to 'new', new_task_path, data: { turbo_stream: true },
-      id: 'task-new-button',
-      class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded block ml-auto w-fit" %>
+    <%= render 'shared/header', title: 'Today Tasks' do %>
+      <%= link_to 'new', new_task_path, data: { turbo_stream: true },
+        id: 'task-new-button',
+        class: "ml-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded w-fit" %>
+    <% end %>
     <%= turbo_frame_tag 'task-form' %>
 
     <div class="py-4 w-full divide-y">
