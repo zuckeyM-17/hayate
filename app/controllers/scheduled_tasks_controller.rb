@@ -6,7 +6,7 @@ class ScheduledTasksController < BaseController
   end
 
   def update
-    @scheduled_task = current_user.today_tasks.find(params[:id])
+    @scheduled_task = current_user.scheduled_tasks.find(params[:id])
     @scheduled_task.reschedule_for_tommorow!
   end
 
