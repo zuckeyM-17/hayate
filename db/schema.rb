@@ -192,7 +192,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_140708) do
     t.bigint "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "datetime"
     t.date "date"
     t.index ["task_id"], name: "index_scheduled_tasks_on_task_id"
     t.index ["user_id"], name: "index_scheduled_tasks_on_user_id"
@@ -373,16 +372,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_140708) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "webpush_subscriptions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "endpoint", null: false
-    t.string "auth_key", null: false
-    t.string "p256dh_key", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_webpush_subscriptions_on_user_id"
-  end
-
   create_table "weekly_objectives", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "start_date", null: false
@@ -463,7 +452,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_140708) do
   add_foreign_key "tasks", "users"
   add_foreign_key "user_credentials", "users"
   add_foreign_key "user_profiles", "users"
-  add_foreign_key "webpush_subscriptions", "users"
   add_foreign_key "weekly_objectives", "users"
   add_foreign_key "weekly_reviews", "weekly_objectives"
   add_foreign_key "word_explanations", "words"

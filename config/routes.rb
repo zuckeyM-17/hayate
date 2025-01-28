@@ -53,7 +53,6 @@ Rails.application.routes.draw do
   end
 
   resource :weekly_review, only: %i[show create]
-  resource :future_log, only: %i[show]
   resources :logs, only: %i[index show] do
     member do
       get :show_day
