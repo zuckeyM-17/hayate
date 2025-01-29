@@ -46,12 +46,6 @@ class Event < ApplicationRecord
     where(date: month.all_month)
   }
 
-  scope :future, lambda {
-    from = Month.future.first.all_month.first
-    to = Month.future.last.all_month.last
-    where(date: from..to)
-  }
-
   def save_with_note!
     ApplicationRecord.transaction do
       save!

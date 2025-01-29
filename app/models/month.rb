@@ -14,13 +14,6 @@ class Month
   end
 
   class << self
-    def future
-      today = Time.zone.today
-      (0..11).map do |i|
-        new(date_to_id(today + i.months))
-      end
-    end
-
     def date_to_id(date)
       "#{date.year}-#{date.month}"
     end
