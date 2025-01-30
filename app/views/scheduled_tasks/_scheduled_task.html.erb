@@ -6,7 +6,7 @@
       <%= link_to '⬜️', completed_tasks_path(task_id: task.id), data: { "turbo-method": :post } %>
       <%= link_to '➡️', scheduled_task_path(scheduled_task), data: { "turbo-method": :patch }, class: 'ml-2' %>
     </div>
-    <div class="grow ml-2 truncate"><span class=""><%= link_to task.title, task_notes_path(task), data: { turbo_frame: }, class: 'underline text-lg' %></span></div>
+    <div class="grow ml-2 truncate"><span class=""><%= link_to task.title, task_notes_path(task, format: :turbo_stream), data: { turbo_frame: }, class: 'underline text-lg' %></span></div>
     <div class="w-fit ml-2"><%= task_category(task.category) %></div>
 </div>
 <% end %>
