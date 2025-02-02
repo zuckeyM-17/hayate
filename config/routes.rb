@@ -63,6 +63,8 @@ Rails.application.routes.draw do
 
   resources :weekly_objectives, only: %i[create]
 
+  resource :drawer, only: %i[destroy]
+
   namespace :api do
     resources :links, only: %i[create]
     resources :notes, only: %i[create]

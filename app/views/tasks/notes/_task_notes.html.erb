@@ -1,14 +1,15 @@
-<%= turbo_frame_tag @task do %>
-<div class="h-fit border-t py-2">
-    <div class="w-full"><span class="line-clamp-1 text-lg"><%= @task.title %></span></div>
+<div class="h-fit">
+    <div class="w-full">
+        <%= render 'shared/header', title: task.title %>
+    </div>
     <div class="w-full flex">
-        <div class="w-3/12"><%= task_category(@task.category) %></div>
-        <div class="w-9/12<%= @task.end_date <= Time.zone.now ? ' text-red-500' : '' %>">
-            <%= "#{l(@task.start_date)} ~ #{l(@task.end_date)}" %>
+        <div class="w-3/12"><%= task_category(task.category) %></div>
+        <div class="w-9/12<%= task.end_date <= Time.zone.now ? ' text-red-500' : '' %>">
+            <%= "#{l(task.start_date)} ~ #{l(task.end_date)}" %>
         </div>
     </div>
     <div class="w-full mt-2">
-        <%= form_with url: task_notes_path(@task) do |f| %>
+        <%= form_with url: task_notes_path(task) do |f| %>
         <div class="grid
             after:px-3.5
             after:py-2.5
@@ -27,17 +28,16 @@
         </div>
         <div class="w-full flex items-center justify-end">
             <%= f.submit 'Add', class: "mt-2 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded" %>
-            <%= link_to 'Cancel', @task, class: 'ml-4 underline' %>
+            <%= link_to 'Cancel', task, class: 'ml-4 underline' %>
         </div>
         <% end %>
     </div>
 
     <div class="w-full">
-        <%= turbo_frame_tag "task_#{@task.id}_notes" do %>
-        <% @notes.each do |note| %>
-            <%= render 'tasks/notes/note', note:, task: @task %>
+        <%= turbo_frame_tag "task_#{task.id}_notes" do %>
+        <% notes.each do |note| %>
+            <%= render 'tasks/notes/note', note:, task: %>
         <% end %>
         <% end %> <!-- turbo_frame_tag -->
     </div>
 </div>
-<% end %>

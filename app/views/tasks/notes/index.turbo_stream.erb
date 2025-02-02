@@ -1,1 +1,5 @@
-<%= turbo_stream.replace 'drawer' , partial: "shared/drawer" %>
+<%= turbo_stream.replace 'drawer' do %>
+ <%= render "shared/drawer" do %>
+  <%= render "tasks/notes/task_notes", task: @task, notes: @notes %>
+ <% end %>
+<% end %>
